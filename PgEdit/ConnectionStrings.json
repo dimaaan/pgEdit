@@ -1,0 +1,18 @@
+﻿{
+	"Servers" :
+	[
+		{
+			"Address" : "localhost",
+			"Port" : "5432",
+			"Databases" : 
+			[
+				{
+					"DisplayName" : "vmware на localhost",
+					"Name" : "vmware",
+					"User" : "gardemarin",
+					"Password" : "Rek3,yak@"
+				}
+			]
+		}
+	]
+}
