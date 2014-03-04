@@ -45,6 +45,9 @@ namespace PgEdit
             TreeNode dbNode = TreeService.GetSelectedDBNode(node);
             Database db = (Database)dbNode.Tag;
 
+            dgvData.DataSource = null;
+            dgvData.DataMember = null;
+            db.Schemas = null;
             db.IsOpen = false;
             dbNode.Nodes.Clear();
             RefreshMenu();

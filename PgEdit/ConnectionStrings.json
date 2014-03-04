@@ -7,9 +7,9 @@
 			"Databases" : 
 			[
 				{
-					"Name" : "db",
-					"User" : "user",
-					"Password" : "pass"
+					"Name" : "vmware",
+					"User" : "gardemarin",
+					"Password" : "Rek3,yak@"
 				}
 			]
 		},
@@ -19,17 +19,17 @@
 			"Databases" : 
 			[
 				{
-					"Name" : "db2",
-					"User" : "user",
-					"Password" : "password"
+					"Name" : "vmware",
+					"User" : "gardemarin",
+					"Password" : "Rek3,yak@"
 				}
 			],
 			"Ssh" : 
 			{
-				"Server" : "qqq.com",
+				"Server" : "vm0.vmware.ez-login.com",
 				"Port" : "22",
-				"User" : "user",
-				"Password" : "password"
+				"User" : "danshilevich",
+				"Password" : "4t,eh@ir@"
 			}
 		}
 	]
