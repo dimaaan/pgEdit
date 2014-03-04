@@ -13,6 +13,7 @@ namespace PgEdit.Domain
         public string Name;
         public string User;
         public string Password;
+        public bool IsOpen;
         public List<DataSet> Schemas;
     }
 }
