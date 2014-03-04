@@ -7,12 +7,30 @@
 			"Databases" : 
 			[
 				{
-					"DisplayName" : "vmware на localhost",
-					"Name" : "vmware",
-					"User" : "gardemarin",
-					"Password" : "Rek3,yak@"
+					"Name" : "db",
+					"User" : "user",
+					"Password" : "pass"
 				}
 			]
+		},
+		{
+			"Address" : "10.10.10.175",
+			"Port" : "5432",
+			"Databases" : 
+			[
+				{
+					"Name" : "db2",
+					"User" : "user",
+					"Password" : "password"
+				}
+			],
+			"Ssh" : 
+			{
+				"Server" : "qqq.com",
+				"Port" : "22",
+				"User" : "user",
+				"Password" : "password"
+			}
 		}
 	]
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Renci.SshNet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,9 @@ namespace PgEdit.Domain
     public class Server
     {
         public string Address;
-        public string Port;
+        public uint Port;
         public List<Database> Databases;
+        public SSHTunnelInfo Ssh;
+        public SshClient sshClient;
     }
 }

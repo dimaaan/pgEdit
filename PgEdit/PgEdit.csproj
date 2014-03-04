@@ -38,6 +38,9 @@
     <Reference Include="Npgsql">
       <HintPath>..\packages\Npgsql.2.0.14.3\lib\net45\Npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="Renci.SshNet">
+      <HintPath>..\packages\SSH.NET.2013.4.7\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
@@ -53,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Domain\Database.cs" />
     <Compile Include="Domain\Server.cs" />
+    <Compile Include="Domain\SSHTunnelInfo.cs" />
     <Compile Include="Domain\Universe.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>

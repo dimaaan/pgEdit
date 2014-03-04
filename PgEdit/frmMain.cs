@@ -23,8 +23,10 @@ namespace PgEdit
         }
 
         private void OpenDatabase(TreeNode dbNode) {
-            Database db = (Database) dbNode.Tag;
-            using (NpgsqlConnection connection = TreeService.GetConnection(dbNode))
+            Database db = (Database)dbNode.Tag;
+            Server server = (Server)dbNode.Parent.Tag;
+
+            using (NpgsqlConnection connection = ConnectionService.GetConnection(server, db))
             {
                 connection.Open();
                 db.Schemas = DatabaseService.fetchDatabaseSchema(connection);
@@ -32,11 +34,8 @@ namespace PgEdit
 
             List<TreeNode> subNodes = TreeService.ConvertDBSchemaToTreeNodes(db);
 
-            tvStructure.SuspendLayout();
-            dbNode.Nodes.Clear();
             dbNode.Nodes.AddRange(subNodes.ToArray());
             dbNode.ExpandAll();
-            tvStructure.ResumeLayout();
             db.IsOpen = true;
             RefreshMenu();
         }
@@ -91,12 +90,21 @@ namespace PgEdit
             {
                 if (e.Node.Tag is Database)
                 {
-                    OpenDatabase(e.Node);
+                    Database db = (Database)e.Node.Tag;
+
+                    if (!db.IsOpen)
+                    {
+                        OpenDatabase(e.Node);
+                    }
                 }
                 else if (e.Node.Tag is DataTable)
                 {
                     DataTable table = (DataTable)e.Node.Tag;
-                    using (NpgsqlConnection connection = TreeService.GetConnection(e.Node))
+                    TreeNode dbNode = TreeService.GetSelectedDBNode(e.Node);
+                    Database db = (Database)dbNode.Tag;
+                    Server server = (Server)dbNode.Parent.Tag;
+
+                    using (NpgsqlConnection connection = ConnectionService.GetConnection(server, db))
                     {
                         connection.Open();
                         DatabaseService.fetchTableByName(connection, table);
