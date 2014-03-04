@@ -22,6 +22,23 @@ namespace PgEdit
             InitializeComponent();
         }
 
+        private void OpenDatabase(TreeNode node) {
+            Database db = (Database) node.Tag;
+            using (NpgsqlConnection connection = TreeService.GetConnection(node))
+            {
+                connection.Open();
+                db.Schemas = DatabaseService.fetchDatabaseSchema(connection);
+            }
+
+            List<TreeNode> subNodes = TreeService.ConvertDBSchemaToTreeNodes(db);
+
+            tvStructure.SuspendLayout();
+            node.Nodes.Clear();
+            node.Nodes.AddRange(subNodes.ToArray());
+            node.ExpandAll();
+            tvStructure.ResumeLayout();
+        }
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             universe = ConnectionService.Load();
@@ -43,15 +60,7 @@ namespace PgEdit
             {
                 if (e.Node.Tag is Database)
                 {
-                    Database db = (Database) e.Node.Tag;
-                    using (NpgsqlConnection connection = TreeService.GetConnection(e.Node))
-                    {
-                        connection.Open();
-                        db.Schemas = DatabaseService.fetchDatabaseSchema(connection);
-                    }
-                    List<TreeNode> subNodes = TreeService.ConvertDBSchemaToTreeNodes(db);
-                    e.Node.Nodes.AddRange(subNodes.ToArray());
-                    e.Node.ExpandAll();
+                    OpenDatabase(e.Node);
                 }
                 else if (e.Node.Tag is DataTable)
                 {
@@ -63,8 +72,18 @@ namespace PgEdit
                     }
                     dgvData.DataMember = table.TableName;
                     dgvData.DataSource = table.DataSet;
-                    
                 }
+            }
+        }
+
+        private void tvStructure_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter) &&
+                tvStructure.SelectedNode != null &&
+                tvStructure.SelectedNode.Tag is Database)
+            {
+                OpenDatabase(tvStructure.SelectedNode);
+                e.Handled = true;
             }
         }
 

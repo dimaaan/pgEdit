@@ -51,6 +51,7 @@
             this.tvStructure.Size = new System.Drawing.Size(200, 537);
             this.tvStructure.TabIndex = 0;
             this.tvStructure.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvStructure_NodeMouseDoubleClick);
+            this.tvStructure.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tvStructure_KeyPress);
             // 
             // dgvData
             // 
