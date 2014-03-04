@@ -22,9 +22,9 @@ namespace PgEdit
             InitializeComponent();
         }
 
-        private void OpenDatabase(TreeNode node) {
-            Database db = (Database) node.Tag;
-            using (NpgsqlConnection connection = TreeService.GetConnection(node))
+        private void OpenDatabase(TreeNode dbNode) {
+            Database db = (Database) dbNode.Tag;
+            using (NpgsqlConnection connection = TreeService.GetConnection(dbNode))
             {
                 connection.Open();
                 db.Schemas = DatabaseService.fetchDatabaseSchema(connection);
@@ -33,11 +33,32 @@ namespace PgEdit
             List<TreeNode> subNodes = TreeService.ConvertDBSchemaToTreeNodes(db);
 
             tvStructure.SuspendLayout();
-            node.Nodes.Clear();
-            node.Nodes.AddRange(subNodes.ToArray());
-            node.ExpandAll();
+            dbNode.Nodes.Clear();
+            dbNode.Nodes.AddRange(subNodes.ToArray());
+            dbNode.ExpandAll();
             tvStructure.ResumeLayout();
+            db.IsOpen = true;
+            RefreshMenu();
         }
+
+        private void CloseDatabase(TreeNode node)
+        {
+            TreeNode dbNode = TreeService.GetSelectedDBNode(node);
+            Database db = (Database)dbNode.Tag;
+
+            db.IsOpen = false;
+            dbNode.Nodes.Clear();
+            RefreshMenu();
+        }
+
+        private void RefreshMenu()
+        {
+            TreeNode dbNode = TreeService.GetSelectedDBNode(tvStructure.SelectedNode);
+
+            tsmiConnect.Enabled = dbNode != null && !((Database)dbNode.Tag).IsOpen;
+            tsmiDisconnect.Enabled = dbNode != null && ((Database)dbNode.Tag).IsOpen;
+        }
+        
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -47,6 +68,16 @@ namespace PgEdit
 
             tvStructure.Nodes.AddRange(rootNodes.ToArray());
             tvStructure.ExpandAll();
+        }
+
+        private void tsmiConnect_Click(object sender, EventArgs e)
+        {
+            OpenDatabase(tvStructure.SelectedNode);
+        }
+
+        private void tsmiDisconnect_Click(object sender, EventArgs e)
+        {
+            CloseDatabase(tvStructure.SelectedNode);
         }
 
         private void tsmiExit_Click(object sender, EventArgs e)
@@ -85,6 +116,11 @@ namespace PgEdit
                 OpenDatabase(tvStructure.SelectedNode);
                 e.Handled = true;
             }
+        }
+
+        private void tvStructure_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            RefreshMenu();            
         }
 
     }

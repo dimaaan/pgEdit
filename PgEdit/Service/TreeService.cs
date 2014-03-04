@@ -69,24 +69,39 @@ namespace PgEdit.Service
 
         public static NpgsqlConnection GetConnection(TreeNode node)
         {
-            string connStr;
+            TreeNode dbNode = GetSelectedDBNode(node);
+            Database db = (Database)node.Tag;
+            Server server = (Server)node.Parent.Tag;
+            string connStr = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};", server.Address, server.Port, db.User, db.Password, db.Name);
 
-            if (node.Tag is DataTable || node.Tag is DataSet)
+            return new NpgsqlConnection(connStr);
+        }
+
+        /// <summary>
+        /// Return database node by it subnodes
+        /// </summary>
+        public static TreeNode GetSelectedDBNode(TreeNode node)
+        {
+            TreeNode res;
+
+            if (node.Tag is Server) 
             {
-                return GetConnection(node.Parent);
+                res = null;
+            }
+            else if (node.Tag is DataTable || node.Tag is DataSet)
+            {
+                res = GetSelectedDBNode(node.Parent);
             }
             else if (node.Tag is Database)
             {
-                Database db = (Database)node.Tag;
-                Server server = (Server)node.Parent.Tag;
-                connStr = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};", server.Address, server.Port, db.User, db.Password, db.Name);
+                res = node;
             }
             else
             {
-                throw new InvalidOperationException("Trying to get connection without specifying database");
+                throw new InvalidOperationException("Invalid tree node type: " + node.Tag.GetType().ToString());
             }
 
-            return new NpgsqlConnection(connStr);
+            return res;
         }
     }
 }

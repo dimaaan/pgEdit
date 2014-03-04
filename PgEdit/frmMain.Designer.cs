@@ -35,6 +35,8 @@
             this.tsmiRegister = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new System.Windows.Forms.SplitContainer();
+            this.tsmiConnect = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDisconnect = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
@@ -50,6 +52,7 @@
             this.tvStructure.Name = "tvStructure";
             this.tvStructure.Size = new System.Drawing.Size(200, 537);
             this.tvStructure.TabIndex = 0;
+            this.tvStructure.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvStructure_AfterSelect);
             this.tvStructure.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvStructure_NodeMouseDoubleClick);
             this.tvStructure.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tvStructure_KeyPress);
             // 
@@ -77,6 +80,8 @@
             // 
             this.tsmiDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiRegister,
+            this.tsmiConnect,
+            this.tsmiDisconnect,
             this.tsmiExit});
             this.tsmiDB.Name = "tsmiDB";
             this.tsmiDB.Size = new System.Drawing.Size(86, 20);
@@ -85,13 +90,13 @@
             // tsmiRegister
             // 
             this.tsmiRegister.Name = "tsmiRegister";
-            this.tsmiRegister.Size = new System.Drawing.Size(174, 22);
+            this.tsmiRegister.Size = new System.Drawing.Size(231, 22);
             this.tsmiRegister.Text = "Зарегистрировать";
             // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(174, 22);
+            this.tsmiExit.Size = new System.Drawing.Size(231, 22);
             this.tsmiExit.Text = "Выход";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
@@ -111,6 +116,20 @@
             this.scMain.Size = new System.Drawing.Size(784, 537);
             this.scMain.SplitterDistance = 200;
             this.scMain.TabIndex = 3;
+            // 
+            // tsmiConnect
+            // 
+            this.tsmiConnect.Name = "tsmiConnect";
+            this.tsmiConnect.Size = new System.Drawing.Size(231, 22);
+            this.tsmiConnect.Text = "Подключиться к выбранной";
+            this.tsmiConnect.Click += new System.EventHandler(this.tsmiConnect_Click);
+            // 
+            // tsmiDisconnect
+            // 
+            this.tsmiDisconnect.Name = "tsmiDisconnect";
+            this.tsmiDisconnect.Size = new System.Drawing.Size(231, 22);
+            this.tsmiDisconnect.Text = "Отключиться от выбранной";
+            this.tsmiDisconnect.Click += new System.EventHandler(this.tsmiDisconnect_Click);
             // 
             // frmMain
             // 
@@ -144,5 +163,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiRegister;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.SplitContainer scMain;
+        private System.Windows.Forms.ToolStripMenuItem tsmiConnect;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDisconnect;
     }
 }
