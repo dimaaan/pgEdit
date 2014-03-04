@@ -12,6 +12,7 @@ namespace PgEdit.Service
 {
     public static class TreeService
     {
+
         public static List<TreeNode> ConvertSettingsToTreeNodes(Universe universe)
         {
             List<TreeNode> nodes = new List<TreeNode>();
@@ -29,7 +30,7 @@ namespace PgEdit.Service
                 {
                     TreeNode nodeDB = new TreeNode()
                     {
-                        Text = db.DisplayName,
+                        Text = db.Name,
                         Tag = db
                     };
                     nodeHost.Nodes.Add(nodeDB);
@@ -65,16 +66,6 @@ namespace PgEdit.Service
             }
 
             return schemaNodes;
-        }
-
-        public static NpgsqlConnection GetConnection(TreeNode node)
-        {
-            TreeNode dbNode = GetSelectedDBNode(node);
-            Database db = (Database)node.Tag;
-            Server server = (Server)node.Parent.Tag;
-            string connStr = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};", server.Address, server.Port, db.User, db.Password, db.Name);
-
-            return new NpgsqlConnection(connStr);
         }
 
         /// <summary>

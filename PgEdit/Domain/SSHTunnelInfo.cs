@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PgEdit.Domain
 {
-    public class Database
+    public class SSHTunnelInfo
     {
-        public string Name;
+        public string Server;
+        public int Port;
         public string User;
         public string Password;
-        public bool IsOpen;
-        public List<DataSet> Schemas;
+        public string KeyFilePath;
     }
 }
