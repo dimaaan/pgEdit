@@ -189,7 +189,7 @@ namespace PgEdit
             tsmiDisconnect.Enabled = dbNode != null && ((Database)dbNode.Tag).IsOpen;
         }
 
-        private void SelectTreeNode(TreeNode node)
+        private void OnSelectTreeNode(TreeNode node)
         {
             if (node.Tag != null)
             {
@@ -243,7 +243,7 @@ namespace PgEdit
 
         private void tvStructure_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            SelectTreeNode(e.Node);
+            OnSelectTreeNode(e.Node);
         }
 
         private void tvStructure_KeyPress(object sender, KeyPressEventArgs e)
@@ -251,7 +251,7 @@ namespace PgEdit
             if (e.KeyChar == Convert.ToChar(Keys.Enter) &&
                 tvStructure.SelectedNode != null)
             {
-                SelectTreeNode(tvStructure.SelectedNode);
+                OnSelectTreeNode(tvStructure.SelectedNode);
                 e.Handled = true;
             }
         }
