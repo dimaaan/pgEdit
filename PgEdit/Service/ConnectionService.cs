@@ -23,34 +23,41 @@ namespace PgEdit.Service
             return universe;
         }
 
+        private static int FreePort()
+        {
+            Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            sock.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 0)); // 0 means ask OS to allocate free port
+            return ((IPEndPoint)sock.LocalEndPoint).Port;
+        }
+
         public static uint CreateSSHTunnel(Server server)
         {
-            SSHTunnelInfo tunnel = server.Ssh;
-
-            if (tunnel.KeyFilePath != null)
+            if (server.Ssh.KeyFilePath != null)
             {
-                using (var stream = new FileStream(tunnel.KeyFilePath, FileMode.Open, FileAccess.Read))
+                using (var stream = new FileStream(server.Ssh.KeyFilePath, FileMode.Open, FileAccess.Read))
                 {
                     var privateKeyFile = new PrivateKeyFile(stream);
-                    var authenticationMethod = new PrivateKeyAuthenticationMethod(tunnel.User, privateKeyFile);
-                    var connectionInfo = new ConnectionInfo(tunnel.Server, tunnel.Port, tunnel.User, authenticationMethod);
+                    var authenticationMethod = new PrivateKeyAuthenticationMethod(server.Ssh.User, privateKeyFile);
+                    var connectionInfo = new ConnectionInfo(server.Ssh.Server, server.Ssh.Port, server.Ssh.User, authenticationMethod);
 
                     server.sshClient = new SshClient(connectionInfo);
                 }
             }
             else
             {
-                server.sshClient = new SshClient(tunnel.Server, tunnel.Port, tunnel.User, tunnel.Password);
+                server.sshClient = new SshClient(server.Ssh.Server, server.Ssh.Port, server.Ssh.User, server.Ssh.Password);
             }
 
             server.sshClient.Connect();
 
-            ForwardedPortLocal forwardedPort = new ForwardedPortLocal("localhost", 0, "localhost", server.Port);
+            uint freePort = (uint)FreePort();
+
+            var forwardedPort = new ForwardedPortLocal("localhost", freePort, server.Address, server.Port);
 
             server.sshClient.AddForwardedPort(forwardedPort);
             forwardedPort.Start();
 
-            return forwardedPort.Port;
+            return freePort;
         }
 
         public static NpgsqlConnection GetConnection(Server server, Database db)
@@ -60,14 +67,15 @@ namespace PgEdit.Service
             if (server.Ssh != null && server.sshClient == null)
             {
                 uint forwardedPort = ConnectionService.CreateSSHTunnel(server);
-                connStr = string.Format(connStr, server.Address, forwardedPort, db.User, db.Password, db.Name);
+                connStr = string.Format(connStr, "localhost", forwardedPort, db.User, db.Password, db.Name);
             }
-            else {
+            else
+            {
                 connStr = string.Format(connStr, server.Address, server.Port, db.User, db.Password, db.Name);
             }
 
             return new NpgsqlConnection(connStr);
         }
-        
+
     }
 }
