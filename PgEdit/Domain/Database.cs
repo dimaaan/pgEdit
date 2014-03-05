@@ -13,6 +13,18 @@ namespace PgEdit.Domain
         public string User;
         public string Password;
         public bool IsOpen;
+
+        /// <summary>
+        /// DataSet.DataSetName = schema name
+        /// DataTable.TableName = table name
+        /// </summary>
         public List<DataSet> Schemas;
+
+        /// <summary>
+        /// Table structure.
+        /// First key - schema.
+        /// Second key - table
+        /// </summary>
+        public Dictionary<string, Dictionary<string, DataTable>> Columns = new Dictionary<string, Dictionary<string, DataTable>>();
     }
 }

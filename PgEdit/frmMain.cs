@@ -30,6 +30,10 @@ namespace PgEdit
             {
                 connection.Open();
                 db.Schemas = DatabaseService.fetchAllSchemasWithTables(connection);
+                foreach (DataSet schema in db.Schemas)
+                {
+                    db.Columns[schema.DataSetName] = new Dictionary<string, DataTable>();
+                }
             }
 
             List<TreeNode> subNodes = TreeService.ConvertDBSchemaToTreeNodes(db);
@@ -51,6 +55,27 @@ namespace PgEdit
             db.IsOpen = false;
             dbNode.Nodes.Clear();
             RefreshMenu();
+        }
+
+        private void ShowTable(TreeNode node)
+        {
+            DataTable table = (DataTable)node.Tag;
+            TreeNode dbNode = TreeService.GetSelectedDBNode(node);
+            Database db = (Database)dbNode.Tag;
+            Server server = (Server)dbNode.Parent.Tag;
+            DataTable tableColumns;
+
+            using (NpgsqlConnection connection = ConnectionService.GetConnection(server, db))
+            {
+                connection.Open();
+                DatabaseService.fetchTableByName(connection, table);
+                tableColumns = DatabaseService.fetchTableColumns(connection, table.DataSet.DataSetName, table.TableName);
+                db.Columns[table.DataSet.DataSetName][table.TableName] = tableColumns;
+            }
+
+            dgvColumns.DataSource = tableColumns;
+            dgvData.DataMember = table.TableName;
+            dgvData.DataSource = table.DataSet;
         }
 
         private void RefreshMenu()
@@ -76,18 +101,7 @@ namespace PgEdit
                 }
                 else if (node.Tag is DataTable)
                 {
-                    DataTable table = (DataTable)node.Tag;
-                    TreeNode dbNode = TreeService.GetSelectedDBNode(node);
-                    Database db = (Database)dbNode.Tag;
-                    Server server = (Server)dbNode.Parent.Tag;
-
-                    using (NpgsqlConnection connection = ConnectionService.GetConnection(server, db))
-                    {
-                        connection.Open();
-                        DatabaseService.fetchTableByName(connection, table);
-                    }
-                    dgvData.DataMember = table.TableName;
-                    dgvData.DataSource = table.DataSet;
+                    ShowTable(node);
                 }
             }
         }
@@ -95,6 +109,8 @@ namespace PgEdit
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            dgvColumns.AutoGenerateColumns = false;
+
             universe = ConnectionService.Load();
 
             List<TreeNode> rootNodes = TreeService.ConvertSettingsToTreeNodes(universe);

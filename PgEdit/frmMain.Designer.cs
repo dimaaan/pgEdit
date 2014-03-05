@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvStructure = new System.Windows.Forms.TreeView();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
@@ -37,12 +38,28 @@
             this.tsmiDisconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new System.Windows.Forms.SplitContainer();
+            this.tabTable = new System.Windows.Forms.TabControl();
+            this.tpColumns = new System.Windows.Forms.TabPage();
+            this.tpData = new System.Windows.Forms.TabPage();
+            this.dgvColumns = new System.Windows.Forms.DataGridView();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrimaryKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colForeignKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colNotNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colDefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
             this.scMain.SuspendLayout();
+            this.tabTable.SuspendLayout();
+            this.tpColumns.SuspendLayout();
+            this.tpData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvColumns)).BeginInit();
             this.SuspendLayout();
             // 
             // tvStructure
@@ -65,10 +82,11 @@
             this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvData.Location = new System.Drawing.Point(0, 0);
+            this.dgvData.Location = new System.Drawing.Point(3, 3);
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
-            this.dgvData.Size = new System.Drawing.Size(580, 537);
+            this.dgvData.RowHeadersVisible = false;
+            this.dgvData.Size = new System.Drawing.Size(566, 505);
             this.dgvData.TabIndex = 1;
             // 
             // msMainMenu
@@ -125,10 +143,134 @@
             // 
             // scMain.Panel2
             // 
-            this.scMain.Panel2.Controls.Add(this.dgvData);
+            this.scMain.Panel2.Controls.Add(this.tabTable);
             this.scMain.Size = new System.Drawing.Size(784, 537);
             this.scMain.SplitterDistance = 200;
             this.scMain.TabIndex = 3;
+            // 
+            // tabTable
+            // 
+            this.tabTable.Controls.Add(this.tpColumns);
+            this.tabTable.Controls.Add(this.tpData);
+            this.tabTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabTable.Location = new System.Drawing.Point(0, 0);
+            this.tabTable.Name = "tabTable";
+            this.tabTable.SelectedIndex = 0;
+            this.tabTable.Size = new System.Drawing.Size(580, 537);
+            this.tabTable.TabIndex = 2;
+            // 
+            // tpColumns
+            // 
+            this.tpColumns.Controls.Add(this.dgvColumns);
+            this.tpColumns.Location = new System.Drawing.Point(4, 22);
+            this.tpColumns.Name = "tpColumns";
+            this.tpColumns.Padding = new System.Windows.Forms.Padding(3);
+            this.tpColumns.Size = new System.Drawing.Size(572, 511);
+            this.tpColumns.TabIndex = 0;
+            this.tpColumns.Text = "Поля";
+            this.tpColumns.UseVisualStyleBackColor = true;
+            // 
+            // tpData
+            // 
+            this.tpData.Controls.Add(this.dgvData);
+            this.tpData.Location = new System.Drawing.Point(4, 22);
+            this.tpData.Name = "tpData";
+            this.tpData.Padding = new System.Windows.Forms.Padding(3);
+            this.tpData.Size = new System.Drawing.Size(572, 511);
+            this.tpData.TabIndex = 1;
+            this.tpData.Text = "Данные";
+            this.tpData.UseVisualStyleBackColor = true;
+            // 
+            // dgvColumns
+            // 
+            this.dgvColumns.AllowUserToAddRows = false;
+            this.dgvColumns.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvColumns.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvColumns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvColumns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colName,
+            this.colType,
+            this.colPrimaryKey,
+            this.colForeignKey,
+            this.colNotNull,
+            this.colUnique,
+            this.colDefaultValue,
+            this.colDescription});
+            this.dgvColumns.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvColumns.Location = new System.Drawing.Point(3, 3);
+            this.dgvColumns.Name = "dgvColumns";
+            this.dgvColumns.ReadOnly = true;
+            this.dgvColumns.RowHeadersVisible = false;
+            this.dgvColumns.Size = new System.Drawing.Size(566, 505);
+            this.dgvColumns.TabIndex = 0;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.DataPropertyName = "name";
+            this.colName.Frozen = true;
+            this.colName.HeaderText = "Имя";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 54;
+            // 
+            // colType
+            // 
+            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colType.DataPropertyName = "type";
+            this.colType.HeaderText = "Тип";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            this.colType.Width = 51;
+            // 
+            // colPrimaryKey
+            // 
+            this.colPrimaryKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colPrimaryKey.DataPropertyName = "primarykey";
+            this.colPrimaryKey.HeaderText = "Первичный ключ";
+            this.colPrimaryKey.Name = "colPrimaryKey";
+            this.colPrimaryKey.ReadOnly = true;
+            this.colPrimaryKey.Width = 88;
+            // 
+            // colForeignKey
+            // 
+            this.colForeignKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colForeignKey.HeaderText = "Внешний ключ";
+            this.colForeignKey.Name = "colForeignKey";
+            this.colForeignKey.ReadOnly = true;
+            this.colForeignKey.Width = 77;
+            // 
+            // colNotNull
+            // 
+            this.colNotNull.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colNotNull.DataPropertyName = "notnull";
+            this.colNotNull.HeaderText = "Не Null";
+            this.colNotNull.Name = "colNotNull";
+            this.colNotNull.ReadOnly = true;
+            this.colNotNull.Width = 43;
+            // 
+            // colUnique
+            // 
+            this.colUnique.HeaderText = "Уникальный";
+            this.colUnique.Name = "colUnique";
+            this.colUnique.ReadOnly = true;
+            // 
+            // colDefaultValue
+            // 
+            this.colDefaultValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colDefaultValue.DataPropertyName = "default";
+            this.colDefaultValue.HeaderText = "По умолчанию";
+            this.colDefaultValue.Name = "colDefaultValue";
+            this.colDefaultValue.ReadOnly = true;
+            this.colDefaultValue.Width = 96;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.HeaderText = "Описание";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
             // 
             // frmMain
             // 
@@ -149,6 +291,10 @@
             this.scMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).EndInit();
             this.scMain.ResumeLayout(false);
+            this.tabTable.ResumeLayout(false);
+            this.tpColumns.ResumeLayout(false);
+            this.tpData.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvColumns)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,5 +310,17 @@
         private System.Windows.Forms.SplitContainer scMain;
         private System.Windows.Forms.ToolStripMenuItem tsmiConnect;
         private System.Windows.Forms.ToolStripMenuItem tsmiDisconnect;
+        private System.Windows.Forms.TabControl tabTable;
+        private System.Windows.Forms.TabPage tpColumns;
+        private System.Windows.Forms.DataGridView dgvColumns;
+        private System.Windows.Forms.TabPage tpData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colPrimaryKey;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colForeignKey;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colNotNull;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colUnique;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDefaultValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
     }
 }
