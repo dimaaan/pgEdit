@@ -7,7 +7,26 @@ namespace PgEdit.Service
 {
     public static class DatabaseService
     {
-        public static List<DataSet> fetchDatabaseSchema(NpgsqlConnection connection)
+        public static List<String> fetchDbNames(NpgsqlConnection connection)
+        {
+            string sql =
+                "SELECT datname " +
+                "FROM pg_database " +
+                "WHERE datistemplate IS FALSE AND datname != 'postgres' " +
+                "ORDER BY datname";
+            NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+            NpgsqlDataReader reader = command.ExecuteReader();
+            List<string> dbs = new List<string>();
+
+            while (reader.Read())
+            {
+                dbs.Add(reader.GetString(0));
+            }
+
+            return dbs;
+        }
+
+        public static List<DataSet> fetchAllSchemasWithTables(NpgsqlConnection connection)
         {
             List<DataSet> schemas = fetchSchemas(connection);
 
@@ -22,10 +41,11 @@ namespace PgEdit.Service
 
         private static List<DataSet> fetchSchemas(NpgsqlConnection connection)
         {
-            string sql = 
-                "SELECT schema_name " + 
-                "FROM information_schema.schemata " +
-                "WHERE schema_name NOT LIKE 'pg_%' AND schema_name != 'information_schema'";
+            string sql =
+                "SELECT nspname " +
+                "FROM pg_namespace " +
+                "WHERE nspname NOT LIKE 'pg_%' AND nspname != 'information_schema' " +
+                "ORDER BY nspname";
             NpgsqlCommand command = new NpgsqlCommand(sql, connection);
             NpgsqlDataReader reader = command.ExecuteReader();
             List<DataSet> schemas = new List<DataSet>();

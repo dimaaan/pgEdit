@@ -29,7 +29,7 @@ namespace PgEdit
             using (NpgsqlConnection connection = ConnectionService.GetConnection(server, db))
             {
                 connection.Open();
-                db.Schemas = DatabaseService.fetchDatabaseSchema(connection);
+                db.Schemas = DatabaseService.fetchAllSchemasWithTables(connection);
             }
 
             List<TreeNode> subNodes = TreeService.ConvertDBSchemaToTreeNodes(db);
