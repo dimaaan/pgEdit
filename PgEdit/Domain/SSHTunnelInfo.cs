@@ -13,5 +13,6 @@ namespace PgEdit.Domain
         public string User;
         public string Password;
         public string KeyFilePath;
+        public int ForwardedPort;
     }
 }
