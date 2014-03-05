@@ -68,8 +68,11 @@ namespace PgEdit.Service
             string sql =
                 "SELECT table_name " +
                 "FROM information_schema.tables " +
-                "WHERE table_schema = '{0}'";
-            NpgsqlCommand command = new NpgsqlCommand(String.Format(sql, schema.DataSetName), connection);
+                "WHERE table_schema = @schema " +
+                "ORDER BY table_name";
+            NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+            command.Parameters.AddWithValue("schema", schema.DataSetName);
+
             NpgsqlDataReader reader = command.ExecuteReader();
             List<DataTable> tables = new List<DataTable>();
 
