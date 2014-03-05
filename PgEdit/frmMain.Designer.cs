@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvStructure = new System.Windows.Forms.TreeView();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
             this.tsmiDB = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRegister = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.scMain = new System.Windows.Forms.SplitContainer();
             this.tsmiConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDisconnect = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.scMain = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
@@ -58,11 +59,16 @@
             // 
             // dgvData
             // 
+            this.dgvData.AllowUserToAddRows = false;
+            this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.Location = new System.Drawing.Point(0, 0);
             this.dgvData.Name = "dgvData";
+            this.dgvData.ReadOnly = true;
             this.dgvData.Size = new System.Drawing.Size(580, 537);
             this.dgvData.TabIndex = 1;
             // 
@@ -93,30 +99,6 @@
             this.tsmiRegister.Size = new System.Drawing.Size(231, 22);
             this.tsmiRegister.Text = "Зарегистрировать";
             // 
-            // tsmiExit
-            // 
-            this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(231, 22);
-            this.tsmiExit.Text = "Выход";
-            this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
-            // 
-            // scMain
-            // 
-            this.scMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scMain.Location = new System.Drawing.Point(0, 24);
-            this.scMain.Name = "scMain";
-            // 
-            // scMain.Panel1
-            // 
-            this.scMain.Panel1.Controls.Add(this.tvStructure);
-            // 
-            // scMain.Panel2
-            // 
-            this.scMain.Panel2.Controls.Add(this.dgvData);
-            this.scMain.Size = new System.Drawing.Size(784, 537);
-            this.scMain.SplitterDistance = 200;
-            this.scMain.TabIndex = 3;
-            // 
             // tsmiConnect
             // 
             this.tsmiConnect.Name = "tsmiConnect";
@@ -131,6 +113,31 @@
             this.tsmiDisconnect.Text = "Отключиться от выбранной";
             this.tsmiDisconnect.Click += new System.EventHandler(this.tsmiDisconnect_Click);
             // 
+            // tsmiExit
+            // 
+            this.tsmiExit.Name = "tsmiExit";
+            this.tsmiExit.Size = new System.Drawing.Size(231, 22);
+            this.tsmiExit.Text = "Выход";
+            this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
+            // 
+            // scMain
+            // 
+            this.scMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.scMain.Location = new System.Drawing.Point(0, 24);
+            this.scMain.Name = "scMain";
+            // 
+            // scMain.Panel1
+            // 
+            this.scMain.Panel1.Controls.Add(this.tvStructure);
+            // 
+            // scMain.Panel2
+            // 
+            this.scMain.Panel2.Controls.Add(this.dgvData);
+            this.scMain.Size = new System.Drawing.Size(784, 537);
+            this.scMain.SplitterDistance = 200;
+            this.scMain.TabIndex = 3;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,6 +148,7 @@
             this.MainMenuStrip = this.msMainMenu;
             this.Name = "frmMain";
             this.Text = "PgEdit";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.msMainMenu.ResumeLayout(false);
