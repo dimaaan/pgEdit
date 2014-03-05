@@ -241,6 +241,13 @@ namespace PgEdit
             Close();
         }
 
+        private void tsmiAbout_Click(object sender, EventArgs e)
+        {
+            frmAbout frm = new frmAbout();
+
+            frm.ShowDialog();
+        }
+
         private void tvStructure_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             OnSelectTreeNode(e.Node);
