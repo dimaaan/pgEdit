@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvStructure = new System.Windows.Forms.TreeView();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
@@ -50,6 +51,7 @@
             this.colUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colDefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ilTreeView = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
@@ -65,8 +67,11 @@
             // tvStructure
             // 
             this.tvStructure.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvStructure.ImageIndex = 0;
+            this.tvStructure.ImageList = this.ilTreeView;
             this.tvStructure.Location = new System.Drawing.Point(0, 0);
             this.tvStructure.Name = "tvStructure";
+            this.tvStructure.SelectedImageIndex = 0;
             this.tvStructure.Size = new System.Drawing.Size(200, 537);
             this.tvStructure.TabIndex = 0;
             this.tvStructure.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvStructure_AfterSelect);
@@ -78,8 +83,8 @@
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.Location = new System.Drawing.Point(3, 3);
@@ -185,8 +190,8 @@
             // 
             this.dgvColumns.AllowUserToAddRows = false;
             this.dgvColumns.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvColumns.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvColumns.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvColumns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvColumns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
@@ -272,6 +277,12 @@
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
             // 
+            // ilTreeView
+            // 
+            this.ilTreeView.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.ilTreeView.ImageSize = new System.Drawing.Size(16, 16);
+            this.ilTreeView.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -322,5 +333,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colUnique;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDefaultValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
+        private System.Windows.Forms.ImageList ilTreeView;
     }
 }
