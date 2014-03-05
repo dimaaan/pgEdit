@@ -60,6 +60,37 @@ namespace PgEdit
             tsmiConnect.Enabled = dbNode != null && !((Database)dbNode.Tag).IsOpen;
             tsmiDisconnect.Enabled = dbNode != null && ((Database)dbNode.Tag).IsOpen;
         }
+
+        private void SelectTreeNode(TreeNode node)
+        {
+            if (node.Tag != null)
+            {
+                if (node.Tag is Database)
+                {
+                    Database db = (Database)node.Tag;
+
+                    if (!db.IsOpen)
+                    {
+                        OpenDatabase(node);
+                    }
+                }
+                else if (node.Tag is DataTable)
+                {
+                    DataTable table = (DataTable)node.Tag;
+                    TreeNode dbNode = TreeService.GetSelectedDBNode(node);
+                    Database db = (Database)dbNode.Tag;
+                    Server server = (Server)dbNode.Parent.Tag;
+
+                    using (NpgsqlConnection connection = ConnectionService.GetConnection(server, db))
+                    {
+                        connection.Open();
+                        DatabaseService.fetchTableByName(connection, table);
+                    }
+                    dgvData.DataMember = table.TableName;
+                    dgvData.DataSource = table.DataSet;
+                }
+            }
+        }
         
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -89,42 +120,15 @@ namespace PgEdit
 
         private void tvStructure_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Node.Tag != null)
-            {
-                if (e.Node.Tag is Database)
-                {
-                    Database db = (Database)e.Node.Tag;
-
-                    if (!db.IsOpen)
-                    {
-                        OpenDatabase(e.Node);
-                    }
-                }
-                else if (e.Node.Tag is DataTable)
-                {
-                    DataTable table = (DataTable)e.Node.Tag;
-                    TreeNode dbNode = TreeService.GetSelectedDBNode(e.Node);
-                    Database db = (Database)dbNode.Tag;
-                    Server server = (Server)dbNode.Parent.Tag;
-
-                    using (NpgsqlConnection connection = ConnectionService.GetConnection(server, db))
-                    {
-                        connection.Open();
-                        DatabaseService.fetchTableByName(connection, table);
-                    }
-                    dgvData.DataMember = table.TableName;
-                    dgvData.DataSource = table.DataSet;
-                }
-            }
+            SelectTreeNode(e.Node);
         }
 
         private void tvStructure_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter) &&
-                tvStructure.SelectedNode != null &&
-                tvStructure.SelectedNode.Tag is Database)
+                tvStructure.SelectedNode != null)
             {
-                OpenDatabase(tvStructure.SelectedNode);
+                SelectTreeNode(tvStructure.SelectedNode);
                 e.Handled = true;
             }
         }
