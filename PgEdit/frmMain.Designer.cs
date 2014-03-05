@@ -33,7 +33,6 @@
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
             this.tsmiDB = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiRegister = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDisconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,19 +84,12 @@
             // tsmiDB
             // 
             this.tsmiDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiRegister,
             this.tsmiConnect,
             this.tsmiDisconnect,
             this.tsmiExit});
             this.tsmiDB.Name = "tsmiDB";
             this.tsmiDB.Size = new System.Drawing.Size(86, 20);
             this.tsmiDB.Text = "База данных";
-            // 
-            // tsmiRegister
-            // 
-            this.tsmiRegister.Name = "tsmiRegister";
-            this.tsmiRegister.Size = new System.Drawing.Size(231, 22);
-            this.tsmiRegister.Text = "Зарегистрировать";
             // 
             // tsmiConnect
             // 
@@ -168,7 +160,6 @@
         private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.MenuStrip msMainMenu;
         private System.Windows.Forms.ToolStripMenuItem tsmiDB;
-        private System.Windows.Forms.ToolStripMenuItem tsmiRegister;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.SplitContainer scMain;
         private System.Windows.Forms.ToolStripMenuItem tsmiConnect;
