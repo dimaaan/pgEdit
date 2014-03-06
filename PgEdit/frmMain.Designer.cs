@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvStructure = new System.Windows.Forms.TreeView();
             this.ilTreeView = new System.Windows.Forms.ImageList(this.components);
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
@@ -210,8 +210,8 @@
             // 
             this.dgvColumns.AllowUserToAddRows = false;
             this.dgvColumns.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvColumns.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvColumns.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvColumns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvColumns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
@@ -313,6 +313,8 @@
             // 
             // ucTable
             // 
+            this.ucTable.DataMember = "";
+            this.ucTable.DataSource = null;
             this.ucTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucTable.Location = new System.Drawing.Point(3, 3);
             this.ucTable.Name = "ucTable";
@@ -330,6 +332,7 @@
             this.Name = "frmMain";
             this.Text = "PgEdit";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.msMainMenu.ResumeLayout(false);
             this.msMainMenu.PerformLayout();
