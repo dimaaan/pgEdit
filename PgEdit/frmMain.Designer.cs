@@ -313,8 +313,6 @@
             // 
             // ucTable
             // 
-            this.ucTable.DataMember = "";
-            this.ucTable.DataSource = null;
             this.ucTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucTable.Location = new System.Drawing.Point(3, 3);
             this.ucTable.Name = "ucTable";
