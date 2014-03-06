@@ -30,15 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.bsTable = new System.Windows.Forms.BindingSource(this.components);
+            this.bsData = new System.Windows.Forms.BindingSource(this.components);
             this.dgvData = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.bsTable)).BeginInit();
+            this.ssData = new System.Windows.Forms.StatusStrip();
+            this.tsslRowsCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslRowsFiltered = new System.Windows.Forms.ToolStripStatusLabel();
+            ((System.ComponentModel.ISupportInitialize)(this.bsData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            this.ssData.SuspendLayout();
             this.SuspendLayout();
             // 
-            // bsTable
+            // bsData
             // 
-            this.bsTable.AllowNew = false;
+            this.bsData.AllowNew = false;
             // 
             // dgvData
             // 
@@ -49,32 +53,59 @@
             this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvData.AutoGenerateColumns = false;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.DataSource = this.bsTable;
+            this.dgvData.DataSource = this.bsData;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.Location = new System.Drawing.Point(0, 0);
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
             this.dgvData.RowHeadersVisible = false;
-            this.dgvData.Size = new System.Drawing.Size(826, 489);
+            this.dgvData.Size = new System.Drawing.Size(826, 467);
             this.dgvData.TabIndex = 2;
-            this.dgvData.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvData_DataBindingComplete);
+            // 
+            // ssData
+            // 
+            this.ssData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslRowsCount,
+            this.tsslRowsFiltered});
+            this.ssData.Location = new System.Drawing.Point(0, 467);
+            this.ssData.Name = "ssData";
+            this.ssData.Size = new System.Drawing.Size(826, 22);
+            this.ssData.TabIndex = 3;
+            this.ssData.Text = "statusStrip1";
+            // 
+            // tsslRowsCount
+            // 
+            this.tsslRowsCount.Name = "tsslRowsCount";
+            this.tsslRowsCount.Size = new System.Drawing.Size(0, 17);
+            // 
+            // tsslRowsFiltered
+            // 
+            this.tsslRowsFiltered.Name = "tsslRowsFiltered";
+            this.tsslRowsFiltered.Size = new System.Drawing.Size(0, 17);
             // 
             // TableWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvData);
+            this.Controls.Add(this.ssData);
             this.Name = "TableWorkspace";
             this.Size = new System.Drawing.Size(826, 489);
-            ((System.ComponentModel.ISupportInitialize)(this.bsTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            this.ssData.ResumeLayout(false);
+            this.ssData.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView dgvData;
-        private System.Windows.Forms.BindingSource bsTable;
+        private System.Windows.Forms.BindingSource bsData;
+        private System.Windows.Forms.StatusStrip ssData;
+        private System.Windows.Forms.ToolStripStatusLabel tsslRowsCount;
+        private System.Windows.Forms.ToolStripStatusLabel tsslRowsFiltered;
     }
 }

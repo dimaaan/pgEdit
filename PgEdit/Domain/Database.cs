@@ -9,6 +9,8 @@ namespace PgEdit.Domain
 {
     public class Database
     {
+        public const string TABLE_PROPERTY_ROWS_COUNT = "rowsCount";
+
         public string Name;
         public string User;
         public string Password;

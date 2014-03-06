@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using PgEdit.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,8 @@ namespace PgEdit.Service
 {
     public static class DatabaseService
     {
+        public const int ROWS_LIMIT = 1000;
+
         public static List<String> fetchDbNames(NpgsqlConnection connection)
         {
             string sql =
@@ -69,8 +72,7 @@ namespace PgEdit.Service
                 "SELECT table_name " +
                 "FROM information_schema.tables " +
                 "WHERE table_schema = @schema " +
-                "ORDER BY table_name " +
-                "LIMIT 1000";
+                "ORDER BY table_name";
             NpgsqlCommand command = new NpgsqlCommand(sql, connection);
             command.Parameters.AddWithValue("schema", schema.DataSetName);
 
@@ -90,14 +92,25 @@ namespace PgEdit.Service
             return tables.ToArray();
         }
 
+        private static void fetchRowsCount(NpgsqlConnection connection, DataTable table)
+        {
+            string sql = String.Format("SELECT count(*) FROM {0}.{1}", table.DataSet.DataSetName, table.TableName, ROWS_LIMIT);
+            NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+            object reqRes = command.ExecuteScalar();
+            long rowsCount = Convert.ToInt64(reqRes);
+            table.ExtendedProperties.Add(Database.TABLE_PROPERTY_ROWS_COUNT, rowsCount);
+        }
+
         public static void fetchTableByName(NpgsqlConnection connection, DataTable table)
         {
-            string sql = String.Format("SELECT * FROM {0}.{1}", table.DataSet.DataSetName, table.TableName);
+            string sql = String.Format("SELECT * FROM {0}.{1} LIMIT {2}", table.DataSet.DataSetName, table.TableName, ROWS_LIMIT);
             NpgsqlCommand command = new NpgsqlCommand(sql, connection);
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
 
             table.Clear();
             adapter.Fill(table.DataSet, table.TableName);
+
+            fetchRowsCount(connection, table);
         }
 
         public static DataTable fetchTableColumns(NpgsqlConnection connection, string schema, string table)

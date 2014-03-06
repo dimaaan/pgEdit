@@ -58,7 +58,7 @@ namespace PgEdit
             TreeNode dbNode = GetSelectedDBNode(node);
             Database db = (Database)dbNode.Tag;
 
-            ucTable.DataSource = null;
+            ucTable.SetDataSource(null, null);
             dgvColumns.DataSource = null;
             dgvColumns.DataMember = null;
             db.Schemas = null;
@@ -145,8 +145,7 @@ namespace PgEdit
             }
 
             dgvColumns.DataSource = tableColumns;
-            ucTable.DataSource = table.DataSet;
-            ucTable.DataMember = table.TableName;
+            ucTable.SetDataSource(table.DataSet, table.TableName);
         }
 
         public static void FillTreeViewWithTables(TreeNode dbNode)

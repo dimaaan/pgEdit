@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataGridViewAutoFilter;
+using PgEdit.Domain;
 
 namespace PgEdit
 {
@@ -20,33 +21,37 @@ namespace PgEdit
             dgvData.AutoGenerateColumns = true;
         }
 
-        public Object DataSource
+        public void SetDataSource(object dataSource, string dataMember)
         {
-            get
-            {
-                return bsTable.DataSource;
-            }
-            set
-            {
-                bsTable.DataSource = value;
-            }
+            bsData.DataSource = dataSource;
+            bsData.DataMember = dataMember;
+            SetupFilters();
         }
 
-        public string DataMember
-        {
-            get
+        private DataTable GetBindedTable() {
+            DataTable tbl;
+
+            if (bsData.DataSource is DataSet)
             {
-                return bsTable.DataMember;
+                DataSet ds = (DataSet)bsData.DataSource;
+
+                tbl = ds.Tables[bsData.DataMember];
             }
-            set
+            else if (bsData.DataSource is DataTable)
             {
-                bsTable.DataMember = value;
+                tbl = (DataTable)bsData.DataSource;
             }
+            else
+            {
+                throw new InvalidOperationException("Unknown datasource");
+            }
+
+            return tbl;
         }
 
         private void SetupFilters()
         {
-            if (dgvData.DataSource != null)
+            if (bsData.DataSource != null)
             {
                 foreach (DataGridViewColumn col in dgvData.Columns)
                 {
@@ -55,12 +60,19 @@ namespace PgEdit
                         col.HeaderCell = new DataGridViewAutoFilterColumnHeaderCell(col.HeaderCell);
                     }
                 }
+
+                DataTable tbl = GetBindedTable();
+                object rowsCount = tbl.ExtendedProperties[Database.TABLE_PROPERTY_ROWS_COUNT];
+
+                tsslRowsCount.Text = string.Format("Записей извлечено: {0} из {1}", bsData.Count, rowsCount);
             }
+            else
+            {
+                tsslRowsCount.Text = null;
+                tsslRowsFiltered.Text = null;
+            }
+                
         }
 
-        private void dgvData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            SetupFilters();
-        }
     }
 }
