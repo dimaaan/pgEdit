@@ -69,7 +69,8 @@ namespace PgEdit.Service
                 "SELECT table_name " +
                 "FROM information_schema.tables " +
                 "WHERE table_schema = @schema " +
-                "ORDER BY table_name";
+                "ORDER BY table_name " +
+                "LIMIT 1000";
             NpgsqlCommand command = new NpgsqlCommand(sql, connection);
             command.Parameters.AddWithValue("schema", schema.DataSetName);
 
@@ -101,33 +102,26 @@ namespace PgEdit.Service
 
         public static DataTable fetchTableColumns(NpgsqlConnection connection, string schema, string table)
         {
-            // TODO bug on table permissions dublicate rows
-            // TODO not working: foreign key, unique key, description
-            // TODO union primary and foreign key column in grid
             string sql =
                 "SELECT " +
-                "f.attname AS name, " +
-                "f.attnotnull AS notnull, " +
-                "pg_catalog.format_type(f.atttypid,f.atttypmod) AS type, " +
-                "CASE WHEN p.contype = 'p' THEN TRUE ELSE FALSE END AS primarykey, " +
-                "CASE WHEN p.contype = 'u' THEN TRUE ELSE FALSE END AS uniquekey, " +
-                "CASE WHEN p.contype = 'f' THEN g.relname END AS foreignkey, " +
-                "CASE WHEN p.contype = 'f' THEN p.confkey END AS foreignkey_fieldnum, " +
-                "CASE WHEN p.contype = 'f' THEN g.relname END AS foreignkey, " +
-                "CASE WHEN p.contype = 'f' THEN p.conkey END AS foreignkey_connnum, " +
-                "CASE WHEN f.atthasdef = 't' THEN d.adsrc END AS default " +
-                "FROM pg_attribute f " +
-                "JOIN pg_class c ON c.oid = f.attrelid " +
-                "JOIN pg_type t ON t.oid = f.atttypid " +
-                "LEFT JOIN pg_attrdef d ON d.adrelid = c.oid AND d.adnum = f.attnum " +
-                "LEFT JOIN pg_namespace n ON n.oid = c.relnamespace " +
-                "LEFT JOIN pg_constraint p ON p.conrelid = c.oid AND f.attnum = ANY (p.conkey) " +
-                "LEFT JOIN pg_class AS g ON p.confrelid = g.oid " +
+                "col.attname AS name, " +
+                "pg_catalog.format_type(col.atttypid,col.atttypmod) AS type, " +
+                "col.attnotnull AS notnull, " +
+                "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'p') THEN TRUE ELSE FALSE END AS primarykey, " +
+                "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'f') THEN TRUE ELSE FALSE END AS foreignkey, " +
+                "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'u') THEN TRUE ELSE FALSE END AS uniquekey, " +
+                "CASE WHEN col.atthasdef IS TRUE THEN def_val.adsrc END AS default, " +
+                "col_description(tbl.oid, col.attnum) AS description " +
+                "FROM pg_namespace schema " +
+                "INNER JOIN pg_class tbl ON schema.oid = tbl.relnamespace " +
+                "INNER JOIN pg_attribute col ON tbl.oid = col.attrelid  " +
+                "INNER JOIN pg_type t ON t.oid = col.atttypid " +
+                "LEFT JOIN pg_attrdef def_val ON def_val.adrelid = tbl.oid AND def_val.adnum = col.attnum " +
                 "WHERE " +
-                "c.relkind = 'r' " +
-                "AND n.nspname = @schema " +
-                "AND c.relname = @table " +
-                "AND f.attnum > 0 ";
+                "tbl.relkind = 'r' AND " +
+                "schema.nspname = @schema AND " +
+                "tbl.relname = @table AND " +
+                "col.attnum > 0";
             NpgsqlCommand command = new NpgsqlCommand(sql, connection);
 
             command.Parameters.AddWithValue("schema", schema);
@@ -137,7 +131,7 @@ namespace PgEdit.Service
             DataTable resultTable = new DataTable();
 
             adapter.Fill(resultTable);
-
+            
             resultTable.TableName = table;
             resultTable.Namespace = "columns";
 

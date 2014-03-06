@@ -39,21 +39,21 @@
             this.tsmiConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDisconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.tabTable = new System.Windows.Forms.TabControl();
             this.tpColumns = new System.Windows.Forms.TabPage();
             this.dgvColumns = new System.Windows.Forms.DataGridView();
+            this.tpData = new System.Windows.Forms.TabPage();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrimaryKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colForeignKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colNotNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colNotNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colDefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tpData = new System.Windows.Forms.TabPage();
-            this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
@@ -144,6 +144,21 @@
             this.tsmiExit.Text = "Выход";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
+            // tsmiHelp
+            // 
+            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiAbout});
+            this.tsmiHelp.Name = "tsmiHelp";
+            this.tsmiHelp.Size = new System.Drawing.Size(68, 20);
+            this.tsmiHelp.Text = "Помощь";
+            // 
+            // tsmiAbout
+            // 
+            this.tsmiAbout.Name = "tsmiAbout";
+            this.tsmiAbout.Size = new System.Drawing.Size(158, 22);
+            this.tsmiAbout.Text = "О программе...";
+            this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
+            // 
             // scMain
             // 
             this.scMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -196,8 +211,8 @@
             this.colType,
             this.colPrimaryKey,
             this.colForeignKey,
-            this.colNotNull,
             this.colUnique,
+            this.colNotNull,
             this.colDefaultValue,
             this.colDescription});
             this.dgvColumns.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -207,6 +222,17 @@
             this.dgvColumns.RowHeadersVisible = false;
             this.dgvColumns.Size = new System.Drawing.Size(566, 505);
             this.dgvColumns.TabIndex = 0;
+            // 
+            // tpData
+            // 
+            this.tpData.Controls.Add(this.dgvData);
+            this.tpData.Location = new System.Drawing.Point(4, 22);
+            this.tpData.Name = "tpData";
+            this.tpData.Padding = new System.Windows.Forms.Padding(3);
+            this.tpData.Size = new System.Drawing.Size(572, 511);
+            this.tpData.TabIndex = 1;
+            this.tpData.Text = "Данные";
+            this.tpData.UseVisualStyleBackColor = true;
             // 
             // colName
             // 
@@ -239,10 +265,18 @@
             // colForeignKey
             // 
             this.colForeignKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colForeignKey.DataPropertyName = "foreignkey";
             this.colForeignKey.HeaderText = "Внешний ключ";
             this.colForeignKey.Name = "colForeignKey";
             this.colForeignKey.ReadOnly = true;
             this.colForeignKey.Width = 77;
+            // 
+            // colUnique
+            // 
+            this.colUnique.DataPropertyName = "uniquekey";
+            this.colUnique.HeaderText = "Уникальный";
+            this.colUnique.Name = "colUnique";
+            this.colUnique.ReadOnly = true;
             // 
             // colNotNull
             // 
@@ -252,12 +286,6 @@
             this.colNotNull.Name = "colNotNull";
             this.colNotNull.ReadOnly = true;
             this.colNotNull.Width = 43;
-            // 
-            // colUnique
-            // 
-            this.colUnique.HeaderText = "Уникальный";
-            this.colUnique.Name = "colUnique";
-            this.colUnique.ReadOnly = true;
             // 
             // colDefaultValue
             // 
@@ -271,35 +299,10 @@
             // colDescription
             // 
             this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.DataPropertyName = "description";
             this.colDescription.HeaderText = "Описание";
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
-            // 
-            // tpData
-            // 
-            this.tpData.Controls.Add(this.dgvData);
-            this.tpData.Location = new System.Drawing.Point(4, 22);
-            this.tpData.Name = "tpData";
-            this.tpData.Padding = new System.Windows.Forms.Padding(3);
-            this.tpData.Size = new System.Drawing.Size(572, 511);
-            this.tpData.TabIndex = 1;
-            this.tpData.Text = "Данные";
-            this.tpData.UseVisualStyleBackColor = true;
-            // 
-            // tsmiHelp
-            // 
-            this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiAbout});
-            this.tsmiHelp.Name = "tsmiHelp";
-            this.tsmiHelp.Size = new System.Drawing.Size(68, 20);
-            this.tsmiHelp.Text = "Помощь";
-            // 
-            // tsmiAbout
-            // 
-            this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(158, 22);
-            this.tsmiAbout.Text = "О программе...";
-            this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
             // frmMain
             // 
@@ -343,16 +346,16 @@
         private System.Windows.Forms.TabPage tpColumns;
         private System.Windows.Forms.DataGridView dgvColumns;
         private System.Windows.Forms.TabPage tpData;
+        private System.Windows.Forms.ImageList ilTreeView;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colType;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colPrimaryKey;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colForeignKey;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colNotNull;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colUnique;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colNotNull;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDefaultValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
-        private System.Windows.Forms.ImageList ilTreeView;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
     }
 }
