@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bsData = new System.Windows.Forms.BindingSource(this.components);
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.ssData = new System.Windows.Forms.StatusStrip();
             this.tsslRowsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRowsFiltered = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslOffsetLimit = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.bsData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.ssData.SuspendLayout();
@@ -49,8 +50,8 @@
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvData.AutoGenerateColumns = false;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.DataSource = this.bsData;
@@ -66,22 +67,32 @@
             // 
             this.ssData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslRowsCount,
-            this.tsslRowsFiltered});
+            this.tsslRowsFiltered,
+            this.tsslOffsetLimit});
             this.ssData.Location = new System.Drawing.Point(0, 467);
             this.ssData.Name = "ssData";
             this.ssData.Size = new System.Drawing.Size(826, 22);
+            this.ssData.SizingGrip = false;
             this.ssData.TabIndex = 3;
             this.ssData.Text = "statusStrip1";
             // 
             // tsslRowsCount
             // 
             this.tsslRowsCount.Name = "tsslRowsCount";
-            this.tsslRowsCount.Size = new System.Drawing.Size(0, 17);
+            this.tsslRowsCount.Size = new System.Drawing.Size(260, 17);
+            this.tsslRowsCount.Spring = true;
             // 
             // tsslRowsFiltered
             // 
             this.tsslRowsFiltered.Name = "tsslRowsFiltered";
-            this.tsslRowsFiltered.Size = new System.Drawing.Size(0, 17);
+            this.tsslRowsFiltered.Size = new System.Drawing.Size(260, 17);
+            this.tsslRowsFiltered.Spring = true;
+            // 
+            // tsslOffsetLimit
+            // 
+            this.tsslOffsetLimit.Name = "tsslOffsetLimit";
+            this.tsslOffsetLimit.Size = new System.Drawing.Size(260, 17);
+            this.tsslOffsetLimit.Spring = true;
             // 
             // TableWorkspace
             // 
@@ -107,5 +118,6 @@
         private System.Windows.Forms.StatusStrip ssData;
         private System.Windows.Forms.ToolStripStatusLabel tsslRowsCount;
         private System.Windows.Forms.ToolStripStatusLabel tsslRowsFiltered;
+        private System.Windows.Forms.ToolStripStatusLabel tsslOffsetLimit;
     }
 }

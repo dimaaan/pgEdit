@@ -62,14 +62,11 @@ namespace DataGridViewAutoFilter
             }
             set
             {
-                if (_filtered != value)
-                {
-                    _filtered = value;
+                _filtered = value;
 
-                    if (FilteredChanged != null)
-                    {
-                        FilteredChanged(this, EventArgs.Empty);
-                    }
+                if (FilteredChanged != null)
+                {
+                    FilteredChanged(this, EventArgs.Empty);
                 }
             }
         }

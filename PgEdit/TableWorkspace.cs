@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataGridViewAutoFilter;
 using PgEdit.Domain;
+using PgEdit.Service;
 
 namespace PgEdit
 {
@@ -19,6 +20,7 @@ namespace PgEdit
             InitializeComponent();
 
             dgvData.AutoGenerateColumns = true;
+            tsslOffsetLimit.Text = string.Format("LIMIT {0} OFFSET 0", DatabaseService.ROWS_LIMIT);
         }
 
         public void SetDataSource(object dataSource, string dataMember)
@@ -77,8 +79,16 @@ namespace PgEdit
 
         private void HeaderCell_FilteredChanged(object sender, EventArgs e)
         {
-            int rows = dgvData.AllowUserToAddRows ? dgvData.Rows.Count - 1 : dgvData.Rows.Count;
-            tsslRowsFiltered.Text = "Отфильтровано записей: " + rows;
+            var c = (DataGridViewAutoFilterColumnHeaderCell)sender;
+            if (c.Filtered)
+            {
+                int rows = dgvData.AllowUserToAddRows ? dgvData.Rows.Count - 1 : dgvData.Rows.Count;
+                tsslRowsFiltered.Text = "Отфильтровано записей: " + rows;
+            }
+            else
+            {
+                tsslRowsFiltered.Text = null;
+            }
         }
 
     }
