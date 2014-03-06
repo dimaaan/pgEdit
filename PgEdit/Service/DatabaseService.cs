@@ -92,7 +92,7 @@ namespace PgEdit.Service
 
         public static void fetchTableByName(NpgsqlConnection connection, DataTable table)
         {
-            string sql = String.Format("SELECT * FROM {0}.{1}", table.DataSet.DataSetName, table.TableName); // TODO set via params
+            string sql = String.Format("SELECT * FROM {0}.{1}", table.DataSet.DataSetName, table.TableName);
             NpgsqlCommand command = new NpgsqlCommand(sql, connection);
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
 
