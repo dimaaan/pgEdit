@@ -25,6 +25,17 @@ namespace PgEdit
         {
             bsData.DataSource = dataSource;
             bsData.DataMember = dataMember;
+
+            foreach (DataGridViewColumn col in dgvData.Columns)
+            {
+                if (!(col.HeaderCell is DataGridViewAutoFilterColumnHeaderCell))
+                {
+                    var cell = new DataGridViewAutoFilterColumnHeaderCell(col.HeaderCell);
+                    cell.FilteredChanged += HeaderCell_FilteredChanged;
+                    col.HeaderCell = cell;
+                }
+            }
+
             SetupFilters();
         }
 
@@ -53,14 +64,6 @@ namespace PgEdit
         {
             if (bsData.DataSource != null)
             {
-                foreach (DataGridViewColumn col in dgvData.Columns)
-                {
-                    if (!(col.HeaderCell is DataGridViewAutoFilterColumnHeaderCell))
-                    {
-                        col.HeaderCell = new DataGridViewAutoFilterColumnHeaderCell(col.HeaderCell);
-                    }
-                }
-
                 DataTable tbl = GetBindedTable();
                 object rowsCount = tbl.ExtendedProperties[Database.TABLE_PROPERTY_ROWS_COUNT];
 
@@ -69,9 +72,13 @@ namespace PgEdit
             else
             {
                 tsslRowsCount.Text = null;
-                tsslRowsFiltered.Text = null;
             }
-                
+        }
+
+        private void HeaderCell_FilteredChanged(object sender, EventArgs e)
+        {
+            int rows = dgvData.AllowUserToAddRows ? dgvData.Rows.Count - 1 : dgvData.Rows.Count;
+            tsslRowsFiltered.Text = "Отфильтровано записей: " + rows;
         }
 
     }

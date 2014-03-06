@@ -48,10 +48,33 @@ namespace DataGridViewAutoFilter
         /// </summary>
         private String currentColumnFilter = String.Empty;
 
+        
+        private bool _filtered;
+
         /// <summary>
         /// Indicates whether the DataGridView is currently filtered by the owning column.  
         /// </summary>
-        private Boolean filtered;
+        public bool Filtered
+        {
+            get
+            {
+                return _filtered;
+            }
+            set
+            {
+                if (_filtered != value)
+                {
+                    _filtered = value;
+
+                    if (FilteredChanged != null)
+                    {
+                        FilteredChanged(this, EventArgs.Empty);
+                    }
+                }
+            }
+        }
+
+        public event EventHandler FilteredChanged;
 
         /// <summary>
         /// Initializes a new instance of the DataGridViewColumnHeaderCell 
@@ -311,7 +334,7 @@ namespace DataGridViewAutoFilter
             BindingSource source = this.DataGridView.DataSource as BindingSource;
             if (source == null || String.IsNullOrEmpty(source.Filter))
             {
-                filtered = false;
+                Filtered = false;
                 selectedFilterValue = "(All)";
                 currentColumnFilter = String.Empty;
             }
@@ -389,7 +412,7 @@ namespace DataGridViewAutoFilter
                 {
                     state = ComboBoxState.Pressed;
                 }
-                else if (filtered)
+                else if (Filtered)
                 {
                     state = ComboBoxState.Hot;
                 }
@@ -412,7 +435,7 @@ namespace DataGridViewAutoFilter
                 // If there is a filter in effect for the column, paint the 
                 // down arrow as an unfilled triangle. If there is no filter 
                 // in effect, paint the down arrow as a filled triangle.
-                if (filtered)
+                if (Filtered)
                 {
                     graphics.DrawPolygon(SystemPens.ControlText, new Point[] {
                         new Point(
@@ -1049,7 +1072,7 @@ namespace DataGridViewAutoFilter
             }
 
             // If the column is not filtered, return the filter string unchanged. 
-            if (!filtered)
+            if (!Filtered)
             {
                 return filter;
             }
@@ -1108,7 +1131,7 @@ namespace DataGridViewAutoFilter
             if (selectedFilterValue.Equals("(All)"))
             {
                 data.Filter = FilterWithoutCurrentColumn(data.Filter);
-                filtered = false;
+                Filtered = false;
                 currentColumnFilter = String.Empty;
                 return;
             }
@@ -1173,7 +1196,7 @@ namespace DataGridViewAutoFilter
             // Indicate that the column is currently filtered
             // and store the new column filter for use by subsequent
             // calls to the FilterWithoutCurrentColumn method. 
-            filtered = true;
+            Filtered = true;
             currentColumnFilter = newColumnFilter;
         }
 
