@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvStructure = new System.Windows.Forms.TreeView();
             this.ilTreeView = new System.Windows.Forms.ImageList(this.components);
-            this.dgvData = new System.Windows.Forms.DataGridView();
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
             this.tsmiDB = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiConnect = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +40,7 @@
             this.tsmiRegisteredDB = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiBugReport = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.tabTable = new System.Windows.Forms.TabControl();
@@ -56,8 +55,7 @@
             this.colDefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpData = new System.Windows.Forms.TabPage();
-            this.tsmiBugReport = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            this.ucTable = new PgEdit.TableWorkspace();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
@@ -88,22 +86,6 @@
             this.ilTreeView.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.ilTreeView.ImageSize = new System.Drawing.Size(16, 16);
             this.ilTreeView.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // dgvData
-            // 
-            this.dgvData.AllowUserToAddRows = false;
-            this.dgvData.AllowUserToDeleteRows = false;
-            this.dgvData.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvData.Location = new System.Drawing.Point(3, 3);
-            this.dgvData.Name = "dgvData";
-            this.dgvData.ReadOnly = true;
-            this.dgvData.RowHeadersVisible = false;
-            this.dgvData.Size = new System.Drawing.Size(566, 505);
-            this.dgvData.TabIndex = 1;
             // 
             // msMainMenu
             // 
@@ -169,6 +151,13 @@
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(68, 20);
             this.tsmiHelp.Text = "Помощь";
+            // 
+            // tsmiBugReport
+            // 
+            this.tsmiBugReport.Name = "tsmiBugReport";
+            this.tsmiBugReport.Size = new System.Drawing.Size(231, 22);
+            this.tsmiBugReport.Text = "Feature Request/Bug Report...";
+            this.tsmiBugReport.Click += new System.EventHandler(this.tsmiBugReport_Click);
             // 
             // tsmiAbout
             // 
@@ -313,7 +302,7 @@
             // 
             // tpData
             // 
-            this.tpData.Controls.Add(this.dgvData);
+            this.tpData.Controls.Add(this.ucTable);
             this.tpData.Location = new System.Drawing.Point(4, 22);
             this.tpData.Name = "tpData";
             this.tpData.Padding = new System.Windows.Forms.Padding(3);
@@ -322,12 +311,13 @@
             this.tpData.Text = "Данные";
             this.tpData.UseVisualStyleBackColor = true;
             // 
-            // tsmiBugReport
+            // ucTable
             // 
-            this.tsmiBugReport.Name = "tsmiBugReport";
-            this.tsmiBugReport.Size = new System.Drawing.Size(231, 22);
-            this.tsmiBugReport.Text = "Feature Request/Bug Report...";
-            this.tsmiBugReport.Click += new System.EventHandler(this.tsmiBugReport_Click);
+            this.ucTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucTable.Location = new System.Drawing.Point(3, 3);
+            this.ucTable.Name = "ucTable";
+            this.ucTable.Size = new System.Drawing.Size(566, 505);
+            this.ucTable.TabIndex = 0;
             // 
             // frmMain
             // 
@@ -341,7 +331,6 @@
             this.Text = "PgEdit";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.msMainMenu.ResumeLayout(false);
             this.msMainMenu.PerformLayout();
             this.scMain.Panel1.ResumeLayout(false);
@@ -360,7 +349,6 @@
         #endregion
 
         private System.Windows.Forms.TreeView tvStructure;
-        private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.MenuStrip msMainMenu;
         private System.Windows.Forms.ToolStripMenuItem tsmiDB;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
@@ -385,5 +373,6 @@
         private System.Windows.Forms.ToolStripSeparator tsSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsmiRegisteredDB;
         private System.Windows.Forms.ToolStripMenuItem tsmiBugReport;
+        private TableWorkspace ucTable;
     }
 }
