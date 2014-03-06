@@ -59,6 +59,8 @@ namespace PgEdit
 
             dgvData.DataSource = null;
             dgvData.DataMember = null;
+            dgvColumns.DataSource = null;
+            dgvColumns.DataMember = null;
             db.Schemas = null;
             db.IsOpen = false;
             dbNode.Nodes.Clear();
