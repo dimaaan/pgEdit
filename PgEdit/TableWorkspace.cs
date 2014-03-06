@@ -48,20 +48,12 @@ namespace PgEdit
         {
             if (dgvData.DataSource != null)
             {
-                bool resize = false;
-
                 foreach (DataGridViewColumn col in dgvData.Columns)
                 {
                     if (!(col.HeaderCell is DataGridViewAutoFilterColumnHeaderCell))
                     {
                         col.HeaderCell = new DataGridViewAutoFilterColumnHeaderCell(col.HeaderCell);
-                        resize = true;
                     }
-                }
-
-                if (resize)
-                {
-                    dgvData.AutoResizeColumns();
                 }
             }
         }
