@@ -14,6 +14,12 @@ namespace PgEdit
         [STAThread]
         static void Main()
         {
+            // TODO close ssh tunnels on program exit
+            // TODO panel for quick reset, edit filters similar to EMS manager. Appers under table.
+            // TODO table Fields: more details
+            // TODO navigation: clicking by foreight key cell send user to row with primary key
+            // TODO navigation: clicking by primary key cell opens menu with depend tables. selecting table send user to table with dependent rows filtered
+            // TODO navigation: forward and backward buttons, support mouse additional buttons
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMain());
