@@ -25,17 +25,15 @@ namespace PgEdit
 
         public void SetDataSource(object dataSource, string dataMember)
         {
+            bsData.Filter = null;
             bsData.DataSource = dataSource;
             bsData.DataMember = dataMember;
 
             foreach (DataGridViewColumn col in dgvData.Columns)
             {
-                if (!(col.HeaderCell is DataGridViewAutoFilterColumnHeaderCell))
-                {
-                    var cell = new DataGridViewAutoFilterColumnHeaderCell(col.HeaderCell);
-                    cell.FilteredChanged += HeaderCell_FilteredChanged;
-                    col.HeaderCell = cell;
-                }
+                var cell = new DataGridViewAutoFilterColumnHeaderCell(col.HeaderCell);
+                cell.FilteredChanged += HeaderCell_FilteredChanged;
+                col.HeaderCell = cell;
             }
 
             SetupFilters();
@@ -80,6 +78,7 @@ namespace PgEdit
         private void HeaderCell_FilteredChanged(object sender, EventArgs e)
         {
             var c = (DataGridViewAutoFilterColumnHeaderCell)sender;
+
             if (c.Filtered)
             {
                 int rows = dgvData.AllowUserToAddRows ? dgvData.Rows.Count - 1 : dgvData.Rows.Count;

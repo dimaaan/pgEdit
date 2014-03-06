@@ -98,6 +98,11 @@ namespace PgEdit.Service
             NpgsqlCommand command = new NpgsqlCommand(sql, connection);
             object reqRes = command.ExecuteScalar();
             long rowsCount = Convert.ToInt64(reqRes);
+
+            if (table.ExtendedProperties.Contains(Database.TABLE_PROPERTY_ROWS_COUNT))
+            {
+                table.ExtendedProperties.Remove(Database.TABLE_PROPERTY_ROWS_COUNT);
+            }
             table.ExtendedProperties.Add(Database.TABLE_PROPERTY_ROWS_COUNT, rowsCount);
         }
 
