@@ -64,10 +64,8 @@ namespace DataGridViewAutoFilter
             {
                 _filtered = value;
 
-                if (FilteredChanged != null)
-                {
-                    FilteredChanged(this, EventArgs.Empty);
-                }
+                // no null check. Ensure every cell updates filter controls
+                FilteredChanged(this, EventArgs.Empty);
             }
         }
 
@@ -97,15 +95,14 @@ namespace DataGridViewAutoFilter
 
             // Copy this type's properties if the old cell is an auto-filter cell. 
             // This enables the Clone method to reuse this constructor. 
-            DataGridViewAutoFilterColumnHeaderCell filterCell =
-                oldHeaderCell as DataGridViewAutoFilterColumnHeaderCell;
+            var filterCell = oldHeaderCell as DataGridViewAutoFilterColumnHeaderCell;
             if (filterCell != null)
             {
                 this.FilteringEnabled = filterCell.FilteringEnabled;
                 this.AutomaticSortingEnabled = filterCell.AutomaticSortingEnabled;
                 this.DropDownListBoxMaxLines = filterCell.DropDownListBoxMaxLines;
-                this.currentDropDownButtonPaddingOffset = 
-                    filterCell.currentDropDownButtonPaddingOffset;
+                this.currentDropDownButtonPaddingOffset = filterCell.currentDropDownButtonPaddingOffset;
+                this.FilteredChanged = filterCell.FilteredChanged;
             }
         }
 
