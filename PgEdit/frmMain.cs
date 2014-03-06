@@ -256,6 +256,11 @@ namespace PgEdit
             Process.Start("ConnectionStrings.json");
         }
 
+        private void tsmiBugReport_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/dimaaan/pgEdit/issues/new");
+        }
+
         private void tvStructure_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             OnSelectTreeNode(e.Node);

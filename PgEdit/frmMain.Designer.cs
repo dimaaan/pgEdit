@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvStructure = new System.Windows.Forms.TreeView();
             this.ilTreeView = new System.Windows.Forms.ImageList(this.components);
             this.dgvData = new System.Windows.Forms.DataGridView();
@@ -38,6 +38,8 @@
             this.tsmiDB = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDisconnect = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiRegisteredDB = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +47,6 @@
             this.tabTable = new System.Windows.Forms.TabControl();
             this.tpColumns = new System.Windows.Forms.TabPage();
             this.dgvColumns = new System.Windows.Forms.DataGridView();
-            this.tpData = new System.Windows.Forms.TabPage();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrimaryKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -54,8 +55,8 @@
             this.colNotNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colDefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tsSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiRegisteredDB = new System.Windows.Forms.ToolStripMenuItem();
+            this.tpData = new System.Windows.Forms.TabPage();
+            this.tsmiBugReport = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
@@ -93,8 +94,8 @@
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.Location = new System.Drawing.Point(3, 3);
@@ -141,6 +142,18 @@
             this.tsmiDisconnect.Text = "Отключиться от выбранной";
             this.tsmiDisconnect.Click += new System.EventHandler(this.tsmiDisconnect_Click);
             // 
+            // tsSeparator1
+            // 
+            this.tsSeparator1.Name = "tsSeparator1";
+            this.tsSeparator1.Size = new System.Drawing.Size(228, 6);
+            // 
+            // tsmiRegisteredDB
+            // 
+            this.tsmiRegisteredDB.Name = "tsmiRegisteredDB";
+            this.tsmiRegisteredDB.Size = new System.Drawing.Size(231, 22);
+            this.tsmiRegisteredDB.Text = "Зарегистрированные...";
+            this.tsmiRegisteredDB.Click += new System.EventHandler(this.tsmiRegisteredDB_Click);
+            // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
@@ -151,6 +164,7 @@
             // tsmiHelp
             // 
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiBugReport,
             this.tsmiAbout});
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(68, 20);
@@ -159,7 +173,7 @@
             // tsmiAbout
             // 
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(158, 22);
+            this.tsmiAbout.Size = new System.Drawing.Size(231, 22);
             this.tsmiAbout.Text = "О программе...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
@@ -207,8 +221,8 @@
             // 
             this.dgvColumns.AllowUserToAddRows = false;
             this.dgvColumns.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvColumns.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvColumns.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvColumns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvColumns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
@@ -226,17 +240,6 @@
             this.dgvColumns.RowHeadersVisible = false;
             this.dgvColumns.Size = new System.Drawing.Size(566, 505);
             this.dgvColumns.TabIndex = 0;
-            // 
-            // tpData
-            // 
-            this.tpData.Controls.Add(this.dgvData);
-            this.tpData.Location = new System.Drawing.Point(4, 22);
-            this.tpData.Name = "tpData";
-            this.tpData.Padding = new System.Windows.Forms.Padding(3);
-            this.tpData.Size = new System.Drawing.Size(572, 511);
-            this.tpData.TabIndex = 1;
-            this.tpData.Text = "Данные";
-            this.tpData.UseVisualStyleBackColor = true;
             // 
             // colName
             // 
@@ -308,17 +311,23 @@
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
             // 
-            // tsSeparator1
+            // tpData
             // 
-            this.tsSeparator1.Name = "tsSeparator1";
-            this.tsSeparator1.Size = new System.Drawing.Size(228, 6);
+            this.tpData.Controls.Add(this.dgvData);
+            this.tpData.Location = new System.Drawing.Point(4, 22);
+            this.tpData.Name = "tpData";
+            this.tpData.Padding = new System.Windows.Forms.Padding(3);
+            this.tpData.Size = new System.Drawing.Size(572, 511);
+            this.tpData.TabIndex = 1;
+            this.tpData.Text = "Данные";
+            this.tpData.UseVisualStyleBackColor = true;
             // 
-            // tsmiRegisteredDB
+            // tsmiBugReport
             // 
-            this.tsmiRegisteredDB.Name = "tsmiRegisteredDB";
-            this.tsmiRegisteredDB.Size = new System.Drawing.Size(231, 22);
-            this.tsmiRegisteredDB.Text = "Зарегистрированные...";
-            this.tsmiRegisteredDB.Click += new System.EventHandler(this.tsmiRegisteredDB_Click);
+            this.tsmiBugReport.Name = "tsmiBugReport";
+            this.tsmiBugReport.Size = new System.Drawing.Size(231, 22);
+            this.tsmiBugReport.Text = "Feature Request/Bug Report...";
+            this.tsmiBugReport.Click += new System.EventHandler(this.tsmiBugReport_Click);
             // 
             // frmMain
             // 
@@ -375,5 +384,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.ToolStripSeparator tsSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsmiRegisteredDB;
+        private System.Windows.Forms.ToolStripMenuItem tsmiBugReport;
     }
 }
