@@ -14,7 +14,6 @@ namespace PgEdit
         [STAThread]
         static void Main()
         {
-            // TODO close ssh tunnels on program exit
             // TODO panel for quick reset, edit filters similar to EMS manager. Appers under table.
             // TODO table Fields: more details
             // TODO navigation: clicking by foreight key cell send user to row with primary key

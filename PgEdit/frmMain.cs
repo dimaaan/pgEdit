@@ -210,6 +210,24 @@ namespace PgEdit
                 }
             }
         }
+
+        private void Shutdown()
+        {
+            if (universe != null)
+            {
+                foreach (var server in universe.Servers)
+                {
+                    if (server.sshClient != null)
+                    {
+                        foreach (var port in server.sshClient.ForwardedPorts)
+                        {
+                            port.Stop();
+                        }
+                        server.sshClient.Disconnect();
+                    }
+                }
+            }
+        }
         
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -258,6 +276,11 @@ namespace PgEdit
         private void tsmiBugReport_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/dimaaan/pgEdit/issues/new");
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Shutdown();
         }
 
         private void tvStructure_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
