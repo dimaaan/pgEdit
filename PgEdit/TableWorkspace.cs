@@ -83,11 +83,19 @@ namespace PgEdit
             {
                 int rows = dgvData.AllowUserToAddRows ? dgvData.Rows.Count - 1 : dgvData.Rows.Count;
                 tsslRowsFiltered.Text = "Отфильтровано записей: " + rows;
+                lblFilterExpr.Text = bsData.Filter;
+                panFilters.Visible = true;
             }
             else
             {
                 tsslRowsFiltered.Text = null;
+                panFilters.Visible = false;
             }
+        }
+
+        private void btnResetFilters_Click(object sender, EventArgs e)
+        {
+            bsData.Filter = null;
         }
 
     }
