@@ -63,6 +63,16 @@ namespace PgEdit.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap close_square_black {
+            get {
+                object obj = ResourceManager.GetObject("close-square-black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Database_Active_icon {
             get {
                 object obj = ResourceManager.GetObject("Database_Active_icon", resourceCulture);
