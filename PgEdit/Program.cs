@@ -14,7 +14,6 @@ namespace PgEdit
         [STAThread]
         static void Main()
         {
-            // TODO panel for quick reset, edit filters similar to EMS manager. Appers under table.
             // TODO table Fields: more details
             // TODO navigation: clicking by foreight key cell send user to row with primary key
             // TODO navigation: clicking by primary key cell opens menu with depend tables. selecting table send user to table with dependent rows filtered
