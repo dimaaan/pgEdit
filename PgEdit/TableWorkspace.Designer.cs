@@ -29,16 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bsData = new System.Windows.Forms.BindingSource(this.components);
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.ssData = new System.Windows.Forms.StatusStrip();
             this.tsslRowsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRowsFiltered = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslOffsetLimit = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnResetFilters = new System.Windows.Forms.Button();
+            this.lblFilterExpr = new System.Windows.Forms.Label();
+            this.panFilters = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.bsData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.ssData.SuspendLayout();
+            this.panFilters.SuspendLayout();
             this.SuspendLayout();
             // 
             // bsData
@@ -50,8 +54,8 @@
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvData.AutoGenerateColumns = false;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.DataSource = this.bsData;
@@ -60,7 +64,7 @@
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
             this.dgvData.RowHeadersVisible = false;
-            this.dgvData.Size = new System.Drawing.Size(826, 467);
+            this.dgvData.Size = new System.Drawing.Size(826, 434);
             this.dgvData.TabIndex = 2;
             // 
             // ssData
@@ -79,26 +83,60 @@
             // tsslRowsCount
             // 
             this.tsslRowsCount.Name = "tsslRowsCount";
-            this.tsslRowsCount.Size = new System.Drawing.Size(260, 17);
+            this.tsslRowsCount.Size = new System.Drawing.Size(270, 17);
             this.tsslRowsCount.Spring = true;
             // 
             // tsslRowsFiltered
             // 
             this.tsslRowsFiltered.Name = "tsslRowsFiltered";
-            this.tsslRowsFiltered.Size = new System.Drawing.Size(260, 17);
+            this.tsslRowsFiltered.Size = new System.Drawing.Size(270, 17);
             this.tsslRowsFiltered.Spring = true;
             // 
             // tsslOffsetLimit
             // 
             this.tsslOffsetLimit.Name = "tsslOffsetLimit";
-            this.tsslOffsetLimit.Size = new System.Drawing.Size(260, 17);
+            this.tsslOffsetLimit.Size = new System.Drawing.Size(270, 17);
             this.tsslOffsetLimit.Spring = true;
+            // 
+            // btnResetFilters
+            // 
+            this.btnResetFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnResetFilters.Location = new System.Drawing.Point(3, 4);
+            this.btnResetFilters.Name = "btnResetFilters";
+            this.btnResetFilters.Size = new System.Drawing.Size(26, 26);
+            this.btnResetFilters.TabIndex = 0;
+            this.btnResetFilters.Text = "X";
+            this.btnResetFilters.UseVisualStyleBackColor = true;
+            this.btnResetFilters.Click += new System.EventHandler(this.btnResetFilters_Click);
+            // 
+            // lblFilterExpr
+            // 
+            this.lblFilterExpr.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFilterExpr.Location = new System.Drawing.Point(35, 4);
+            this.lblFilterExpr.Name = "lblFilterExpr";
+            this.lblFilterExpr.Size = new System.Drawing.Size(788, 26);
+            this.lblFilterExpr.TabIndex = 1;
+            this.lblFilterExpr.Text = "Filter expression";
+            this.lblFilterExpr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panFilters
+            // 
+            this.panFilters.Controls.Add(this.btnResetFilters);
+            this.panFilters.Controls.Add(this.lblFilterExpr);
+            this.panFilters.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panFilters.Location = new System.Drawing.Point(0, 434);
+            this.panFilters.Name = "panFilters";
+            this.panFilters.Size = new System.Drawing.Size(826, 33);
+            this.panFilters.TabIndex = 4;
+            this.panFilters.Visible = false;
             // 
             // TableWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvData);
+            this.Controls.Add(this.panFilters);
             this.Controls.Add(this.ssData);
             this.Name = "TableWorkspace";
             this.Size = new System.Drawing.Size(826, 489);
@@ -106,6 +144,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.ssData.ResumeLayout(false);
             this.ssData.PerformLayout();
+            this.panFilters.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,5 +158,8 @@
         private System.Windows.Forms.ToolStripStatusLabel tsslRowsCount;
         private System.Windows.Forms.ToolStripStatusLabel tsslRowsFiltered;
         private System.Windows.Forms.ToolStripStatusLabel tsslOffsetLimit;
+        private System.Windows.Forms.Button btnResetFilters;
+        private System.Windows.Forms.Label lblFilterExpr;
+        private System.Windows.Forms.Panel panFilters;
     }
 }
