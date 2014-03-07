@@ -36,7 +36,7 @@ namespace PgEdit
                 col.HeaderCell = cell;
             }
 
-            SetupFilters();
+            SetupStatusStrip();
         }
 
         private DataTable GetBindedTable() {
@@ -60,7 +60,7 @@ namespace PgEdit
             return tbl;
         }
 
-        private void SetupFilters()
+        private void SetupStatusStrip()
         {
             if (bsData.DataSource != null)
             {
