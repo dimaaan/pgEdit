@@ -14,6 +14,7 @@ namespace PgEdit
         [STAThread]
         static void Main()
         {
+            // TODO what table currently open?
             // TODO table Fields: more details
             // TODO navigation: clicking by foreight key cell send user to row with primary key
             // TODO navigation: clicking by primary key cell opens menu with depend tables. selecting table send user to table with dependent rows filtered
