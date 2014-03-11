@@ -77,9 +77,7 @@ namespace PgEdit
 
         private void HeaderCell_FilteredChanged(object sender, EventArgs e)
         {
-            var c = (DataGridViewAutoFilterColumnHeaderCell)sender;
-
-            if (c.Filtered)
+            if (!string.IsNullOrEmpty(bsData.Filter))
             {
                 int rows = dgvData.AllowUserToAddRows ? dgvData.Rows.Count - 1 : dgvData.Rows.Count;
                 tsslRowsFiltered.Text = "Отфильтровано записей: " + rows;

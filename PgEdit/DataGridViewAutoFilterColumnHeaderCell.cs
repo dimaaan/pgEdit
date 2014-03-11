@@ -8,16 +8,15 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
+using System.Collections;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Text;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using System.Collections;
-using System.Reflection;
 
 namespace DataGridViewAutoFilter
 {
@@ -35,8 +34,8 @@ namespace DataGridViewAutoFilter
         /// A list of filters available for the owning column stored as 
         /// formatted and unformatted string values. 
         /// </summary>
-        private System.Collections.Specialized.OrderedDictionary filters =
-            new System.Collections.Specialized.OrderedDictionary();
+        private OrderedDictionary filters =
+            new OrderedDictionary();
 
         /// <summary>
         /// The drop-down list filter value currently in effect for the owning column. 
