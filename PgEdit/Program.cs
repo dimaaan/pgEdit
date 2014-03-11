@@ -14,6 +14,7 @@ namespace PgEdit
         [STAThread]
         static void Main()
         {
+            // TODO table schema, column type. If enumeration - display values in tooltip
             // TODO what table currently open?
             // TODO table Fields: more details
             // TODO navigation: clicking by foreight key cell send user to row with primary key
