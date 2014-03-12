@@ -47,7 +47,7 @@
             this.tpColumns = new System.Windows.Forms.TabPage();
             this.dgvColumns = new System.Windows.Forms.DataGridView();
             this.tpData = new System.Windows.Forms.TabPage();
-            this.ucTable = new PgEdit.TableWorkspace();
+            this.ucTable = new PgEdit.DataWorkspace();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrimaryKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -366,7 +366,7 @@
         private System.Windows.Forms.ToolStripSeparator tsSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsmiRegisteredDB;
         private System.Windows.Forms.ToolStripMenuItem tsmiBugReport;
-        private TableWorkspace ucTable;
+        private DataWorkspace ucTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colType;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colPrimaryKey;
