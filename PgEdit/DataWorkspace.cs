@@ -13,9 +13,9 @@ using PgEdit.Service;
 
 namespace PgEdit
 {
-    public partial class TableWorkspace : UserControl
+    public partial class DataWorkspace : UserControl
     {
-        public TableWorkspace()
+        public DataWorkspace()
         {
             InitializeComponent();
 

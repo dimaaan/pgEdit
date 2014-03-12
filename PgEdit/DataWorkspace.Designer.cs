@@ -1,6 +1,6 @@
 ﻿namespace PgEdit
 {
-    partial class TableWorkspace
+    partial class DataWorkspace
     {
         /// <summary> 
         /// Required designer variable.
