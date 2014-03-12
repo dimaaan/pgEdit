@@ -23,11 +23,23 @@ namespace PgEdit
         {
             picLogo.Image = Bitmap.FromHicon(Resources.logo.Handle);
 
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            StringBuilder displayVersion = new StringBuilder(32);
+
+            displayVersion.Append(version.Major);
+            displayVersion.Append('.');
+            displayVersion.Append(version.Minor);
+
+            if(version.Build != 0) {
+                displayVersion.Append('.');
+                displayVersion.Append(version.Build);
+            }
+            
             string info = string.Format(
                 "Автор: Аншилевич Дмитрий{0}" + 
                 "Версия: {1}", 
-                Environment.NewLine, 
-                Assembly.GetExecutingAssembly().GetName().Version);
+                Environment.NewLine,
+                displayVersion);
             txtInfo.Text = info;
         }
     }
