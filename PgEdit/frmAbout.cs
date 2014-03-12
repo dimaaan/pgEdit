@@ -37,7 +37,11 @@ namespace PgEdit
             
             string info = string.Format(
                 "Автор: Аншилевич Дмитрий{0}" + 
-                "Версия: {1}", 
+                "Версия: {1}{0}{0}" +
+                "Компоненты:{0}" +
+                "* Npgsql https://github.com/npgsql/Npgsql{0}" +
+                "* SSH.NET http://sshnet.codeplex.com/{0}" +
+                "* DataGridViewAutoFilterColumnHeaderCell http://msdn.microsoft.com/en-us/library/aa480727.aspx", 
                 Environment.NewLine,
                 displayVersion);
             txtInfo.Text = info;

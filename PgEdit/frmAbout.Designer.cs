@@ -37,7 +37,8 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(259, 132);
+            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnOK.Location = new System.Drawing.Point(259, 149);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(94, 23);
             this.btnOK.TabIndex = 0;
@@ -48,18 +49,17 @@
             // 
             this.picLogo.Location = new System.Drawing.Point(12, 12);
             this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(86, 86);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picLogo.Size = new System.Drawing.Size(64, 64);
             this.picLogo.TabIndex = 1;
             this.picLogo.TabStop = false;
             // 
             // txtInfo
             // 
-            this.txtInfo.Location = new System.Drawing.Point(103, 12);
+            this.txtInfo.Location = new System.Drawing.Point(82, 12);
             this.txtInfo.Multiline = true;
             this.txtInfo.Name = "txtInfo";
             this.txtInfo.ReadOnly = true;
-            this.txtInfo.Size = new System.Drawing.Size(250, 86);
+            this.txtInfo.Size = new System.Drawing.Size(271, 131);
             this.txtInfo.TabIndex = 2;
             // 
             // frmAbout
@@ -68,7 +68,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnOK;
-            this.ClientSize = new System.Drawing.Size(365, 167);
+            this.ClientSize = new System.Drawing.Size(365, 184);
             this.Controls.Add(this.txtInfo);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.btnOK);
