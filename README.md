@@ -7,6 +7,7 @@ Quick PostgreSQL DB editor for developers
 * server -> database -> schemas -> tables tree
 * viewing table fields
 * viewing table data, sorting, filtering, reordering columns, copy cell data
+
 #Used
 * Npgsql https://github.com/npgsql/Npgsql
 * SSH.NET http://sshnet.codeplex.com/
