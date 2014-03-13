@@ -304,5 +304,12 @@ namespace PgEdit
             RefreshMenu();            
         }
 
+        private void ucTable_DataSourceNeedRefresh()
+        {
+            TreeNode node = (TreeNode) ucTable.Tag; // selected node
+
+            ShowTable(node);
+        }
+
     }
 }
