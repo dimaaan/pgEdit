@@ -31,22 +31,22 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvData = new System.Windows.Forms.DataGridView();
+            this.bsData = new System.Windows.Forms.BindingSource(this.components);
             this.ssData = new System.Windows.Forms.StatusStrip();
             this.tsslRowsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRowsFiltered = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslOffsetLimit = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblFilterExpr = new System.Windows.Forms.Label();
             this.panFilters = new System.Windows.Forms.Panel();
+            this.btnResetFilters = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tsData = new System.Windows.Forms.ToolStrip();
-            this.bsData = new System.Windows.Forms.BindingSource(this.components);
             this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
-            this.btnResetFilters = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsData)).BeginInit();
             this.ssData.SuspendLayout();
             this.panFilters.SuspendLayout();
             this.tsData.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsData)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvData
@@ -66,6 +66,10 @@
             this.dgvData.RowHeadersVisible = false;
             this.dgvData.Size = new System.Drawing.Size(826, 409);
             this.dgvData.TabIndex = 2;
+            // 
+            // bsData
+            // 
+            this.bsData.AllowNew = false;
             // 
             // ssData
             // 
@@ -120,30 +124,6 @@
             this.panFilters.TabIndex = 4;
             this.panFilters.Visible = false;
             // 
-            // tsData
-            // 
-            this.tsData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbRefresh});
-            this.tsData.Location = new System.Drawing.Point(0, 0);
-            this.tsData.Name = "tsData";
-            this.tsData.Size = new System.Drawing.Size(826, 25);
-            this.tsData.TabIndex = 5;
-            this.tsData.Text = "toolStrip1";
-            // 
-            // bsData
-            // 
-            this.bsData.AllowNew = false;
-            // 
-            // tsbRefresh
-            // 
-            this.tsbRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbRefresh.Image = global::PgEdit.Properties.Resources.refresh_16xLG;
-            this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRefresh.Name = "tsbRefresh";
-            this.tsbRefresh.Size = new System.Drawing.Size(23, 22);
-            this.tsbRefresh.Text = "Обновить";
-            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
-            // 
             // btnResetFilters
             // 
             this.btnResetFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -156,6 +136,27 @@
             this.btnResetFilters.UseVisualStyleBackColor = true;
             this.btnResetFilters.Click += new System.EventHandler(this.btnResetFilters_Click);
             // 
+            // tsData
+            // 
+            this.tsData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbRefresh});
+            this.tsData.Location = new System.Drawing.Point(0, 0);
+            this.tsData.Name = "tsData";
+            this.tsData.Size = new System.Drawing.Size(826, 25);
+            this.tsData.TabIndex = 5;
+            this.tsData.Text = "toolStrip1";
+            // 
+            // tsbRefresh
+            // 
+            this.tsbRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRefresh.Enabled = false;
+            this.tsbRefresh.Image = global::PgEdit.Properties.Resources.refresh_16xLG;
+            this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRefresh.Name = "tsbRefresh";
+            this.tsbRefresh.Size = new System.Drawing.Size(23, 22);
+            this.tsbRefresh.Text = "Обновить";
+            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
+            // 
             // DataWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -167,12 +168,12 @@
             this.Name = "DataWorkspace";
             this.Size = new System.Drawing.Size(826, 489);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsData)).EndInit();
             this.ssData.ResumeLayout(false);
             this.ssData.PerformLayout();
             this.panFilters.ResumeLayout(false);
             this.tsData.ResumeLayout(false);
             this.tsData.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
