@@ -33,9 +33,10 @@ namespace PgEdit
             {
                 if (value != null)
                 {
-                    currentDataSource = value;
-
-                    bsData.Filter = null;
+                    if (currentDataSource != value)
+                    {
+                        bsData.Filter = null;
+                    }
                     bsData.DataSource = value;
 
                     foreach (DataGridViewColumn col in dgvData.Columns)
@@ -45,7 +46,7 @@ namespace PgEdit
                         col.HeaderCell = cell;
                     }
 
-                    object rowsCount = currentDataSource.ExtendedProperties[Database.TABLE_PROPERTY_ROWS_COUNT];
+                    object rowsCount = value.ExtendedProperties[Database.TABLE_PROPERTY_ROWS_COUNT];
                     tsslRowsCount.Text = string.Format("Записей извлечено: {0} из {1}", bsData.Count, rowsCount);
                 }
                 else
@@ -54,6 +55,8 @@ namespace PgEdit
                     bsData.Filter = null;
                     tsslRowsCount.Text = null;
                 }
+
+                currentDataSource = value;
             }
         }
 
