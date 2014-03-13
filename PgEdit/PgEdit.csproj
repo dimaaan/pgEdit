@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataGridViewAutoFilterColumnHeaderCell.cs" />
+    <Compile Include="Domain\Column.cs" />
     <Compile Include="Domain\Database.cs" />
     <Compile Include="Domain\Server.cs" />
     <Compile Include="Domain\SSHTunnelInfo.cs" />

@@ -118,7 +118,7 @@ namespace PgEdit.Service
             fetchRowsCount(connection, table);
         }
 
-        public static DataTable fetchTableColumns(NpgsqlConnection connection, string schema, string table)
+        public static List<Column> fetchTableColumns(NpgsqlConnection connection, string schema, string table)
         {
             string sql =
                 "SELECT " +
@@ -127,8 +127,8 @@ namespace PgEdit.Service
                 "col.attnotnull AS notnull, " +
                 "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'p') THEN TRUE ELSE FALSE END AS primarykey, " +
                 "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'f') THEN TRUE ELSE FALSE END AS foreignkey, " +
-                "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'u') THEN TRUE ELSE FALSE END AS uniquekey, " +
-                "CASE WHEN col.atthasdef IS TRUE THEN def_val.adsrc END AS default, " +
+                "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'u') THEN TRUE ELSE FALSE END AS unique, " +
+                "CASE WHEN col.atthasdef IS TRUE THEN def_val.adsrc END AS defaultValue, " +
                 "col_description(tbl.oid, col.attnum) AS description " +
                 "FROM pg_namespace schema " +
                 "INNER JOIN pg_class tbl ON schema.oid = tbl.relnamespace " +
@@ -144,16 +144,36 @@ namespace PgEdit.Service
 
             command.Parameters.AddWithValue("schema", schema);
             command.Parameters.AddWithValue("table", table);
-            
-            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
-            DataTable resultTable = new DataTable();
 
-            adapter.Fill(resultTable);
-            
-            resultTable.TableName = table;
-            resultTable.Namespace = "columns";
+            NpgsqlDataReader reader = command.ExecuteReader();
+            List<Column> columns = new List<Column>(64);
+            var ordinals = new {
+                           name = reader.GetOrdinal("name"),
+                           type = reader.GetOrdinal("type"),
+                           notnull = reader.GetOrdinal("notnull"),
+                           primarykey = reader.GetOrdinal("primarykey"),
+                           foreignkey = reader.GetOrdinal("foreignkey"),
+                           unique = reader.GetOrdinal("unique"),
+                           defaultValue = reader.GetOrdinal("defaultValue"),
+                           description = reader.GetOrdinal("description")
+                       };
 
-            return resultTable;
+            while (reader.Read())
+            {
+                Column c = new Column() {
+                    Name = reader.GetString(ordinals.name),
+                    PgType = reader.GetString(ordinals.type),
+                    NotNull = reader.GetBoolean(ordinals.notnull),
+                    PrimaryKey = reader.GetBoolean(ordinals.primarykey),
+                    ForeignKey = reader.GetBoolean(ordinals.foreignkey),
+                    Unique = reader.GetBoolean(ordinals.unique),
+                    DefaultValue = reader.GetValue(ordinals.defaultValue),
+                    Description = reader.IsDBNull(ordinals.description) ? null : reader.GetString(ordinals.description)
+                };
+                columns.Add(c);
+            }
+
+            return columns;
         }
     }
 }

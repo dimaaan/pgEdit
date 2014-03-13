@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvStructure = new System.Windows.Forms.TreeView();
             this.ilTreeView = new System.Windows.Forms.ImageList(this.components);
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
@@ -46,6 +47,16 @@
             this.tabTable = new System.Windows.Forms.TabControl();
             this.tpColumns = new System.Windows.Forms.TabPage();
             this.dgvColumns = new System.Windows.Forms.DataGridView();
+            this.tpData = new System.Windows.Forms.TabPage();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewCheckBoxColumn3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewCheckBoxColumn4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ucTable = new PgEdit.DataWorkspace();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrimaryKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -54,8 +65,6 @@
             this.colUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colDefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tpData = new System.Windows.Forms.TabPage();
-            this.ucTable = new PgEdit.DataWorkspace();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
@@ -230,76 +239,6 @@
             this.dgvColumns.Size = new System.Drawing.Size(566, 505);
             this.dgvColumns.TabIndex = 0;
             // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.DataPropertyName = "name";
-            this.colName.Frozen = true;
-            this.colName.HeaderText = "Имя";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 54;
-            // 
-            // colType
-            // 
-            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colType.DataPropertyName = "type";
-            this.colType.HeaderText = "Тип";
-            this.colType.Name = "colType";
-            this.colType.ReadOnly = true;
-            this.colType.Width = 51;
-            // 
-            // colPrimaryKey
-            // 
-            this.colPrimaryKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colPrimaryKey.DataPropertyName = "primarykey";
-            this.colPrimaryKey.HeaderText = "Первичный ключ";
-            this.colPrimaryKey.Name = "colPrimaryKey";
-            this.colPrimaryKey.ReadOnly = true;
-            this.colPrimaryKey.Width = 88;
-            // 
-            // colForeignKey
-            // 
-            this.colForeignKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colForeignKey.DataPropertyName = "foreignkey";
-            this.colForeignKey.HeaderText = "Внешний ключ";
-            this.colForeignKey.Name = "colForeignKey";
-            this.colForeignKey.ReadOnly = true;
-            this.colForeignKey.Width = 77;
-            // 
-            // colNotNull
-            // 
-            this.colNotNull.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colNotNull.DataPropertyName = "notnull";
-            this.colNotNull.HeaderText = "Не Null";
-            this.colNotNull.Name = "colNotNull";
-            this.colNotNull.ReadOnly = true;
-            this.colNotNull.Width = 43;
-            // 
-            // colUnique
-            // 
-            this.colUnique.DataPropertyName = "uniquekey";
-            this.colUnique.HeaderText = "Уникальный";
-            this.colUnique.Name = "colUnique";
-            this.colUnique.ReadOnly = true;
-            // 
-            // colDefaultValue
-            // 
-            this.colDefaultValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colDefaultValue.DataPropertyName = "default";
-            this.colDefaultValue.HeaderText = "По умолчанию";
-            this.colDefaultValue.Name = "colDefaultValue";
-            this.colDefaultValue.ReadOnly = true;
-            this.colDefaultValue.Width = 96;
-            // 
-            // colDescription
-            // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescription.DataPropertyName = "description";
-            this.colDescription.HeaderText = "Описание";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
-            // 
             // tpData
             // 
             this.tpData.Controls.Add(this.ucTable);
@@ -311,6 +250,78 @@
             this.tpData.Text = "Данные";
             this.tpData.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTextBoxColumn1.Frozen = true;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Имя";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 54;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "PgType";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Тип";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 51;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewCheckBoxColumn1.DataPropertyName = "PrimaryKey";
+            this.dataGridViewCheckBoxColumn1.HeaderText = "Первичный ключ";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn1.Width = 88;
+            // 
+            // dataGridViewCheckBoxColumn2
+            // 
+            this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewCheckBoxColumn2.DataPropertyName = "ForeignKey";
+            this.dataGridViewCheckBoxColumn2.HeaderText = "Внешний ключ";
+            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
+            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn2.Width = 77;
+            // 
+            // dataGridViewCheckBoxColumn3
+            // 
+            this.dataGridViewCheckBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewCheckBoxColumn3.DataPropertyName = "NotNull";
+            this.dataGridViewCheckBoxColumn3.HeaderText = "Не Null";
+            this.dataGridViewCheckBoxColumn3.Name = "dataGridViewCheckBoxColumn3";
+            this.dataGridViewCheckBoxColumn3.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn3.Width = 43;
+            // 
+            // dataGridViewCheckBoxColumn4
+            // 
+            this.dataGridViewCheckBoxColumn4.DataPropertyName = "Unique";
+            this.dataGridViewCheckBoxColumn4.HeaderText = "Уникальный";
+            this.dataGridViewCheckBoxColumn4.Name = "dataGridViewCheckBoxColumn4";
+            this.dataGridViewCheckBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "DefaultValue";
+            this.dataGridViewTextBoxColumn3.HeaderText = "По умолчанию";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 96;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Description";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Описание";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
             // ucTable
             // 
             this.ucTable.DataSource = null;
@@ -320,6 +331,76 @@
             this.ucTable.Size = new System.Drawing.Size(566, 505);
             this.ucTable.TabIndex = 0;
             this.ucTable.DataSourceNeedRefresh += new System.Action(this.ucTable_DataSourceNeedRefresh);
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.DataPropertyName = "Name";
+            this.colName.Frozen = true;
+            this.colName.HeaderText = "Имя";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 54;
+            // 
+            // colType
+            // 
+            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colType.DataPropertyName = "PgType";
+            this.colType.HeaderText = "Тип";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            this.colType.Width = 51;
+            // 
+            // colPrimaryKey
+            // 
+            this.colPrimaryKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colPrimaryKey.DataPropertyName = "PrimaryKey";
+            this.colPrimaryKey.HeaderText = "Первичный ключ";
+            this.colPrimaryKey.Name = "colPrimaryKey";
+            this.colPrimaryKey.ReadOnly = true;
+            this.colPrimaryKey.Width = 88;
+            // 
+            // colForeignKey
+            // 
+            this.colForeignKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colForeignKey.DataPropertyName = "ForeignKey";
+            this.colForeignKey.HeaderText = "Внешний ключ";
+            this.colForeignKey.Name = "colForeignKey";
+            this.colForeignKey.ReadOnly = true;
+            this.colForeignKey.Width = 77;
+            // 
+            // colNotNull
+            // 
+            this.colNotNull.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colNotNull.DataPropertyName = "NotNull";
+            this.colNotNull.HeaderText = "Не Null";
+            this.colNotNull.Name = "colNotNull";
+            this.colNotNull.ReadOnly = true;
+            this.colNotNull.Width = 43;
+            // 
+            // colUnique
+            // 
+            this.colUnique.DataPropertyName = "Unique";
+            this.colUnique.HeaderText = "Уникальный";
+            this.colUnique.Name = "colUnique";
+            this.colUnique.ReadOnly = true;
+            // 
+            // colDefaultValue
+            // 
+            this.colDefaultValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colDefaultValue.DataPropertyName = "DefaultValue";
+            this.colDefaultValue.HeaderText = "По умолчанию";
+            this.colDefaultValue.Name = "colDefaultValue";
+            this.colDefaultValue.ReadOnly = true;
+            this.colDefaultValue.Width = 96;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.DataPropertyName = "Description";
+            this.colDescription.HeaderText = "Описание";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
             // 
             // frmMain
             // 
@@ -369,6 +450,14 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiRegisteredDB;
         private System.Windows.Forms.ToolStripMenuItem tsmiBugReport;
         private DataWorkspace ucTable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colType;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colPrimaryKey;
