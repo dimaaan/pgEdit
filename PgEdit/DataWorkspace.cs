@@ -48,12 +48,14 @@ namespace PgEdit
 
                     object rowsCount = value.ExtendedProperties[Database.TABLE_PROPERTY_ROWS_COUNT];
                     tsslRowsCount.Text = string.Format("Записей извлечено: {0} из {1}", bsData.Count, rowsCount);
+                    tsbRefresh.Enabled = true;
                 }
                 else
                 {
                     bsData.DataSource = null;
                     bsData.Filter = null;
                     tsslRowsCount.Text = null;
+                    tsbRefresh.Enabled = false;
                 }
 
                 currentDataSource = value;
