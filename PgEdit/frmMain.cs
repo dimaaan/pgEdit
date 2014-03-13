@@ -40,7 +40,7 @@ namespace PgEdit
                 db.Schemas = DatabaseService.fetchAllSchemasWithTables(connection);
                 foreach (DataSet schema in db.Schemas)
                 {
-                    db.Columns[schema.DataSetName] = new Dictionary<string, DataTable>();
+                    db.Columns[schema.DataSetName] = new Dictionary<string, List<Column>>();
                 }
             }
 
@@ -61,7 +61,6 @@ namespace PgEdit
             ucTable.DataSource = null;
             ucTable.Tag = null;
             dgvColumns.DataSource = null;
-            dgvColumns.DataMember = null;
             db.Schemas = null;
             db.IsOpen = false;
             dbNode.Nodes.Clear();
@@ -135,17 +134,17 @@ namespace PgEdit
             TreeNode dbNode = GetSelectedDBNode(node);
             Database db = (Database)dbNode.Tag;
             Server server = (Server)dbNode.Parent.Tag;
-            DataTable tableColumns;
+            List<Column> columns;
 
             using (NpgsqlConnection connection = ConnectionService.GetConnection(server, db))
             {
                 connection.Open();
                 DatabaseService.fetchTableByName(connection, table);
-                tableColumns = DatabaseService.fetchTableColumns(connection, table.DataSet.DataSetName, table.TableName);
-                db.Columns[table.DataSet.DataSetName][table.TableName] = tableColumns;
+                columns = DatabaseService.fetchTableColumns(connection, table.DataSet.DataSetName, table.TableName);
+                db.Columns[table.DataSet.DataSetName][table.TableName] = columns;
             }
 
-            dgvColumns.DataSource = tableColumns;
+            dgvColumns.DataSource = columns;
             ucTable.DataSource = table;
             ucTable.Tag = node;
         }
@@ -234,7 +233,6 @@ namespace PgEdit
         private void frmMain_Load(object sender, EventArgs e)
         {
             Icon = Resources.logo;
-            dgvColumns.AutoGenerateColumns = false;
 
             ilTreeView.Images.Add(IMAGE_KEY_SERVER, Resources.computersystemproduct);
             ilTreeView.Images.Add(IMAGE_KEY_DATABASE_CONNECTED, Resources.Database_Active_icon);

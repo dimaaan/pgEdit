@@ -27,6 +27,6 @@ namespace PgEdit.Domain
         /// First key - schema.
         /// Second key - table
         /// </summary>
-        public Dictionary<string, Dictionary<string, DataTable>> Columns = new Dictionary<string, Dictionary<string, DataTable>>();
+        public Dictionary<string, Dictionary<string, List<Column>>> Columns = new Dictionary<string, Dictionary<string, List<Column>>>();
     }
 }
