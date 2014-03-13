@@ -13,6 +13,9 @@ using PgEdit.Service;
 
 namespace PgEdit
 {
+    /// <remarks>
+    /// Subscribing to DataSourceNeedRefresh required
+    /// </remarks>
     public partial class DataWorkspace : UserControl
     {
         /// <summary>
@@ -54,6 +57,11 @@ namespace PgEdit
             }
         }
 
+        /// <summary>
+        /// Raises when Refresh button pushed
+        /// </summary>
+        public event Action DataSourceNeedRefresh;
+
         public DataWorkspace()
         {
             InitializeComponent();
@@ -81,6 +89,11 @@ namespace PgEdit
         private void btnResetFilters_Click(object sender, EventArgs e)
         {
             bsData.Filter = null;
+        }
+
+        private void tsbRefresh_Click(object sender, EventArgs e)
+        {
+            DataSourceNeedRefresh();
         }
 
     }

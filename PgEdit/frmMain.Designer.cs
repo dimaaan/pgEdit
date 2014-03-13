@@ -46,8 +46,6 @@
             this.tabTable = new System.Windows.Forms.TabControl();
             this.tpColumns = new System.Windows.Forms.TabPage();
             this.dgvColumns = new System.Windows.Forms.DataGridView();
-            this.tpData = new System.Windows.Forms.TabPage();
-            this.ucTable = new PgEdit.DataWorkspace();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrimaryKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -56,6 +54,8 @@
             this.colUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colDefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tpData = new System.Windows.Forms.TabPage();
+            this.ucTable = new PgEdit.DataWorkspace();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
@@ -230,25 +230,6 @@
             this.dgvColumns.Size = new System.Drawing.Size(566, 505);
             this.dgvColumns.TabIndex = 0;
             // 
-            // tpData
-            // 
-            this.tpData.Controls.Add(this.ucTable);
-            this.tpData.Location = new System.Drawing.Point(4, 22);
-            this.tpData.Name = "tpData";
-            this.tpData.Padding = new System.Windows.Forms.Padding(3);
-            this.tpData.Size = new System.Drawing.Size(572, 511);
-            this.tpData.TabIndex = 1;
-            this.tpData.Text = "Данные";
-            this.tpData.UseVisualStyleBackColor = true;
-            // 
-            // ucTable
-            // 
-            this.ucTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucTable.Location = new System.Drawing.Point(3, 3);
-            this.ucTable.Name = "ucTable";
-            this.ucTable.Size = new System.Drawing.Size(566, 505);
-            this.ucTable.TabIndex = 0;
-            // 
             // colName
             // 
             this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -318,6 +299,27 @@
             this.colDescription.HeaderText = "Описание";
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
+            // 
+            // tpData
+            // 
+            this.tpData.Controls.Add(this.ucTable);
+            this.tpData.Location = new System.Drawing.Point(4, 22);
+            this.tpData.Name = "tpData";
+            this.tpData.Padding = new System.Windows.Forms.Padding(3);
+            this.tpData.Size = new System.Drawing.Size(572, 511);
+            this.tpData.TabIndex = 1;
+            this.tpData.Text = "Данные";
+            this.tpData.UseVisualStyleBackColor = true;
+            // 
+            // ucTable
+            // 
+            this.ucTable.DataSource = null;
+            this.ucTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucTable.Location = new System.Drawing.Point(3, 3);
+            this.ucTable.Name = "ucTable";
+            this.ucTable.Size = new System.Drawing.Size(566, 505);
+            this.ucTable.TabIndex = 0;
+            this.ucTable.DataSourceNeedRefresh += new System.Action(this.ucTable_DataSourceNeedRefresh);
             // 
             // frmMain
             // 
