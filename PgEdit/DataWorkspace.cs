@@ -20,37 +20,46 @@ namespace PgEdit
         /// </summary>
         private DataTable currentDataSource;
 
+        public DataTable DataSource
+        {
+            get
+            {
+                return currentDataSource;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    currentDataSource = value;
+
+                    bsData.Filter = null;
+                    bsData.DataSource = value;
+
+                    foreach (DataGridViewColumn col in dgvData.Columns)
+                    {
+                        var cell = new DataGridViewAutoFilterColumnHeaderCell(col.HeaderCell);
+                        cell.FilteredChanged += HeaderCell_FilteredChanged;
+                        col.HeaderCell = cell;
+                    }
+
+                    object rowsCount = currentDataSource.ExtendedProperties[Database.TABLE_PROPERTY_ROWS_COUNT];
+                    tsslRowsCount.Text = string.Format("Записей извлечено: {0} из {1}", bsData.Count, rowsCount);
+                }
+                else
+                {
+                    bsData.DataSource = null;
+                    bsData.Filter = null;
+                    tsslRowsCount.Text = null;
+                }
+            }
+        }
+
         public DataWorkspace()
         {
             InitializeComponent();
 
             dgvData.AutoGenerateColumns = true;
             tsslOffsetLimit.Text = string.Format("LIMIT {0} OFFSET 0", DatabaseService.ROWS_LIMIT);
-        }
-
-        public void SetDataSource(DataTable dataSource)
-        {
-            currentDataSource = dataSource;
-
-            bsData.Filter = null;
-            bsData.DataSource = dataSource;
-
-            foreach (DataGridViewColumn col in dgvData.Columns)
-            {
-                var cell = new DataGridViewAutoFilterColumnHeaderCell(col.HeaderCell);
-                cell.FilteredChanged += HeaderCell_FilteredChanged;
-                col.HeaderCell = cell;
-            }
-
-            object rowsCount = currentDataSource.ExtendedProperties[Database.TABLE_PROPERTY_ROWS_COUNT];
-            tsslRowsCount.Text = string.Format("Записей извлечено: {0} из {1}", bsData.Count, rowsCount);
-        }
-
-        public void ResetDataSource()
-        {
-            bsData.DataSource = null;
-            bsData.Filter = null;
-            tsslRowsCount.Text = null;
         }
 
         private void HeaderCell_FilteredChanged(object sender, EventArgs e)

@@ -58,7 +58,7 @@ namespace PgEdit
             TreeNode dbNode = GetSelectedDBNode(node);
             Database db = (Database)dbNode.Tag;
 
-            ucTable.ResetDataSource();
+            ucTable.DataSource = null;
             ucTable.Tag = null;
             dgvColumns.DataSource = null;
             dgvColumns.DataMember = null;
@@ -146,7 +146,7 @@ namespace PgEdit
             }
 
             dgvColumns.DataSource = tableColumns;
-            ucTable.SetDataSource(table);
+            ucTable.DataSource = table;
             ucTable.Tag = node;
         }
 
