@@ -15,6 +15,11 @@ namespace PgEdit
 {
     public partial class DataWorkspace : UserControl
     {
+        /// <summary>
+        /// Table for BindingDataSource
+        /// </summary>
+        private DataTable currentDataSource;
+
         public DataWorkspace()
         {
             InitializeComponent();
@@ -23,11 +28,12 @@ namespace PgEdit
             tsslOffsetLimit.Text = string.Format("LIMIT {0} OFFSET 0", DatabaseService.ROWS_LIMIT);
         }
 
-        public void SetDataSource(object dataSource, string dataMember)
+        public void SetDataSource(DataTable dataSource)
         {
+            currentDataSource = dataSource;
+
             bsData.Filter = null;
             bsData.DataSource = dataSource;
-            bsData.DataMember = dataMember;
 
             foreach (DataGridViewColumn col in dgvData.Columns)
             {
@@ -36,43 +42,15 @@ namespace PgEdit
                 col.HeaderCell = cell;
             }
 
-            SetupStatusStrip();
+            object rowsCount = currentDataSource.ExtendedProperties[Database.TABLE_PROPERTY_ROWS_COUNT];
+            tsslRowsCount.Text = string.Format("Записей извлечено: {0} из {1}", bsData.Count, rowsCount);
         }
 
-        private DataTable GetBindedTable() {
-            DataTable tbl;
-
-            if (bsData.DataSource is DataSet)
-            {
-                DataSet ds = (DataSet)bsData.DataSource;
-
-                tbl = ds.Tables[bsData.DataMember];
-            }
-            else if (bsData.DataSource is DataTable)
-            {
-                tbl = (DataTable)bsData.DataSource;
-            }
-            else
-            {
-                throw new InvalidOperationException("Unknown datasource");
-            }
-
-            return tbl;
-        }
-
-        private void SetupStatusStrip()
+        public void ResetDataSource()
         {
-            if (bsData.DataSource != null)
-            {
-                DataTable tbl = GetBindedTable();
-                object rowsCount = tbl.ExtendedProperties[Database.TABLE_PROPERTY_ROWS_COUNT];
-
-                tsslRowsCount.Text = string.Format("Записей извлечено: {0} из {1}", bsData.Count, rowsCount);
-            }
-            else
-            {
-                tsslRowsCount.Text = null;
-            }
+            bsData.DataSource = null;
+            bsData.Filter = null;
+            tsslRowsCount.Text = null;
         }
 
         private void HeaderCell_FilteredChanged(object sender, EventArgs e)
