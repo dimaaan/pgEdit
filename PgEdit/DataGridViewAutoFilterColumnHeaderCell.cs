@@ -328,7 +328,7 @@ namespace DataGridViewAutoFilter
             if (source == null || String.IsNullOrEmpty(source.Filter))
             {
                 Filtered = false;
-                selectedFilterValue = "(All)";
+                selectedFilterValue = FilterListBox.FILTER_ALL;
                 currentColumnFilter = String.Empty;
             }
         }
@@ -1043,11 +1043,11 @@ namespace DataGridViewAutoFilter
             // Add special filter options to the filters dictionary
             // along with null values, since unformatted representations
             // are not needed. 
-            filters.Insert(0, "(All)", null);
+            filters.Insert(0, FilterListBox.FILTER_ALL, null);
             if (containsBlanks && containsNonBlanks)
             {
-                filters.Insert(1, "(Blanks)", null);
-                filters.Insert(1, "(NonBlanks)", null);
+                filters.Insert(1, FilterListBox.FILTER_BLANKS, null);
+                filters.Insert(1, FilterListBox.FILTER_NON_BLANKS, null);
             }
         }
 
@@ -1121,7 +1121,7 @@ namespace DataGridViewAutoFilter
 
             // If the user selection is (All), remove any filter currently 
             // in effect for the column. 
-            if (selectedFilterValue.Equals("(All)"))
+            if (selectedFilterValue.Equals(FilterListBox.FILTER_ALL))
             {
                 data.Filter = FilterWithoutCurrentColumn(data.Filter);
                 Filtered = false;
@@ -1143,12 +1143,12 @@ namespace DataGridViewAutoFilter
             // string determines whether the column value is the selected value. 
             switch (selectedFilterValue)
             {
-                case "(Blanks)":
+                case FilterListBox.FILTER_BLANKS:
                     newColumnFilter = String.Format(
                         "LEN(ISNULL(CONVERT([{0}],'System.String'),''))=0",
                         columnProperty);
                     break;
-                case "(NonBlanks)":
+                case FilterListBox.FILTER_NON_BLANKS:
                     newColumnFilter = String.Format(
                         "LEN(ISNULL(CONVERT([{0}],'System.String'),''))>0",
                         columnProperty);
@@ -1534,6 +1534,12 @@ namespace DataGridViewAutoFilter
         /// </summary>
         private class FilterListBox : ListBox
         {
+            // filter special values
+            public const string FILTER_ALL = "(All)";
+            public const string FILTER_BLANKS = "(Blanks)";
+            public const string FILTER_NON_BLANKS = "(NonBlanks)";
+
+
             /// <summary>
             /// Initializes a new instance of the FilterListBox class.
             /// </summary>
