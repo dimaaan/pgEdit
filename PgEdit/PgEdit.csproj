@@ -127,19 +127,19 @@
     <None Include="Resources\Database-Inactive-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\server-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\tables-stacks-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\table.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\close-square-black.png" />
+    <None Include="Resources\Clearallrequests_8816.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\computersystemproduct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Schema_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Table_748.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

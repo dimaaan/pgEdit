@@ -234,11 +234,11 @@ namespace PgEdit
             Icon = Resources.logo;
             dgvColumns.AutoGenerateColumns = false;
 
-            ilTreeView.Images.Add(IMAGE_KEY_SERVER, Resources.server_icon);
+            ilTreeView.Images.Add(IMAGE_KEY_SERVER, Resources.computersystemproduct);
             ilTreeView.Images.Add(IMAGE_KEY_DATABASE_CONNECTED, Resources.Database_Active_icon);
             ilTreeView.Images.Add(IMAGE_KEY_DATABASE_DISCONNECTED, Resources.Database_Inactive_icon);
-            ilTreeView.Images.Add(IMAGE_KEY_SCHEMA, Resources.tables_stacks_icon);
-            ilTreeView.Images.Add(IMAGE_KEY_TABLE, Resources.table);
+            ilTreeView.Images.Add(IMAGE_KEY_SCHEMA, Resources.Schema_16xLG);
+            ilTreeView.Images.Add(IMAGE_KEY_TABLE, Resources.Table_748);
 
             universe = ConnectionService.Load();
 

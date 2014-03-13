@@ -31,18 +31,19 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvData = new System.Windows.Forms.DataGridView();
+            this.bsData = new System.Windows.Forms.BindingSource(this.components);
             this.ssData = new System.Windows.Forms.StatusStrip();
             this.tsslRowsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRowsFiltered = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslOffsetLimit = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblFilterExpr = new System.Windows.Forms.Label();
             this.panFilters = new System.Windows.Forms.Panel();
-            this.bsData = new System.Windows.Forms.BindingSource(this.components);
             this.btnResetFilters = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsData)).BeginInit();
             this.ssData.SuspendLayout();
             this.panFilters.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsData)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvData
@@ -62,6 +63,10 @@
             this.dgvData.RowHeadersVisible = false;
             this.dgvData.Size = new System.Drawing.Size(826, 434);
             this.dgvData.TabIndex = 2;
+            // 
+            // bsData
+            // 
+            this.bsData.AllowNew = false;
             // 
             // ssData
             // 
@@ -116,35 +121,32 @@
             this.panFilters.TabIndex = 4;
             this.panFilters.Visible = false;
             // 
-            // bsData
-            // 
-            this.bsData.AllowNew = false;
-            // 
             // btnResetFilters
             // 
             this.btnResetFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnResetFilters.Image = global::PgEdit.Properties.Resources.close_square_black;
+            this.btnResetFilters.Image = global::PgEdit.Properties.Resources.Clearallrequests_8816;
             this.btnResetFilters.Location = new System.Drawing.Point(3, 4);
             this.btnResetFilters.Name = "btnResetFilters";
             this.btnResetFilters.Size = new System.Drawing.Size(26, 26);
             this.btnResetFilters.TabIndex = 0;
+            this.toolTip.SetToolTip(this.btnResetFilters, "Сбросить фильтр");
             this.btnResetFilters.UseVisualStyleBackColor = true;
             this.btnResetFilters.Click += new System.EventHandler(this.btnResetFilters_Click);
             // 
-            // TableWorkspace
+            // DataWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvData);
             this.Controls.Add(this.panFilters);
             this.Controls.Add(this.ssData);
-            this.Name = "TableWorkspace";
+            this.Name = "DataWorkspace";
             this.Size = new System.Drawing.Size(826, 489);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsData)).EndInit();
             this.ssData.ResumeLayout(false);
             this.ssData.PerformLayout();
             this.panFilters.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bsData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,5 +163,6 @@
         private System.Windows.Forms.Button btnResetFilters;
         private System.Windows.Forms.Label lblFilterExpr;
         private System.Windows.Forms.Panel panFilters;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
