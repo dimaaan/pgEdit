@@ -23,38 +23,6 @@ namespace PgEdit.GridFilter
         /// </summary>
         private string Field;
 
-        public string Filter
-        {
-            get
-            {
-                string value = cmbValue.Text;
-                string result = String.Empty;
-
-                if (!String.IsNullOrWhiteSpace(value))
-                {
-                    switch (cmbOperand.Text)
-                    {
-                        case FILTER_TYPE_EQUALS:
-                            result = String.Format("[{0}]='{1}'", Field, value);
-                            break;
-                        case FILTER_TYPE_NOT_EQUALS:
-                            result = String.Format("[{0}]<>'{1}'", Field, value);
-                            break;
-                        case FILTER_TYPE_LIKE:
-                            result = String.Format("[{0}] LIKE '{1}'", Field, value);
-                            break;
-                        case FILTER_TYPE_NOT_LIKE:
-                            result = String.Format("[{0}] NOT LIKE '{1}'", Field, value);
-                            break;
-                        default:
-                            throw new InvalidOperationException("Unknown filter type " + cmbOperand.Text);
-                    }
-                }
-
-                return result;
-            }
-        }
-
         private const string FILTER_TYPE_EQUALS = "равняется";
         private const string FILTER_TYPE_NOT_EQUALS = "не равняется";
         private const string FILTER_TYPE_LIKE = "похоже на";
@@ -89,6 +57,38 @@ namespace PgEdit.GridFilter
             object selItem = cmbOperand.SelectedItem;
 
             panInfo.Visible = selItem == (object)FILTER_TYPE_LIKE || selItem == (object)FILTER_TYPE_NOT_LIKE;
+        }
+
+        public string Filter
+        {
+            get
+            {
+                string value = cmbValue.Text;
+                string result = String.Empty;
+
+                if (!String.IsNullOrWhiteSpace(value))
+                {
+                    switch (cmbOperand.Text)
+                    {
+                        case FILTER_TYPE_EQUALS:
+                            result = String.Format("[{0}]='{1}'", Field, value);
+                            break;
+                        case FILTER_TYPE_NOT_EQUALS:
+                            result = String.Format("[{0}]<>'{1}'", Field, value);
+                            break;
+                        case FILTER_TYPE_LIKE:
+                            result = String.Format("[{0}] LIKE '{1}'", Field, value);
+                            break;
+                        case FILTER_TYPE_NOT_LIKE:
+                            result = String.Format("[{0}] NOT LIKE '{1}'", Field, value);
+                            break;
+                        default:
+                            throw new InvalidOperationException("Unknown filter type " + cmbOperand.Text);
+                    }
+                }
+
+                return result;
+            }
         }
     }
 }

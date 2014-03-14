@@ -904,6 +904,33 @@ namespace PgEdit.GridFilter
 
         #region filtering: PopulateFilters, FilterWithoutCurrentColumn, UpdateFilter, RemoveFilter, AvoidNewRowWhenFiltering, GetFilterStatus
 
+        public static bool IsNumeric(Type type)
+        {
+            switch (Type.GetTypeCode(type))
+            {
+                case TypeCode.Byte:
+                case TypeCode.SByte:
+                case TypeCode.UInt16:
+                case TypeCode.UInt32:
+                case TypeCode.UInt64:
+                case TypeCode.Int16:
+                case TypeCode.Int32:
+                case TypeCode.Int64:
+                case TypeCode.Decimal:
+                case TypeCode.Double:
+                case TypeCode.Single:
+                    return true;
+                case TypeCode.Object:
+                    if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    {
+                        return IsNumeric(Nullable.GetUnderlyingType(type));
+                    }
+                    return false;
+                default:
+                    return false;
+            }
+        }
+
         /// <summary>
         /// Populates the filters dictionary with formatted and unformatted string
         /// representations of each unique value in the column, accounting for all 
@@ -1070,8 +1097,12 @@ namespace PgEdit.GridFilter
                         WhereFilterDialog = new frmFilterString(OwningColumn.DataPropertyName);
                         WhereFilteringSupported = true;
                     }
-                    else
+                    else if (IsNumeric(dataType))
                     {
+                        WhereFilterDialog = new frmFilterNumber(OwningColumn.DataPropertyName);
+                        WhereFilteringSupported = true;
+                    }
+                    else {
                         WhereFilteringSupported = false;
                     }
                 }
