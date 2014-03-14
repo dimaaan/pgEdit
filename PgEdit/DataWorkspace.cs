@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DataGridViewAutoFilter;
 using PgEdit.Domain;
 using PgEdit.Service;
+using PgEdit.GridFilter;
 
 namespace PgEdit
 {
@@ -38,13 +38,6 @@ namespace PgEdit
                         bsData.Filter = null;
                     }
                     bsData.DataSource = value;
-
-                    foreach (DataGridViewColumn col in dgvData.Columns)
-                    {
-                        var cell = new DataGridViewAutoFilterColumnHeaderCell(col.HeaderCell);
-                        cell.FilteredChanged += HeaderCell_FilteredChanged;
-                        col.HeaderCell = cell;
-                    }
 
                     object rowsCount = value.ExtendedProperties[Database.TABLE_PROPERTY_ROWS_COUNT];
                     tsslRowsCount.Text = string.Format("Записей извлечено: {0} из {1}", bsData.Count, rowsCount);
@@ -101,5 +94,11 @@ namespace PgEdit
             DataSourceNeedRefresh();
         }
 
+        private void dgvData_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            var cell = new DataGridViewAutoFilterColumnHeaderCell(e.Column.HeaderCell);
+            cell.FilteredChanged += HeaderCell_FilteredChanged;
+            e.Column.HeaderCell = cell;
+        }
     }
 }

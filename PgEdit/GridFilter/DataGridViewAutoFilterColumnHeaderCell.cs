@@ -9,16 +9,18 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-namespace DataGridViewAutoFilter
+namespace PgEdit.GridFilter
 {
     /// <summary>
     /// Provides a drop-down filter list in a DataGridViewColumnHeaderCell.
@@ -34,8 +36,7 @@ namespace DataGridViewAutoFilter
         /// A list of filters available for the owning column stored as 
         /// formatted and unformatted string values. 
         /// </summary>
-        private OrderedDictionary filters =
-            new OrderedDictionary();
+        private OrderedDictionary filters = new OrderedDictionary();
 
         /// <summary>
         /// The drop-down list filter value currently in effect for the owning column. 
@@ -47,8 +48,12 @@ namespace DataGridViewAutoFilter
         /// </summary>
         private String currentColumnFilter = String.Empty;
 
+        private bool WhereFilteringSupported;
+
+        private IFIlterForm WhereFilterDialog;
+
         
-        private bool _filtered;
+        private bool filtered;
 
         /// <summary>
         /// Indicates whether the DataGridView is currently filtered by the owning column.  
@@ -57,11 +62,11 @@ namespace DataGridViewAutoFilter
         {
             get
             {
-                return _filtered;
+                return filtered;
             }
             set
             {
-                _filtered = value;
+                filtered = value;
 
                 // no null check. Ensure every cell updates filter controls
                 FilteredChanged(this, EventArgs.Empty);
@@ -846,8 +851,8 @@ namespace DataGridViewAutoFilter
             {
                 return;
             }
-
-            UpdateFilter();
+            
+            UpdateDataSourceFilter();
             HideDropDownList();
         }
 
@@ -886,7 +891,7 @@ namespace DataGridViewAutoFilter
             switch (e.KeyCode)
             {
                 case Keys.Enter:
-                    UpdateFilter();
+                    UpdateDataSourceFilter();
                     HideDropDownList();
                     break;
                 case Keys.Escape:
@@ -1040,14 +1045,41 @@ namespace DataGridViewAutoFilter
             if (oldFilter != null) data.Filter = oldFilter;
             data.RaiseListChangedEvents = true;
 
+
             // Add special filter options to the filters dictionary
             // along with null values, since unformatted representations
             // are not needed. 
             filters.Insert(0, FilterListBox.FILTER_ALL, null);
+            
             if (containsBlanks && containsNonBlanks)
             {
                 filters.Insert(1, FilterListBox.FILTER_BLANKS, null);
                 filters.Insert(1, FilterListBox.FILTER_NON_BLANKS, null);
+            }
+
+            // (Where) filter
+            if (list.Count > 0) // not show (Where) is table is empty
+            {
+                // create dialog for this column type
+                if (WhereFilterDialog == null)
+                {
+                    Type dataType = list[0].GetType();
+
+                    if (dataType == typeof(String))
+                    {
+                        WhereFilterDialog = new frmFilterString(OwningColumn.DataPropertyName);
+                        WhereFilteringSupported = true;
+                    }
+                    else
+                    {
+                        WhereFilteringSupported = false;
+                    }
+                }
+
+                if (WhereFilteringSupported)
+                {
+                    filters.Insert(1, FilterListBox.FILTER_WHERE, null);
+                }
             }
         }
 
@@ -1101,10 +1133,11 @@ namespace DataGridViewAutoFilter
         /// Updates the BindingSource.Filter value based on a user selection
         /// from the drop-down filter list. 
         /// </summary>
-        private void UpdateFilter()
+        private void UpdateDataSourceFilter()
         {
             // Continue only if the selection has changed.
-            if (dropDownListBox.SelectedItem.ToString().Equals(selectedFilterValue))
+            if (dropDownListBox.SelectedItem.ToString().Equals(selectedFilterValue) &&
+               !dropDownListBox.SelectedItem.Equals(FilterListBox.FILTER_WHERE))
             {
                 return;
             }
@@ -1113,29 +1146,17 @@ namespace DataGridViewAutoFilter
             selectedFilterValue = dropDownListBox.SelectedItem.ToString();
 
             // Cast the data source to an IBindingListView.
-            IBindingListView data = 
-                this.DataGridView.DataSource as IBindingListView;
+            BindingSource data = DataGridView.DataSource as BindingSource;
 
-            Debug.Assert(data != null && data.SupportsFiltering,
-                "DataSource is not an IBindingListView or does not support filtering");
-
-            // If the user selection is (All), remove any filter currently 
-            // in effect for the column. 
-            if (selectedFilterValue.Equals(FilterListBox.FILTER_ALL))
-            {
-                data.Filter = FilterWithoutCurrentColumn(data.Filter);
-                Filtered = false;
-                currentColumnFilter = String.Empty;
-                return;
-            }
-
+            Debug.Assert(data != null && data.SupportsFiltering, "DataSource is not an IBindingListView or does not support filtering");
+            
+           
             // Declare a variable to store the filter string for this column.
             String newColumnFilter = null;
 
             // Store the column name in a form acceptable to the Filter property, 
             // using a backslash to escape any closing square brackets. 
-            String columnProperty = 
-                OwningColumn.DataPropertyName.Replace("]", @"\]");
+            String columnProperty = OwningColumn.DataPropertyName.Replace("]", @"\]");
 
             // Determine the column filter string based on the user selection.
             // For (Blanks) and (NonBlanks), the filter string determines whether
@@ -1143,21 +1164,29 @@ namespace DataGridViewAutoFilter
             // string determines whether the column value is the selected value. 
             switch (selectedFilterValue)
             {
+                case FilterListBox.FILTER_ALL:
+                    // If the user selection is (All), remove any filter currently in effect for the column. 
+                    newColumnFilter = String.Empty;
+                    break;
                 case FilterListBox.FILTER_BLANKS:
-                    newColumnFilter = String.Format(
-                        "LEN(ISNULL(CONVERT([{0}],'System.String'),''))=0",
-                        columnProperty);
+                    newColumnFilter = String.Format("LEN(ISNULL(CONVERT([{0}],'System.String'),''))=0", columnProperty);
                     break;
                 case FilterListBox.FILTER_NON_BLANKS:
-                    newColumnFilter = String.Format(
-                        "LEN(ISNULL(CONVERT([{0}],'System.String'),''))>0",
-                        columnProperty);
+                    newColumnFilter = String.Format("LEN(ISNULL(CONVERT([{0}],'System.String'),''))>0", columnProperty);
+                    break;
+                case FilterListBox.FILTER_WHERE:
+                    Form dlg = (Form)WhereFilterDialog;
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        newColumnFilter = WhereFilterDialog.Filter;
+                    }
+                    else
+                    {
+                        return;
+                    }
                     break;
                 default:
-                    newColumnFilter = String.Format("[{0}]='{1}'",
-                        columnProperty,
-                        ((String)filters[selectedFilterValue])
-                        .Replace("'", "''"));  
+                    newColumnFilter = String.Format("[{0}]='{1}'", columnProperty, ((String)filters[selectedFilterValue]).Replace("'", "''"));
                     break;
             }
 
@@ -1189,100 +1218,8 @@ namespace DataGridViewAutoFilter
             // Indicate that the column is currently filtered
             // and store the new column filter for use by subsequent
             // calls to the FilterWithoutCurrentColumn method. 
-            Filtered = true;
+            Filtered = !String.IsNullOrEmpty(newColumnFilter);
             currentColumnFilter = newColumnFilter;
-        }
-
-        /// <summary>
-        /// Removes the filter from the BindingSource bound to the specified DataGridView. 
-        /// </summary>
-        /// <param name="dataGridView">The DataGridView bound to the BindingSource to unfilter.</param>
-        public static void RemoveFilter(DataGridView dataGridView)
-        {
-            if (dataGridView == null)
-            {
-                throw new ArgumentNullException("dataGridView");
-            }
-
-            // Cast the data source to a BindingSource.
-            BindingSource data = dataGridView.DataSource as BindingSource;
-
-            // Confirm that the data source is a BindingSource that 
-            // supports filtering.
-            if (data == null || 
-                data.DataSource == null || 
-                !data.SupportsFiltering)
-            {
-                throw new ArgumentException("The DataSource property of the " +
-                    "specified DataGridView is not set to a BindingSource " +
-                    "with a SupportsFiltering property value of true.");
-            }
-
-            // Ensure that the current row is not the row for new records.
-            // This prevents the new row from being added when the filter changes.
-            if (dataGridView.CurrentRow != null && dataGridView.CurrentRow.IsNewRow)
-            {
-                dataGridView.CurrentCell = null;
-            }
-
-            // Remove the filter. 
-            data.Filter = null;
-        }
-
-        /// <summary>
-        /// Gets a status string for the specified DataGridView indicating the 
-        /// number of visible rows in the bound, filtered BindingSource, or 
-        /// String.Empty if all rows are currently visible. 
-        /// </summary>
-        /// <param name="dataGridView">The DataGridView bound to the 
-        /// BindingSource to return the filter status for.</param>
-        /// <returns>A string in the format "x of y records found" where x is 
-        /// the number of rows currently displayed and y is the number of rows 
-        /// available, or String.Empty if all rows are currently displayed.</returns>
-        public static String GetFilterStatus(DataGridView dataGridView)
-        {
-            // Continue only if the specified value is valid. 
-            if (dataGridView == null)
-            {
-                throw new ArgumentNullException("dataGridView");
-            }
-
-            // Cast the data source to a BindingSource.
-            BindingSource data = dataGridView.DataSource as BindingSource;
-
-            // Return String.Empty if there is no appropriate data source or
-            // there is no filter in effect. 
-            if (String.IsNullOrEmpty(data.Filter) ||
-                data == null || 
-                data.DataSource == null || 
-                !data.SupportsFiltering)
-            {
-                return String.Empty;
-            }
-
-            // Retrieve the filtered row count. 
-            Int32 currentRowCount = data.Count;
-
-            // Retrieve the unfiltered row count by 
-            // temporarily unfiltering the data.
-            data.RaiseListChangedEvents = false;
-            String oldFilter = data.Filter;
-            data.Filter = null;
-            Int32 unfilteredRowCount = data.Count;
-            data.Filter = oldFilter;
-            data.RaiseListChangedEvents = true;
-
-            Debug.Assert(currentRowCount <= unfilteredRowCount, 
-                "current count is greater than unfiltered count");
-
-            // Return String.Empty if the filtered and unfiltered counts
-            // are the same, otherwise, return the status string. 
-            if (currentRowCount == unfilteredRowCount)
-            {
-                return String.Empty;
-            }
-            return String.Format("{0} of {1} records found", 
-                currentRowCount, unfilteredRowCount);
         }
 
         #endregion filtering
@@ -1538,6 +1475,7 @@ namespace DataGridViewAutoFilter
             public const string FILTER_ALL = "(All)";
             public const string FILTER_BLANKS = "(Blanks)";
             public const string FILTER_NON_BLANKS = "(NonBlanks)";
+            public const string FILTER_WHERE = "(Where)";
 
 
             /// <summary>

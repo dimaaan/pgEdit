@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataGridViewAutoFilterColumnHeaderCell.cs" />
+    <Compile Include="GridFilter\DataGridViewAutoFilterColumnHeaderCell.cs" />
     <Compile Include="Domain\Column.cs" />
     <Compile Include="Domain\Database.cs" />
     <Compile Include="Domain\Server.cs" />
@@ -69,12 +69,19 @@
     <Compile Include="frmAbout.Designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="GridFilter\frmFilterString.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridFilter\frmFilterString.Designer.cs">
+      <DependentUpon>frmFilterString.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="GridFilter\IFIlterForm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ConnectionService.cs" />
@@ -87,6 +94,9 @@
     </Compile>
     <EmbeddedResource Include="frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridFilter\frmFilterString.resx">
+      <DependentUpon>frmFilterString.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -144,6 +154,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\refresh_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StatusAnnotations_Information_16xLG.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

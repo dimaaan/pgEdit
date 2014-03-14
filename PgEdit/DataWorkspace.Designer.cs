@@ -54,9 +54,11 @@
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.AllowUserToOrderColumns = true;
+            this.dgvData.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvData.AutoGenerateColumns = false;
+            this.dgvData.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.DataSource = this.bsData;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -65,7 +67,8 @@
             this.dgvData.ReadOnly = true;
             this.dgvData.RowHeadersVisible = false;
             this.dgvData.Size = new System.Drawing.Size(826, 409);
-            this.dgvData.TabIndex = 2;
+            this.dgvData.TabIndex = 1;
+            this.dgvData.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvData_ColumnAdded);
             // 
             // bsData
             // 
@@ -81,7 +84,7 @@
             this.ssData.Name = "ssData";
             this.ssData.Size = new System.Drawing.Size(826, 22);
             this.ssData.SizingGrip = false;
-            this.ssData.TabIndex = 3;
+            this.ssData.TabIndex = 0;
             this.ssData.Text = "statusStrip1";
             // 
             // tsslRowsCount
@@ -109,7 +112,7 @@
             this.lblFilterExpr.Location = new System.Drawing.Point(35, 4);
             this.lblFilterExpr.Name = "lblFilterExpr";
             this.lblFilterExpr.Size = new System.Drawing.Size(788, 26);
-            this.lblFilterExpr.TabIndex = 1;
+            this.lblFilterExpr.TabIndex = 0;
             this.lblFilterExpr.Text = "Filter expression";
             this.lblFilterExpr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -121,7 +124,7 @@
             this.panFilters.Location = new System.Drawing.Point(0, 434);
             this.panFilters.Name = "panFilters";
             this.panFilters.Size = new System.Drawing.Size(826, 33);
-            this.panFilters.TabIndex = 4;
+            this.panFilters.TabIndex = 2;
             this.panFilters.Visible = false;
             // 
             // btnResetFilters
@@ -131,7 +134,7 @@
             this.btnResetFilters.Location = new System.Drawing.Point(3, 4);
             this.btnResetFilters.Name = "btnResetFilters";
             this.btnResetFilters.Size = new System.Drawing.Size(26, 26);
-            this.btnResetFilters.TabIndex = 0;
+            this.btnResetFilters.TabIndex = 1;
             this.toolTip.SetToolTip(this.btnResetFilters, "Сбросить фильтр");
             this.btnResetFilters.UseVisualStyleBackColor = true;
             this.btnResetFilters.Click += new System.EventHandler(this.btnResetFilters_Click);
@@ -143,7 +146,7 @@
             this.tsData.Location = new System.Drawing.Point(0, 0);
             this.tsData.Name = "tsData";
             this.tsData.Size = new System.Drawing.Size(826, 25);
-            this.tsData.TabIndex = 5;
+            this.tsData.TabIndex = 0;
             this.tsData.Text = "toolStrip1";
             // 
             // tsbRefresh
