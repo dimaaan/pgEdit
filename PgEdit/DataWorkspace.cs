@@ -100,5 +100,13 @@ namespace PgEdit
             cell.FilteredChanged += HeaderCell_FilteredChanged;
             e.Column.HeaderCell = cell;
         }
+
+        private void dgvData_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Context == DataGridViewDataErrorContexts.Display)
+            {
+                e.ThrowException = false;
+            }
+        }
     }
 }
