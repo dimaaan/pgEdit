@@ -24,6 +24,7 @@ namespace PgEdit
         private const string IMAGE_KEY_DATABASE_DISCONNECTED = "dbDisconnected";
         private const string IMAGE_KEY_SCHEMA = "schema";
         private const string IMAGE_KEY_TABLE = "table";
+        private const string IMAGE_KEY_TABLE_OPEN = "table-open";
 
         public frmMain()
         {
@@ -144,6 +145,18 @@ namespace PgEdit
                 db.Columns[table.DataSet.DataSetName][table.TableName] = columns;
             }
 
+
+            // hilight image of selected table
+            TreeNode prevSelected = (TreeNode)ucTable.Tag;
+            if (prevSelected != null)
+            {
+                prevSelected.ImageKey = IMAGE_KEY_TABLE;
+                prevSelected.SelectedImageKey = IMAGE_KEY_TABLE;
+            }
+            node.ImageKey = IMAGE_KEY_TABLE_OPEN;
+            node.SelectedImageKey = IMAGE_KEY_TABLE_OPEN;
+
+
             dgvColumns.DataSource = columns;
             ucTable.DataSource = table;
             ucTable.Tag = node;
@@ -239,6 +252,7 @@ namespace PgEdit
             ilTreeView.Images.Add(IMAGE_KEY_DATABASE_DISCONNECTED, Resources.Database_Inactive_icon);
             ilTreeView.Images.Add(IMAGE_KEY_SCHEMA, Resources.Schema_16xLG);
             ilTreeView.Images.Add(IMAGE_KEY_TABLE, Resources.Table_748);
+            ilTreeView.Images.Add(IMAGE_KEY_TABLE_OPEN, Resources.Table_748_Opened);
 
             universe = ConnectionService.Load();
 
