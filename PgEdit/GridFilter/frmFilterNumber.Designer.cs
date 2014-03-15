@@ -42,7 +42,7 @@
             this.btnOK.Location = new System.Drawing.Point(198, 131);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 66;
+            this.btnOK.TabIndex = 4;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -54,7 +54,7 @@
             this.btnCancel.Location = new System.Drawing.Point(279, 131);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 67;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -65,7 +65,7 @@
             this.cmbOperand.Location = new System.Drawing.Point(15, 49);
             this.cmbOperand.Name = "cmbOperand";
             this.cmbOperand.Size = new System.Drawing.Size(168, 21);
-            this.cmbOperand.TabIndex = 65;
+            this.cmbOperand.TabIndex = 3;
             // 
             // lblFiledName
             // 
@@ -75,7 +75,7 @@
             this.lblFiledName.Location = new System.Drawing.Point(12, 23);
             this.lblFiledName.Name = "lblFiledName";
             this.lblFiledName.Size = new System.Drawing.Size(342, 23);
-            this.lblFiledName.TabIndex = 63;
+            this.lblFiledName.TabIndex = 1;
             this.lblFiledName.Text = "field name";
             this.lblFiledName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -85,7 +85,7 @@
             this.lblPrompt.Location = new System.Drawing.Point(12, 10);
             this.lblPrompt.Name = "lblPrompt";
             this.lblPrompt.Size = new System.Drawing.Size(118, 13);
-            this.lblPrompt.TabIndex = 62;
+            this.lblPrompt.TabIndex = 0;
             this.lblPrompt.Text = "Показать записи где:";
             // 
             // txtValue
@@ -93,7 +93,7 @@
             this.txtValue.Location = new System.Drawing.Point(198, 49);
             this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(156, 20);
-            this.txtValue.TabIndex = 68;
+            this.txtValue.TabIndex = 2;
             this.txtValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValue_KeyPress);
             // 
             // frmFilterNumber
