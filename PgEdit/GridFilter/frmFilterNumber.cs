@@ -36,11 +36,6 @@ namespace PgEdit.GridFilter
                                            FILTER_TYPE_GREATER_OR_EQUAL 
                                        };
 
-        private readonly NumberFormatInfo numberFormatInfo;
-        private readonly string decimalSeparator;
-        private readonly string groupSeparator;
-        private readonly string negativeSign;
-
 
         public frmFilterNumber()
         {
@@ -56,11 +51,6 @@ namespace PgEdit.GridFilter
 
             cmbOperand.Items.AddRange(filterTypes);
             cmbOperand.SelectedItem = FILTER_TYPE_EQUALS;
-
-            numberFormatInfo = CultureInfo.CurrentCulture.NumberFormat;
-            decimalSeparator = numberFormatInfo.NumberDecimalSeparator;
-            groupSeparator = numberFormatInfo.NumberGroupSeparator;
-            negativeSign = numberFormatInfo.NegativeSign;
         }
 
         public string Filter
@@ -111,12 +101,13 @@ namespace PgEdit.GridFilter
             {
                 // Digits are OK
             }
-            else if (
-                keyInput.Equals(decimalSeparator) || 
-                keyInput.Equals(groupSeparator) ||
-                keyInput.Equals(negativeSign))
+            else if (keyInput == ".")
             {
-                // Decimal separator is OK
+                // decimal separator is OK
+            }
+            else if (keyInput == "-" && txtValue.SelectionStart == 0 && txtValue.Text.IndexOf('-') == -1)
+            {
+                // unary minus is OK if it first and unique
             }
             else if (e.KeyChar == '\b')
             {
