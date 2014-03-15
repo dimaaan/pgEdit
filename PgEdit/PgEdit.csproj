@@ -69,6 +69,12 @@
     <Compile Include="frmAbout.Designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="GridFilter\frmFilterDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridFilter\frmFilterDate.Designer.cs">
+      <DependentUpon>frmFilterDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="GridFilter\frmFilterNumber.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </Compile>
     <EmbeddedResource Include="frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GridFilter\frmFilterDate.resx">
+      <DependentUpon>frmFilterDate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GridFilter\frmFilterNumber.resx">
       <DependentUpon>frmFilterNumber.cs</DependentUpon>
