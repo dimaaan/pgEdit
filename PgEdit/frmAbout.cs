@@ -21,8 +21,6 @@ namespace PgEdit
 
         private void frmAbout_Load(object sender, EventArgs e)
         {
-            picLogo.Image = Bitmap.FromHicon(Resources.logo.Handle);
-
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             StringBuilder displayVersion = new StringBuilder(32);
 
@@ -39,9 +37,12 @@ namespace PgEdit
                 "Автор: Аншилевич Дмитрий{0}" + 
                 "Версия: {1}{0}{0}" +
                 "Компоненты:{0}" +
-                "* Npgsql https://github.com/npgsql/Npgsql{0}" +
-                "* SSH.NET http://sshnet.codeplex.com/{0}" +
-                "* DataGridViewAutoFilterColumnHeaderCell http://msdn.microsoft.com/en-us/library/aa480727.aspx", 
+                "* Npgsql{0}https://github.com/npgsql/Npgsql{0}" +
+                "* SSH.NET{0}http://sshnet.codeplex.com/{0}" +
+                "* DataGridViewAutoFilterColumnHeaderCell{0}http://msdn.microsoft.com/en-us/library/aa480727.aspx " +
+                "{0}{0}" + 
+                "Арт:{0} " +
+                "Логотип - Анна \"annubis\" Кикош", 
                 Environment.NewLine,
                 displayVersion);
             txtInfo.Text = info;

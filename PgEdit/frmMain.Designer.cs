@@ -171,6 +171,7 @@
             // tsmiAbout
             // 
             this.tsmiAbout.Name = "tsmiAbout";
+            this.tsmiAbout.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.tsmiAbout.Size = new System.Drawing.Size(231, 22);
             this.tsmiAbout.Text = "О программе...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
