@@ -36,6 +36,10 @@ namespace PgEdit.GridFilter
                                            FILTER_TYPE_GREATER_OR_EQUAL 
                                        };
 
+        private readonly NumberStyles numberStyle;
+        private readonly CultureInfo currCulture;
+        private readonly NumberFormatInfo numberFormatInfo;
+
 
         public frmFilterNumber()
         {
@@ -51,36 +55,47 @@ namespace PgEdit.GridFilter
 
             cmbOperand.Items.AddRange(filterTypes);
             cmbOperand.SelectedItem = FILTER_TYPE_EQUALS;
+
+            numberStyle = 
+                NumberStyles.AllowLeadingWhite | 
+                NumberStyles.AllowTrailingWhite | 
+                NumberStyles.AllowThousands | 
+                NumberStyles.AllowLeadingSign | 
+                NumberStyles.AllowDecimalPoint;
+
+            currCulture = CultureInfo.CurrentCulture;
+            numberFormatInfo = currCulture.NumberFormat;
         }
 
         public string Filter
         {
             get
             {
-                string value = txtValue.Text;
                 string result = String.Empty;
 
-                if (!String.IsNullOrWhiteSpace(value))
+                if (!String.IsNullOrWhiteSpace(txtValue.Text))
                 {
+                    decimal value = decimal.Parse(txtValue.Text, numberStyle, currCulture);
+
                     switch (cmbOperand.Text)
                     {
                         case FILTER_TYPE_EQUALS:
-                            result = String.Format("[{0}]={1}", Field, value);
+                            result = String.Format(CultureInfo.InvariantCulture, "[{0}]={1}", Field, value);
                             break;
                         case FILTER_TYPE_NOT_EQUALS:
-                            result = String.Format("[{0}]<>{1}", Field, value);
+                            result = String.Format(CultureInfo.InvariantCulture, "[{0}]<>{1}", Field, value);
                             break;
                         case FILTER_TYPE_LESS:
-                            result = String.Format("[{0}]<{1}", Field, value);
+                            result = String.Format(CultureInfo.InvariantCulture, "[{0}]<{1}", Field, value);
                             break;
                         case FILTER_TYPE_LESS_OR_EQUAL:
-                            result = String.Format("[{0}]<={1}", Field, value);
+                            result = String.Format(CultureInfo.InvariantCulture, "[{0}]<={1}", Field, value);
                             break;
                         case FILTER_TYPE_GREATER:
-                            result = String.Format("[{0}]>{1}", Field, value);
+                            result = String.Format(CultureInfo.InvariantCulture, "[{0}]>{1}", Field, value);
                             break;
                         case FILTER_TYPE_GREATER_OR_EQUAL:
-                            result = String.Format("[{0}]>={1}", Field, value);
+                            result = String.Format(CultureInfo.InvariantCulture, "[{0}]>={1}", Field, value);
                             break;
                         default:
                             throw new InvalidOperationException("Unknown filter type " + cmbOperand.Text);
@@ -101,13 +116,12 @@ namespace PgEdit.GridFilter
             {
                 // Digits are OK
             }
-            else if (keyInput == ".")
+            else if (
+                keyInput.Equals(numberFormatInfo.NumberDecimalSeparator) ||
+                keyInput.Equals(numberFormatInfo.NumberGroupSeparator) ||
+                keyInput.Equals(numberFormatInfo.NegativeSign))
             {
-                // decimal separator is OK
-            }
-            else if (keyInput == "-" && txtValue.SelectionStart == 0 && txtValue.Text.IndexOf('-') == -1)
-            {
-                // unary minus is OK if it first and unique
+                // Decimal separator is OK
             }
             else if (e.KeyChar == '\b')
             {
@@ -127,7 +141,7 @@ namespace PgEdit.GridFilter
 
                 decimal tst;
 
-                if (decimal.TryParse(txtValue.Text, out tst))
+                if (decimal.TryParse(txtValue.Text, numberStyle, currCulture, out tst))
                 {
                     DialogResult = DialogResult.OK;
                 }
