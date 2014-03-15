@@ -1102,6 +1102,11 @@ namespace PgEdit.GridFilter
                         WhereFilterDialog = new frmFilterNumber(OwningColumn.DataPropertyName);
                         WhereFilteringSupported = true;
                     }
+                    else if (dataType == typeof(DateTime))
+                    {
+                        WhereFilterDialog = new frmFilterDate(OwningColumn.DataPropertyName);
+                        WhereFilteringSupported = true;
+                    }
                     else {
                         WhereFilteringSupported = false;
                     }
