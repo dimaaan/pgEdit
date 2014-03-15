@@ -69,6 +69,7 @@
             this.dgvData.Size = new System.Drawing.Size(826, 409);
             this.dgvData.TabIndex = 1;
             this.dgvData.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvData_ColumnAdded);
+            this.dgvData.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvData_DataError);
             // 
             // bsData
             // 
