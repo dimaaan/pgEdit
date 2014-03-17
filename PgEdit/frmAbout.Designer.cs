@@ -38,7 +38,7 @@
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnOK.Location = new System.Drawing.Point(388, 325);
+            this.btnOK.Location = new System.Drawing.Point(414, 325);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(94, 23);
             this.btnOK.TabIndex = 0;
@@ -56,11 +56,11 @@
             // 
             // txtInfo
             // 
-            this.txtInfo.Location = new System.Drawing.Point(208, 12);
+            this.txtInfo.Location = new System.Drawing.Point(221, 12);
             this.txtInfo.Multiline = true;
             this.txtInfo.Name = "txtInfo";
             this.txtInfo.ReadOnly = true;
-            this.txtInfo.Size = new System.Drawing.Size(274, 276);
+            this.txtInfo.Size = new System.Drawing.Size(287, 276);
             this.txtInfo.TabIndex = 2;
             // 
             // frmAbout
@@ -69,7 +69,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnOK;
-            this.ClientSize = new System.Drawing.Size(494, 360);
+            this.ClientSize = new System.Drawing.Size(520, 360);
             this.Controls.Add(this.txtInfo);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.btnOK);
