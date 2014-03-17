@@ -42,11 +42,14 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tsData = new System.Windows.Forms.ToolStrip();
             this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
+            this.cmsData = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiRefresh = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsData)).BeginInit();
             this.ssData.SuspendLayout();
             this.panFilters.SuspendLayout();
             this.tsData.SuspendLayout();
+            this.cmsData.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvData
@@ -60,6 +63,7 @@
             this.dgvData.AutoGenerateColumns = false;
             this.dgvData.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvData.ContextMenuStrip = this.cmsData;
             this.dgvData.DataSource = this.bsData;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.Location = new System.Drawing.Point(0, 25);
@@ -161,6 +165,22 @@
             this.tsbRefresh.Text = "Обновить";
             this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
             // 
+            // cmsData
+            // 
+            this.cmsData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiRefresh});
+            this.cmsData.Name = "cmsData";
+            this.cmsData.Size = new System.Drawing.Size(148, 26);
+            // 
+            // tsmiRefresh
+            // 
+            this.tsmiRefresh.Image = global::PgEdit.Properties.Resources.refresh_16xLG;
+            this.tsmiRefresh.Name = "tsmiRefresh";
+            this.tsmiRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.tsmiRefresh.Size = new System.Drawing.Size(147, 22);
+            this.tsmiRefresh.Text = "Обновить";
+            this.tsmiRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
+            // 
             // DataWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -178,6 +198,7 @@
             this.panFilters.ResumeLayout(false);
             this.tsData.ResumeLayout(false);
             this.tsData.PerformLayout();
+            this.cmsData.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,5 +218,7 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ToolStrip tsData;
         private System.Windows.Forms.ToolStripButton tsbRefresh;
+        private System.Windows.Forms.ContextMenuStrip cmsData;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRefresh;
     }
 }
