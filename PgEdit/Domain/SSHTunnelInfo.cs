@@ -8,11 +8,11 @@ namespace PgEdit.Domain
 {
     public class SSHTunnelInfo
     {
-        public string Server;
-        public int Port;
-        public string User;
-        public string Password;
-        public string KeyFilePath;
-        public int ForwardedPort;
+        public string Server { get; set; }
+        public int Port { get; set; }
+        public string User { get; set; }
+        public string Password { get; set; }
+        public string KeyFilePath { get; set; }
+        public int ForwardedPort { get; set; }
     }
 }

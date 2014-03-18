@@ -11,22 +11,27 @@ namespace PgEdit.Domain
     {
         public const string TABLE_PROPERTY_ROWS_COUNT = "rowsCount";
 
-        public string Name;
-        public string User;
-        public string Password;
-        public bool IsOpen;
+        public string Name { get; set; }
+        public string User { get; set; }
+        public string Password { get; set; }
+        public bool IsOpen { get; set; }
 
         /// <summary>
         /// DataSet.DataSetName = schema name
         /// DataTable.TableName = table name
         /// </summary>
-        public List<DataSet> Schemas;
+        public List<DataSet> Schemas { get; set; }
 
         /// <summary>
         /// Table structure.
         /// First key - schema.
         /// Second key - table
         /// </summary>
-        public Dictionary<string, Dictionary<string, List<Column>>> Columns = new Dictionary<string, Dictionary<string, List<Column>>>();
+        public Dictionary<string, Dictionary<string, List<Column>>> Columns { get; set; }
+
+        public Database()
+        {
+            Columns = new Dictionary<string, Dictionary<string, List<Column>>>();
+        }
     }
 }
