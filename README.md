@@ -14,3 +14,6 @@ Quick PostgreSQL DB editor for developers
 * DataGridViewAutoFilterColumnHeaderCell http://msdn.microsoft.com/en-us/library/aa480727.aspx
 
 Language: Russian
+
+
+![screenshot](https://f.cloud.github.com/assets/4518589/2440110/5fefe92a-ae04-11e3-9ccf-e72b1bbf4f1d.png)
