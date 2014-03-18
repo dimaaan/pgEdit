@@ -9,10 +9,10 @@ namespace PgEdit.Domain
 {
     public class Server
     {
-        public string Address;
-        public uint Port;
-        public List<Database> Databases;
-        public SSHTunnelInfo Ssh;
-        public SshClient sshClient;
+        public string Address { get; set; }
+        public uint Port { get; set; }
+        public List<Database> Databases { get; set; }
+        public SSHTunnelInfo Ssh { get; set; }
+        public SshClient sshClient { get; set; }
     }
 }
