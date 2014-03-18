@@ -14,5 +14,10 @@ namespace PgEdit.Domain
         public List<Database> Databases { get; set; }
         public SSHTunnelInfo Ssh { get; set; }
         public SshClient sshClient { get; set; }
+
+        public Server()
+        {
+            Port = 5432;
+        }
     }
 }

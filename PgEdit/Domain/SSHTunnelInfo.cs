@@ -14,5 +14,10 @@ namespace PgEdit.Domain
         public string Password { get; set; }
         public string KeyFilePath { get; set; }
         public int ForwardedPort { get; set; }
+
+        public SSHTunnelInfo()
+        {
+            Port = 22;
+        }
     }
 }
