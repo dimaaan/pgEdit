@@ -57,11 +57,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\ConnectionSettings.cs" />
+    <Compile Include="frmConnection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConnection.Designer.cs">
+      <DependentUpon>frmConnection.cs</DependentUpon>
+    </Compile>
     <Compile Include="GridFilter\DataGridViewAutoFilterColumnHeaderCell.cs" />
     <Compile Include="Domain\Column.cs" />
     <Compile Include="Domain\Database.cs" />
     <Compile Include="Domain\Server.cs" />
-    <Compile Include="Domain\SSHTunnelInfo.cs" />
+    <Compile Include="Domain\SshTunnel.cs" />
     <Compile Include="Domain\Universe.cs" />
     <Compile Include="frmAbout.cs">
       <SubType>Form</SubType>
@@ -106,6 +113,9 @@
     </Compile>
     <EmbeddedResource Include="frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConnection.resx">
+      <DependentUpon>frmConnection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GridFilter\frmFilterDate.resx">
       <DependentUpon>frmFilterDate.cs</DependentUpon>

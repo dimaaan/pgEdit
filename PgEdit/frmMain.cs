@@ -54,9 +54,8 @@ namespace PgEdit
             RefreshMenu();
         }
 
-        private void CloseDatabase(TreeNode node)
+        private void CloseDatabase(TreeNode dbNode)
         {
-            TreeNode dbNode = GetSelectedDBNode(node);
             Database db = (Database)dbNode.Tag;
 
             ucTable.DataSource = null;
@@ -68,6 +67,14 @@ namespace PgEdit
             dbNode.ImageKey = IMAGE_KEY_DATABASE_DISCONNECTED;
             dbNode.SelectedImageKey = IMAGE_KEY_DATABASE_DISCONNECTED;
             RefreshMenu();
+        }
+
+        private void CloseDatabasesOfServer(TreeNode serverNode)
+        {
+            foreach (TreeNode dbNode in serverNode.Nodes)
+            {
+                CloseDatabase(dbNode);
+            }
         }
 
         /// <summary>
@@ -103,30 +110,61 @@ namespace PgEdit
 
             foreach (Server server in universe.Servers)
             {
-                TreeNode nodeHost = new TreeNode()
-                {
-                    Text = server.Address,
-                    Tag = server,
-                    ImageKey = IMAGE_KEY_SERVER,
-                    SelectedImageKey = IMAGE_KEY_SERVER
-                };
+                TreeNode nodeHost = ServerToNode(server);
                 nodes.Add(nodeHost);
-
-                foreach (Database db in server.Databases)
-                {
-                    TreeNode nodeDB = new TreeNode()
-                    {
-                        Text = db.Name,
-                        Tag = db,
-                        ImageKey = IMAGE_KEY_DATABASE_DISCONNECTED,
-                        SelectedImageKey = IMAGE_KEY_DATABASE_DISCONNECTED
-                    };
-                    nodeHost.Nodes.Add(nodeDB);
-                }
             }
 
-            tvStructure.Nodes.AddRange(nodes.ToArray());
-            tvStructure.ExpandAll();
+            tvTree.Nodes.AddRange(nodes.ToArray());
+            tvTree.ExpandAll();
+        }
+
+        private TreeNode ServerToNode(Server server)
+        {
+            TreeNode nodeHost = new TreeNode()
+            {
+                Text = server.Address,
+                Tag = server,
+                ImageKey = IMAGE_KEY_SERVER,
+                SelectedImageKey = IMAGE_KEY_SERVER,
+                ContextMenuStrip = cmsServer
+            };
+
+            foreach (Database db in server.Databases)
+            {
+                TreeNode nodeDB = new TreeNode()
+                {
+                    Text = db.Name,
+                    Tag = db,
+                    ImageKey = IMAGE_KEY_DATABASE_DISCONNECTED,
+                    SelectedImageKey = IMAGE_KEY_DATABASE_DISCONNECTED,
+                };
+                nodeHost.Nodes.Add(nodeDB);
+            }
+            return nodeHost;
+        }
+
+        private void RemoveServer(TreeNode selectedNode)
+        {
+            string msg = "Настройки подключения к серверу и его базам данных будут удалены.{0}Продолжить?";
+            var res = MessageBox.Show(
+                String.Format(msg, Environment.NewLine),
+                null,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+
+            if (res == DialogResult.Yes)
+            {
+                Server server = (Server)selectedNode.Tag;
+
+                SuspendLayout();
+                CloseDatabasesOfServer(selectedNode);
+                universe.Servers.Remove(server);
+                ConnectionService.CloseSshTunnel(server);
+                ConnectionService.Save(universe);
+                selectedNode.Remove();
+                ResumeLayout();
+            }
         }
 
         private void ShowTable(TreeNode node)
@@ -198,7 +236,7 @@ namespace PgEdit
 
         private void RefreshMenu()
         {
-            TreeNode dbNode = GetSelectedDBNode(tvStructure.SelectedNode);
+            TreeNode dbNode = GetSelectedDBNode(tvTree.SelectedNode);
 
             tsmiConnect.Enabled = dbNode != null && !((Database)dbNode.Tag).IsOpen;
             tsmiDisconnect.Enabled = dbNode != null && ((Database)dbNode.Tag).IsOpen;
@@ -230,18 +268,10 @@ namespace PgEdit
             {
                 foreach (var server in universe.Servers)
                 {
-                    if (server.sshClient != null)
-                    {
-                        foreach (var port in server.sshClient.ForwardedPorts)
-                        {
-                            port.Stop();
-                        }
-                        server.sshClient.Disconnect();
-                    }
+                    ConnectionService.CloseSshTunnel(server);
                 }
             }
         }
-        
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -259,14 +289,31 @@ namespace PgEdit
             FillTreeViewOnStartup(universe);
         }
 
+        private void tsmiNewConnection_Click(object sender, EventArgs e)
+        {
+            frmConnection dlg = new frmConnection();
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                universe.Servers.Add(dlg.Server);
+
+                TreeNode serverNode = ServerToNode(dlg.Server);
+                tvTree.Nodes.Add(serverNode);
+                
+                ConnectionService.Save(universe);
+            }
+        }
+
         private void tsmiConnect_Click(object sender, EventArgs e)
         {
-            OpenDatabase(tvStructure.SelectedNode);
+            OpenDatabase(tvTree.SelectedNode);
         }
 
         private void tsmiDisconnect_Click(object sender, EventArgs e)
         {
-            CloseDatabase(tvStructure.SelectedNode);
+            TreeNode dbNode = GetSelectedDBNode(tvTree.SelectedNode);
+
+            CloseDatabase(dbNode);
         }
 
         private void tsmiAbout_Click(object sender, EventArgs e)
@@ -296,22 +343,25 @@ namespace PgEdit
             Shutdown();
         }
 
-        private void tvStructure_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void tvTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            OnSelectTreeNode(e.Node);
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                OnSelectTreeNode(e.Node);
+            }
         }
 
-        private void tvStructure_KeyPress(object sender, KeyPressEventArgs e)
+        private void tvTree_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter) &&
-                tvStructure.SelectedNode != null)
+                tvTree.SelectedNode != null)
             {
-                OnSelectTreeNode(tvStructure.SelectedNode);
+                OnSelectTreeNode(tvTree.SelectedNode);
                 e.Handled = true;
             }
         }
 
-        private void tvStructure_AfterSelect(object sender, TreeViewEventArgs e)
+        private void tvTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             RefreshMenu();            
         }
@@ -323,5 +373,16 @@ namespace PgEdit
             ShowTable(node);
         }
 
+        private void tsmiRemoveServer_Click(object sender, EventArgs e)
+        {
+            // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
+            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsServer.Left, cmsServer.Top)));
+            var selectedNode = hitTest.Node;
+
+            if (selectedNode != null)
+            {
+                RemoveServer(selectedNode);
+            }
+        }
     }
 }

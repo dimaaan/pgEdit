@@ -31,6 +31,7 @@ namespace PgEdit.Domain
 
         public Database()
         {
+            User = "postgres";
             Columns = new Dictionary<string, Dictionary<string, List<Column>>>();
         }
     }

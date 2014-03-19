@@ -12,12 +12,14 @@ namespace PgEdit.Domain
         public string Address { get; set; }
         public uint Port { get; set; }
         public List<Database> Databases { get; set; }
-        public SSHTunnelInfo Ssh { get; set; }
+        public SshTunnel Ssh { get; set; }
         public SshClient sshClient { get; set; }
 
         public Server()
         {
+            Address = "localhost";
             Port = 5432;
+            Databases = new List<Database>();
         }
     }
 }
