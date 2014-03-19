@@ -31,10 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.tvStructure = new System.Windows.Forms.TreeView();
+            this.tvTree = new System.Windows.Forms.TreeView();
             this.ilTreeView = new System.Windows.Forms.ImageList(this.components);
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
             this.tsmiDB = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDisconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -47,16 +48,9 @@
             this.tabTable = new System.Windows.Forms.TabControl();
             this.tpColumns = new System.Windows.Forms.TabPage();
             this.dgvColumns = new System.Windows.Forms.DataGridView();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrimaryKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colForeignKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colNotNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colDefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpData = new System.Windows.Forms.TabPage();
-            this.ucTable = new PgEdit.DataWorkspace();
+            this.cmsServer = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiRemoveServer = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -65,6 +59,15 @@
             this.dataGridViewCheckBoxColumn4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrimaryKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colForeignKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colNotNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colDefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ucTable = new PgEdit.DataWorkspace();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
@@ -74,21 +77,22 @@
             this.tpColumns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvColumns)).BeginInit();
             this.tpData.SuspendLayout();
+            this.cmsServer.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tvStructure
+            // tvTree
             // 
-            this.tvStructure.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvStructure.ImageIndex = 0;
-            this.tvStructure.ImageList = this.ilTreeView;
-            this.tvStructure.Location = new System.Drawing.Point(0, 0);
-            this.tvStructure.Name = "tvStructure";
-            this.tvStructure.SelectedImageIndex = 0;
-            this.tvStructure.Size = new System.Drawing.Size(200, 537);
-            this.tvStructure.TabIndex = 0;
-            this.tvStructure.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvStructure_AfterSelect);
-            this.tvStructure.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvStructure_NodeMouseDoubleClick);
-            this.tvStructure.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tvStructure_KeyPress);
+            this.tvTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvTree.ImageIndex = 0;
+            this.tvTree.ImageList = this.ilTreeView;
+            this.tvTree.Location = new System.Drawing.Point(0, 0);
+            this.tvTree.Name = "tvTree";
+            this.tvTree.SelectedImageIndex = 0;
+            this.tvTree.Size = new System.Drawing.Size(200, 537);
+            this.tvTree.TabIndex = 0;
+            this.tvTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTree_AfterSelect);
+            this.tvTree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvTree_NodeMouseDoubleClick);
+            this.tvTree.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tvTree_KeyPress);
             // 
             // ilTreeView
             // 
@@ -110,6 +114,7 @@
             // tsmiDB
             // 
             this.tsmiDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewConnection,
             this.tsmiConnect,
             this.tsmiDisconnect,
             this.tsSeparator1,
@@ -118,6 +123,13 @@
             this.tsmiDB.Name = "tsmiDB";
             this.tsmiDB.Size = new System.Drawing.Size(86, 20);
             this.tsmiDB.Text = "База данных";
+            // 
+            // tsmiNewConnection
+            // 
+            this.tsmiNewConnection.Name = "tsmiNewConnection";
+            this.tsmiNewConnection.Size = new System.Drawing.Size(231, 22);
+            this.tsmiNewConnection.Text = "Новое подключение...";
+            this.tsmiNewConnection.Click += new System.EventHandler(this.tsmiNewConnection_Click);
             // 
             // tsmiConnect
             // 
@@ -185,7 +197,7 @@
             // 
             // scMain.Panel1
             // 
-            this.scMain.Panel1.Controls.Add(this.tvStructure);
+            this.scMain.Panel1.Controls.Add(this.tvTree);
             // 
             // scMain.Panel2
             // 
@@ -240,6 +252,103 @@
             this.dgvColumns.RowHeadersVisible = false;
             this.dgvColumns.Size = new System.Drawing.Size(566, 505);
             this.dgvColumns.TabIndex = 0;
+            // 
+            // tpData
+            // 
+            this.tpData.Controls.Add(this.ucTable);
+            this.tpData.Location = new System.Drawing.Point(4, 22);
+            this.tpData.Name = "tpData";
+            this.tpData.Padding = new System.Windows.Forms.Padding(3);
+            this.tpData.Size = new System.Drawing.Size(572, 511);
+            this.tpData.TabIndex = 1;
+            this.tpData.Text = "Данные";
+            this.tpData.UseVisualStyleBackColor = true;
+            // 
+            // cmsServer
+            // 
+            this.cmsServer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiRemoveServer});
+            this.cmsServer.Name = "cmsStructure";
+            this.cmsServer.Size = new System.Drawing.Size(128, 26);
+            // 
+            // tsmiRemoveServer
+            // 
+            this.tsmiRemoveServer.Name = "tsmiRemoveServer";
+            this.tsmiRemoveServer.Size = new System.Drawing.Size(127, 22);
+            this.tsmiRemoveServer.Text = "Удалить...";
+            this.tsmiRemoveServer.Click += new System.EventHandler(this.tsmiRemoveServer_Click);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTextBoxColumn1.Frozen = true;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Имя";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 54;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "PgType";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Тип";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 51;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewCheckBoxColumn1.DataPropertyName = "PrimaryKey";
+            this.dataGridViewCheckBoxColumn1.HeaderText = "Первичный ключ";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn1.Width = 88;
+            // 
+            // dataGridViewCheckBoxColumn2
+            // 
+            this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewCheckBoxColumn2.DataPropertyName = "ForeignKey";
+            this.dataGridViewCheckBoxColumn2.HeaderText = "Внешний ключ";
+            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
+            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn2.Width = 77;
+            // 
+            // dataGridViewCheckBoxColumn3
+            // 
+            this.dataGridViewCheckBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewCheckBoxColumn3.DataPropertyName = "NotNull";
+            this.dataGridViewCheckBoxColumn3.HeaderText = "Не Null";
+            this.dataGridViewCheckBoxColumn3.Name = "dataGridViewCheckBoxColumn3";
+            this.dataGridViewCheckBoxColumn3.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn3.Width = 43;
+            // 
+            // dataGridViewCheckBoxColumn4
+            // 
+            this.dataGridViewCheckBoxColumn4.DataPropertyName = "Unique";
+            this.dataGridViewCheckBoxColumn4.HeaderText = "Уникальный";
+            this.dataGridViewCheckBoxColumn4.Name = "dataGridViewCheckBoxColumn4";
+            this.dataGridViewCheckBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "DefaultValue";
+            this.dataGridViewTextBoxColumn3.HeaderText = "По умолчанию";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 96;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Description";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Описание";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // colName
             // 
@@ -311,17 +420,6 @@
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
             // 
-            // tpData
-            // 
-            this.tpData.Controls.Add(this.ucTable);
-            this.tpData.Location = new System.Drawing.Point(4, 22);
-            this.tpData.Name = "tpData";
-            this.tpData.Padding = new System.Windows.Forms.Padding(3);
-            this.tpData.Size = new System.Drawing.Size(572, 511);
-            this.tpData.TabIndex = 1;
-            this.tpData.Text = "Данные";
-            this.tpData.UseVisualStyleBackColor = true;
-            // 
             // ucTable
             // 
             this.ucTable.DataSource = null;
@@ -331,72 +429,6 @@
             this.ucTable.Size = new System.Drawing.Size(566, 505);
             this.ucTable.TabIndex = 0;
             this.ucTable.DataSourceNeedRefresh += new System.Action(this.ucTable_DataSourceNeedRefresh);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewTextBoxColumn1.Frozen = true;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Имя";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "PgType";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Тип";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewCheckBoxColumn1.DataPropertyName = "PrimaryKey";
-            this.dataGridViewCheckBoxColumn1.HeaderText = "Первичный ключ";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewCheckBoxColumn2
-            // 
-            this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewCheckBoxColumn2.DataPropertyName = "ForeignKey";
-            this.dataGridViewCheckBoxColumn2.HeaderText = "Внешний ключ";
-            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
-            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewCheckBoxColumn3
-            // 
-            this.dataGridViewCheckBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewCheckBoxColumn3.DataPropertyName = "NotNull";
-            this.dataGridViewCheckBoxColumn3.HeaderText = "Не Null";
-            this.dataGridViewCheckBoxColumn3.Name = "dataGridViewCheckBoxColumn3";
-            this.dataGridViewCheckBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewCheckBoxColumn4
-            // 
-            this.dataGridViewCheckBoxColumn4.DataPropertyName = "Unique";
-            this.dataGridViewCheckBoxColumn4.HeaderText = "Уникальный";
-            this.dataGridViewCheckBoxColumn4.Name = "dataGridViewCheckBoxColumn4";
-            this.dataGridViewCheckBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "DefaultValue";
-            this.dataGridViewTextBoxColumn3.HeaderText = "По умолчанию";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Description";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Описание";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // frmMain
             // 
@@ -421,6 +453,7 @@
             this.tpColumns.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvColumns)).EndInit();
             this.tpData.ResumeLayout(false);
+            this.cmsServer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -428,7 +461,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TreeView tvStructure;
+        private System.Windows.Forms.TreeView tvTree;
         private System.Windows.Forms.MenuStrip msMainMenu;
         private System.Windows.Forms.ToolStripMenuItem tsmiDB;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
@@ -462,5 +495,8 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colUnique;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDefaultValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNewConnection;
+        private System.Windows.Forms.ContextMenuStrip cmsServer;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRemoveServer;
     }
 }
