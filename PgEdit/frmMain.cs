@@ -58,15 +58,18 @@ namespace PgEdit
         {
             Database db = (Database)dbNode.Tag;
 
-            ucTable.DataSource = null;
-            ucTable.Tag = null;
-            dgvColumns.DataSource = null;
-            db.Schemas = null;
-            db.IsOpen = false;
-            dbNode.Nodes.Clear();
-            dbNode.ImageKey = IMAGE_KEY_DATABASE_DISCONNECTED;
-            dbNode.SelectedImageKey = IMAGE_KEY_DATABASE_DISCONNECTED;
-            RefreshMenu();
+            if (db.IsOpen)
+            {
+                ucTable.DataSource = null;
+                ucTable.Tag = null;
+                dgvColumns.DataSource = null;
+                db.Schemas = null;
+                db.IsOpen = false;
+                dbNode.Nodes.Clear();
+                dbNode.ImageKey = IMAGE_KEY_DATABASE_DISCONNECTED;
+                dbNode.SelectedImageKey = IMAGE_KEY_DATABASE_DISCONNECTED;
+                RefreshMenu();
+            }
         }
 
         private void CloseDatabasesOfServer(TreeNode serverNode)
