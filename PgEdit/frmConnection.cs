@@ -14,6 +14,7 @@ using System.Windows.Forms;
 namespace PgEdit
 {
     // TODO validation
+    // TODO same server different db problem (maybe merge tabs + add server aliases + when switch existing alias it adds to this server or different server & db dialogs)
     public partial class frmConnection : Form
     {
         private readonly Color COLOR_SUCCESS = Color.Green;
