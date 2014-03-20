@@ -176,7 +176,7 @@
             this.panSsh.Location = new System.Drawing.Point(15, 138);
             this.panSsh.Name = "panSsh";
             this.panSsh.Size = new System.Drawing.Size(417, 136);
-            this.panSsh.TabIndex = 1;
+            this.panSsh.TabIndex = 11;
             // 
             // ctrlSshConnectionStatus
             // 
@@ -185,7 +185,8 @@
             this.ctrlSshConnectionStatus.Location = new System.Drawing.Point(132, 101);
             this.ctrlSshConnectionStatus.Name = "ctrlSshConnectionStatus";
             this.ctrlSshConnectionStatus.Size = new System.Drawing.Size(23, 23);
-            this.ctrlSshConnectionStatus.TabIndex = 9;
+            this.ctrlSshConnectionStatus.TabIndex = 8;
+            this.ctrlSshConnectionStatus.TabStop = false;
             this.ctrlSshConnectionStatus.Text = "control1";
             // 
             // btnTestSshConnection
@@ -194,7 +195,7 @@
             this.btnTestSshConnection.Location = new System.Drawing.Point(166, 101);
             this.btnTestSshConnection.Name = "btnTestSshConnection";
             this.btnTestSshConnection.Size = new System.Drawing.Size(251, 23);
-            this.btnTestSshConnection.TabIndex = 8;
+            this.btnTestSshConnection.TabIndex = 9;
             this.btnTestSshConnection.Text = "Проверить подключение по SSH";
             this.btnTestSshConnection.UseVisualStyleBackColor = true;
             this.btnTestSshConnection.Click += new System.EventHandler(this.btnTestSshConnection_Click);
@@ -289,7 +290,7 @@
             this.chkUseSsh.Location = new System.Drawing.Point(15, 115);
             this.chkUseSsh.Name = "chkUseSsh";
             this.chkUseSsh.Size = new System.Drawing.Size(352, 24);
-            this.chkUseSsh.TabIndex = 0;
+            this.chkUseSsh.TabIndex = 10;
             this.chkUseSsh.Text = "Подключение через SSH туннель";
             this.chkUseSsh.UseVisualStyleBackColor = true;
             this.chkUseSsh.CheckedChanged += new System.EventHandler(this.chkUseSsh_CheckedChanged);
@@ -301,7 +302,8 @@
             this.ctrlConnectionStatus.Location = new System.Drawing.Point(12, 296);
             this.ctrlConnectionStatus.Name = "ctrlConnectionStatus";
             this.ctrlConnectionStatus.Size = new System.Drawing.Size(23, 23);
-            this.ctrlConnectionStatus.TabIndex = 10;
+            this.ctrlConnectionStatus.TabIndex = 12;
+            this.ctrlConnectionStatus.TabStop = false;
             this.ctrlConnectionStatus.Text = "control1";
             // 
             // btnTestConnection
@@ -311,7 +313,7 @@
             this.btnTestConnection.Location = new System.Drawing.Point(41, 296);
             this.btnTestConnection.Name = "btnTestConnection";
             this.btnTestConnection.Size = new System.Drawing.Size(166, 23);
-            this.btnTestConnection.TabIndex = 0;
+            this.btnTestConnection.TabIndex = 13;
             this.btnTestConnection.Text = "Проверить подключение";
             this.btnTestConnection.UseVisualStyleBackColor = true;
             this.btnTestConnection.Click += new System.EventHandler(this.btnTestConnection_Click);
@@ -322,7 +324,7 @@
             this.btnOK.Location = new System.Drawing.Point(276, 296);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 1;
+            this.btnOK.TabIndex = 14;
             this.btnOK.Text = "ОК";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -334,7 +336,7 @@
             this.btnCancel.Location = new System.Drawing.Point(357, 296);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.TabIndex = 15;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
