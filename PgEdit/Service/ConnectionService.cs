@@ -110,7 +110,7 @@ namespace PgEdit.Service
             {
                 using (var stream = new FileStream(server.Ssh.KeyFilePath, FileMode.Open, FileAccess.Read))
                 {
-                    var privateKeyFile = new PrivateKeyFile(stream);
+                    var privateKeyFile = new PrivateKeyFile(stream, server.Ssh.Password);
                     var authenticationMethod = new PrivateKeyAuthenticationMethod(server.Ssh.User, privateKeyFile);
                     var connectionInfo = new ConnectionInfo(server.Ssh.Server, server.Ssh.Port, server.Ssh.User, authenticationMethod);
 
