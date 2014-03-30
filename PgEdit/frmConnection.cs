@@ -143,11 +143,11 @@ namespace PgEdit
                 false, DataSourceUpdateMode.OnValidation);
             bindings.Add(b);
 
-            b = panSsh.DataBindings.Add(
-                PropertyName((Panel c) => c.Enabled),
-                chkUseSsh,
-                PropertyName((CheckBox c) => c.Checked),
-                false, DataSourceUpdateMode.OnPropertyChanged);
+            b = txtSshKey.DataBindings.Add(
+                PropertyName((TextBox c) => c.Text),
+                sshTunnel,
+                PropertyName((SshTunnel c) => c.KeyFilePath),
+                false, DataSourceUpdateMode.OnValidation);
             bindings.Add(b);
 
             foreach(Binding binding in bindings) 
@@ -211,6 +211,8 @@ namespace PgEdit
         private void chkUseSsh_CheckedChanged(object sender, EventArgs e)
         {
             server.Ssh = chkUseSsh.Checked ? sshTunnel : null;
+            panSsh.Enabled = chkUseSsh.Checked;
+            ResetConnectionStatuses();
         }
 
         private void chkShowDBPass_CheckedChanged(object sender, EventArgs e)
@@ -221,6 +223,22 @@ namespace PgEdit
         private void chkShowSshPass_CheckedChanged(object sender, EventArgs e)
         {
             txtShhPassword.UseSystemPasswordChar = !chkShowSshPass.Checked;
+        }
+
+        private void btnShhKey_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                txtSshKey.Text = dlg.FileName;
+            }
+        }
+
+        private void chkSshKey_CheckedChanged(object sender, EventArgs e)
+        {
+            txtSshKey.Enabled = btnShhKey.Enabled = chkSshKey.Checked;
+            sshTunnel.KeyFilePath = chkSshKey.Checked ? txtSshKey.Text : null;
         }
     }
 }
