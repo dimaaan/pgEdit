@@ -1,14 +1,14 @@
 ﻿using Npgsql;
 using PgEdit.Domain;
 using Renci.SshNet;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Web.Script.Serialization;
-using System.Xml.Linq;
+using Newtonsoft.Json;
 
 namespace PgEdit.Service
 {
@@ -80,8 +80,7 @@ namespace PgEdit.Service
             if (File.Exists(CONNECTION_STRINGS_PATH))
             {
                 string json = File.ReadAllText(CONNECTION_STRINGS_PATH);
-                ConnectionSettings settings = (new JavaScriptSerializer()).Deserialize<ConnectionSettings>(json);
-
+                ConnectionSettings settings = JsonConvert.DeserializeObject<ConnectionSettings>(json);
                 universe.Servers = ConvertSettingsToDomain(settings);
             }
 
@@ -91,7 +90,7 @@ namespace PgEdit.Service
         public static void Save(Universe universe)
         {
             ConnectionSettings settings = ConvertDomainToSettings(universe.Servers);
-            string json = (new JavaScriptSerializer()).Serialize(settings);
+            string json = JsonConvert.SerializeObject(settings, Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(CONNECTION_STRINGS_PATH, false))
             {
                 sw.Write(json);

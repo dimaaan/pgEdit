@@ -17,6 +17,7 @@ namespace PgEdit
     // TODO same server different db problem (maybe merge tabs + add server aliases + when switch existing alias it adds to this server or different server & db dialogs)
     public partial class frmConnection : Form
     {
+        // Test connection colors
         private readonly Color COLOR_SUCCESS = Color.Green;
         private readonly Color COLOR_FAIL = Color.Red;
         private readonly Color COLOR_UNKNOWN = Color.Gray;
