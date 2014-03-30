@@ -183,6 +183,7 @@
             this.panSsh.Controls.Add(this.nudSshPort);
             this.panSsh.Controls.Add(this.lblShhPassword);
             this.panSsh.Controls.Add(this.cmbSshHost);
+            this.panSsh.Enabled = false;
             this.panSsh.Location = new System.Drawing.Point(15, 138);
             this.panSsh.Name = "panSsh";
             this.panSsh.Size = new System.Drawing.Size(417, 164);
