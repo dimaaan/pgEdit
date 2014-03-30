@@ -12,6 +12,7 @@ Quick PostgreSQL DB editor for developers
 * Npgsql https://github.com/npgsql/Npgsql
 * SSH.NET http://sshnet.codeplex.com/
 * DataGridViewAutoFilterColumnHeaderCell http://msdn.microsoft.com/en-us/library/aa480727.aspx
+* JSON.NET http://json.codeplex.com
 
 Language: Russian
 
