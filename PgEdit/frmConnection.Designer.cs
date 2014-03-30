@@ -54,6 +54,8 @@
             this.btnTestConnection = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.chkShowDBPass = new System.Windows.Forms.CheckBox();
+            this.chkShowSshPass = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudPort)).BeginInit();
             this.panSsh.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSshPort)).BeginInit();
@@ -65,8 +67,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPassword.Location = new System.Drawing.Point(128, 62);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(304, 20);
+            this.txtPassword.Size = new System.Drawing.Size(213, 20);
             this.txtPassword.TabIndex = 7;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // txtUser
             // 
@@ -105,7 +108,7 @@
             this.cmbDatabase.Location = new System.Drawing.Point(128, 88);
             this.cmbDatabase.Name = "cmbDatabase";
             this.cmbDatabase.Size = new System.Drawing.Size(304, 21);
-            this.cmbDatabase.TabIndex = 9;
+            this.cmbDatabase.TabIndex = 10;
             this.cmbDatabase.DropDown += new System.EventHandler(this.cmbDatabase_DropDown);
             // 
             // lblDatabase
@@ -113,7 +116,7 @@
             this.lblDatabase.Location = new System.Drawing.Point(12, 88);
             this.lblDatabase.Name = "lblDatabase";
             this.lblDatabase.Size = new System.Drawing.Size(110, 21);
-            this.lblDatabase.TabIndex = 8;
+            this.lblDatabase.TabIndex = 9;
             this.lblDatabase.Text = "База данных:";
             this.lblDatabase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -163,6 +166,7 @@
             // 
             this.panSsh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panSsh.Controls.Add(this.chkShowSshPass);
             this.panSsh.Controls.Add(this.ctrlSshConnectionStatus);
             this.panSsh.Controls.Add(this.btnTestSshConnection);
             this.panSsh.Controls.Add(this.lblSshHost);
@@ -176,7 +180,7 @@
             this.panSsh.Location = new System.Drawing.Point(15, 138);
             this.panSsh.Name = "panSsh";
             this.panSsh.Size = new System.Drawing.Size(417, 136);
-            this.panSsh.TabIndex = 11;
+            this.panSsh.TabIndex = 12;
             // 
             // ctrlSshConnectionStatus
             // 
@@ -185,7 +189,7 @@
             this.ctrlSshConnectionStatus.Location = new System.Drawing.Point(132, 101);
             this.ctrlSshConnectionStatus.Name = "ctrlSshConnectionStatus";
             this.ctrlSshConnectionStatus.Size = new System.Drawing.Size(23, 23);
-            this.ctrlSshConnectionStatus.TabIndex = 8;
+            this.ctrlSshConnectionStatus.TabIndex = 9;
             this.ctrlSshConnectionStatus.TabStop = false;
             this.ctrlSshConnectionStatus.Text = "control1";
             // 
@@ -195,7 +199,7 @@
             this.btnTestSshConnection.Location = new System.Drawing.Point(166, 101);
             this.btnTestSshConnection.Name = "btnTestSshConnection";
             this.btnTestSshConnection.Size = new System.Drawing.Size(251, 23);
-            this.btnTestSshConnection.TabIndex = 9;
+            this.btnTestSshConnection.TabIndex = 10;
             this.btnTestSshConnection.Text = "Проверить подключение по SSH";
             this.btnTestSshConnection.UseVisualStyleBackColor = true;
             this.btnTestSshConnection.Click += new System.EventHandler(this.btnTestSshConnection_Click);
@@ -216,8 +220,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtShhPassword.Location = new System.Drawing.Point(113, 68);
             this.txtShhPassword.Name = "txtShhPassword";
-            this.txtShhPassword.Size = new System.Drawing.Size(304, 20);
+            this.txtShhPassword.Size = new System.Drawing.Size(213, 20);
             this.txtShhPassword.TabIndex = 7;
+            this.txtShhPassword.UseSystemPasswordChar = true;
             // 
             // lblSshPort
             // 
@@ -290,7 +295,7 @@
             this.chkUseSsh.Location = new System.Drawing.Point(15, 115);
             this.chkUseSsh.Name = "chkUseSsh";
             this.chkUseSsh.Size = new System.Drawing.Size(352, 24);
-            this.chkUseSsh.TabIndex = 10;
+            this.chkUseSsh.TabIndex = 11;
             this.chkUseSsh.Text = "Подключение через SSH туннель";
             this.chkUseSsh.UseVisualStyleBackColor = true;
             this.chkUseSsh.CheckedChanged += new System.EventHandler(this.chkUseSsh_CheckedChanged);
@@ -302,7 +307,7 @@
             this.ctrlConnectionStatus.Location = new System.Drawing.Point(12, 296);
             this.ctrlConnectionStatus.Name = "ctrlConnectionStatus";
             this.ctrlConnectionStatus.Size = new System.Drawing.Size(23, 23);
-            this.ctrlConnectionStatus.TabIndex = 12;
+            this.ctrlConnectionStatus.TabIndex = 13;
             this.ctrlConnectionStatus.TabStop = false;
             this.ctrlConnectionStatus.Text = "control1";
             // 
@@ -313,7 +318,7 @@
             this.btnTestConnection.Location = new System.Drawing.Point(41, 296);
             this.btnTestConnection.Name = "btnTestConnection";
             this.btnTestConnection.Size = new System.Drawing.Size(166, 23);
-            this.btnTestConnection.TabIndex = 13;
+            this.btnTestConnection.TabIndex = 14;
             this.btnTestConnection.Text = "Проверить подключение";
             this.btnTestConnection.UseVisualStyleBackColor = true;
             this.btnTestConnection.Click += new System.EventHandler(this.btnTestConnection_Click);
@@ -324,7 +329,7 @@
             this.btnOK.Location = new System.Drawing.Point(276, 296);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 14;
+            this.btnOK.TabIndex = 15;
             this.btnOK.Text = "ОК";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -336,9 +341,35 @@
             this.btnCancel.Location = new System.Drawing.Point(357, 296);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 15;
+            this.btnCancel.TabIndex = 16;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // chkShowDBPass
+            // 
+            this.chkShowDBPass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkShowDBPass.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkShowDBPass.Location = new System.Drawing.Point(347, 62);
+            this.chkShowDBPass.Name = "chkShowDBPass";
+            this.chkShowDBPass.Size = new System.Drawing.Size(85, 20);
+            this.chkShowDBPass.TabIndex = 8;
+            this.chkShowDBPass.Text = "Показать";
+            this.chkShowDBPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkShowDBPass.UseVisualStyleBackColor = true;
+            this.chkShowDBPass.CheckedChanged += new System.EventHandler(this.chkShowDBPass_CheckedChanged);
+            // 
+            // chkShowSshPass
+            // 
+            this.chkShowSshPass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkShowSshPass.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkShowSshPass.Location = new System.Drawing.Point(332, 68);
+            this.chkShowSshPass.Name = "chkShowSshPass";
+            this.chkShowSshPass.Size = new System.Drawing.Size(82, 20);
+            this.chkShowSshPass.TabIndex = 8;
+            this.chkShowSshPass.Text = "Показать";
+            this.chkShowSshPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkShowSshPass.UseVisualStyleBackColor = true;
+            this.chkShowSshPass.CheckedChanged += new System.EventHandler(this.chkShowSshPass_CheckedChanged);
             // 
             // frmConnection
             // 
@@ -347,6 +378,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(444, 331);
+            this.Controls.Add(this.chkShowDBPass);
             this.Controls.Add(this.panSsh);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.chkUseSsh);
@@ -408,6 +440,8 @@
         private System.Windows.Forms.Control ctrlSshConnectionStatus;
         private System.Windows.Forms.Button btnTestSshConnection;
         private System.Windows.Forms.Control ctrlConnectionStatus;
+        private System.Windows.Forms.CheckBox chkShowSshPass;
+        private System.Windows.Forms.CheckBox chkShowDBPass;
 
     }
 }

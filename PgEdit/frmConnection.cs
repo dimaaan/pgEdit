@@ -212,5 +212,15 @@ namespace PgEdit
         {
             server.Ssh = chkUseSsh.Checked ? sshTunnel : null;
         }
+
+        private void chkShowDBPass_CheckedChanged(object sender, EventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = !chkShowDBPass.Checked;
+        }
+
+        private void chkShowSshPass_CheckedChanged(object sender, EventArgs e)
+        {
+            txtShhPassword.UseSystemPasswordChar = !chkShowSshPass.Checked;
+        }
     }
 }
