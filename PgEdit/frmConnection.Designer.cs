@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.lblUser = new System.Windows.Forms.Label();
@@ -39,6 +40,9 @@
             this.lblPort = new System.Windows.Forms.Label();
             this.lblHost = new System.Windows.Forms.Label();
             this.panSsh = new System.Windows.Forms.Panel();
+            this.btnShhKey = new System.Windows.Forms.Button();
+            this.chkSshKey = new System.Windows.Forms.CheckBox();
+            this.txtSshKey = new System.Windows.Forms.TextBox();
             this.chkShowSshPass = new System.Windows.Forms.CheckBox();
             this.ctrlSshConnectionStatus = new System.Windows.Forms.Control();
             this.btnTestSshConnection = new System.Windows.Forms.Button();
@@ -56,12 +60,11 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.chkShowDBPass = new System.Windows.Forms.CheckBox();
-            this.txtSshKey = new System.Windows.Forms.TextBox();
-            this.chkSshKey = new System.Windows.Forms.CheckBox();
-            this.btnShhKey = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudPort)).BeginInit();
             this.panSsh.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSshPort)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPassword
@@ -78,17 +81,20 @@
             // 
             this.txtUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.errorProvider.SetIconAlignment(this.txtUser, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.txtUser.Location = new System.Drawing.Point(128, 36);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(304, 20);
             this.txtUser.TabIndex = 5;
+            this.txtUser.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
+            this.txtUser.Validated += new System.EventHandler(this.ctrl_Validated);
             // 
             // lblUser
             // 
             this.lblUser.AutoEllipsis = true;
             this.lblUser.Location = new System.Drawing.Point(12, 36);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(110, 20);
+            this.lblUser.Size = new System.Drawing.Size(92, 20);
             this.lblUser.TabIndex = 4;
             this.lblUser.Text = "Пользователь:";
             this.lblUser.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -98,7 +104,7 @@
             this.lblPassword.AutoEllipsis = true;
             this.lblPassword.Location = new System.Drawing.Point(12, 62);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(110, 20);
+            this.lblPassword.Size = new System.Drawing.Size(92, 20);
             this.lblPassword.TabIndex = 6;
             this.lblPassword.Text = "Пароль:";
             this.lblPassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -108,17 +114,20 @@
             this.cmbDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDatabase.FormattingEnabled = true;
+            this.errorProvider.SetIconAlignment(this.cmbDatabase, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.cmbDatabase.Location = new System.Drawing.Point(128, 88);
             this.cmbDatabase.Name = "cmbDatabase";
             this.cmbDatabase.Size = new System.Drawing.Size(304, 21);
             this.cmbDatabase.TabIndex = 10;
             this.cmbDatabase.DropDown += new System.EventHandler(this.cmbDatabase_DropDown);
+            this.cmbDatabase.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
+            this.cmbDatabase.Validated += new System.EventHandler(this.ctrl_Validated);
             // 
             // lblDatabase
             // 
             this.lblDatabase.Location = new System.Drawing.Point(12, 88);
             this.lblDatabase.Name = "lblDatabase";
-            this.lblDatabase.Size = new System.Drawing.Size(110, 21);
+            this.lblDatabase.Size = new System.Drawing.Size(92, 21);
             this.lblDatabase.TabIndex = 9;
             this.lblDatabase.Text = "База данных:";
             this.lblDatabase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -141,10 +150,13 @@
             this.cmbHost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbHost.FormattingEnabled = true;
+            this.errorProvider.SetIconAlignment(this.cmbHost, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.cmbHost.Location = new System.Drawing.Point(128, 9);
             this.cmbHost.Name = "cmbHost";
             this.cmbHost.Size = new System.Drawing.Size(162, 21);
             this.cmbHost.TabIndex = 1;
+            this.cmbHost.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
+            this.cmbHost.Validated += new System.EventHandler(this.ctrl_Validated);
             // 
             // lblPort
             // 
@@ -160,7 +172,7 @@
             // 
             this.lblHost.Location = new System.Drawing.Point(12, 9);
             this.lblHost.Name = "lblHost";
-            this.lblHost.Size = new System.Drawing.Size(110, 21);
+            this.lblHost.Size = new System.Drawing.Size(92, 21);
             this.lblHost.TabIndex = 0;
             this.lblHost.Text = "Хост:";
             this.lblHost.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -188,6 +200,43 @@
             this.panSsh.Name = "panSsh";
             this.panSsh.Size = new System.Drawing.Size(417, 164);
             this.panSsh.TabIndex = 12;
+            // 
+            // btnShhKey
+            // 
+            this.btnShhKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShhKey.Enabled = false;
+            this.btnShhKey.Location = new System.Drawing.Point(382, 93);
+            this.btnShhKey.Name = "btnShhKey";
+            this.btnShhKey.Size = new System.Drawing.Size(32, 23);
+            this.btnShhKey.TabIndex = 11;
+            this.btnShhKey.Text = "...";
+            this.btnShhKey.UseVisualStyleBackColor = true;
+            this.btnShhKey.Click += new System.EventHandler(this.btnShhKey_Click);
+            // 
+            // chkSshKey
+            // 
+            this.chkSshKey.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkSshKey.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.chkSshKey.Location = new System.Drawing.Point(0, 94);
+            this.chkSshKey.Name = "chkSshKey";
+            this.chkSshKey.Size = new System.Drawing.Size(89, 20);
+            this.chkSshKey.TabIndex = 9;
+            this.chkSshKey.Text = "Ключ:";
+            this.chkSshKey.UseVisualStyleBackColor = true;
+            this.chkSshKey.CheckedChanged += new System.EventHandler(this.chkSshKey_CheckedChanged);
+            // 
+            // txtSshKey
+            // 
+            this.txtSshKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSshKey.Enabled = false;
+            this.errorProvider.SetIconAlignment(this.txtSshKey, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
+            this.txtSshKey.Location = new System.Drawing.Point(113, 94);
+            this.txtSshKey.Name = "txtSshKey";
+            this.txtSshKey.Size = new System.Drawing.Size(263, 20);
+            this.txtSshKey.TabIndex = 10;
+            this.txtSshKey.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
+            this.txtSshKey.Validated += new System.EventHandler(this.ctrl_Validated);
             // 
             // chkShowSshPass
             // 
@@ -229,7 +278,7 @@
             this.lblSshHost.AutoEllipsis = true;
             this.lblSshHost.Location = new System.Drawing.Point(-3, 12);
             this.lblSshHost.Name = "lblSshHost";
-            this.lblSshHost.Size = new System.Drawing.Size(110, 21);
+            this.lblSshHost.Size = new System.Drawing.Size(92, 21);
             this.lblSshHost.TabIndex = 0;
             this.lblSshHost.Text = "Хост:";
             this.lblSshHost.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -259,17 +308,20 @@
             // 
             this.txtSshUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.errorProvider.SetIconAlignment(this.txtSshUser, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.txtSshUser.Location = new System.Drawing.Point(113, 42);
             this.txtSshUser.Name = "txtSshUser";
             this.txtSshUser.Size = new System.Drawing.Size(304, 20);
             this.txtSshUser.TabIndex = 5;
+            this.txtSshUser.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
+            this.txtSshUser.Validated += new System.EventHandler(this.ctrl_Validated);
             // 
             // lblSshUser
             // 
             this.lblSshUser.AutoEllipsis = true;
             this.lblSshUser.Location = new System.Drawing.Point(-2, 42);
             this.lblSshUser.Name = "lblSshUser";
-            this.lblSshUser.Size = new System.Drawing.Size(109, 20);
+            this.lblSshUser.Size = new System.Drawing.Size(91, 20);
             this.lblSshUser.TabIndex = 4;
             this.lblSshUser.Text = "Пользователь:";
             this.lblSshUser.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -292,7 +344,7 @@
             this.lblShhPassword.AutoEllipsis = true;
             this.lblShhPassword.Location = new System.Drawing.Point(-3, 68);
             this.lblShhPassword.Name = "lblShhPassword";
-            this.lblShhPassword.Size = new System.Drawing.Size(110, 20);
+            this.lblShhPassword.Size = new System.Drawing.Size(92, 20);
             this.lblShhPassword.TabIndex = 6;
             this.lblShhPassword.Text = "Пароль:";
             this.lblShhPassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -302,10 +354,13 @@
             this.cmbSshHost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbSshHost.FormattingEnabled = true;
+            this.errorProvider.SetIconAlignment(this.cmbSshHost, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.cmbSshHost.Location = new System.Drawing.Point(113, 15);
             this.cmbSshHost.Name = "cmbSshHost";
             this.cmbSshHost.Size = new System.Drawing.Size(162, 21);
             this.cmbSshHost.TabIndex = 1;
+            this.cmbSshHost.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
+            this.cmbSshHost.Validated += new System.EventHandler(this.ctrl_Validated);
             // 
             // chkUseSsh
             // 
@@ -358,6 +413,7 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.CausesValidation = false;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(357, 321);
             this.btnCancel.Name = "btnCancel";
@@ -379,45 +435,17 @@
             this.chkShowDBPass.UseVisualStyleBackColor = true;
             this.chkShowDBPass.CheckedChanged += new System.EventHandler(this.chkShowDBPass_CheckedChanged);
             // 
-            // txtSshKey
+            // errorProvider
             // 
-            this.txtSshKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSshKey.Enabled = false;
-            this.txtSshKey.Location = new System.Drawing.Point(113, 94);
-            this.txtSshKey.Name = "txtSshKey";
-            this.txtSshKey.Size = new System.Drawing.Size(263, 20);
-            this.txtSshKey.TabIndex = 10;
-            // 
-            // chkSshKey
-            // 
-            this.chkSshKey.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkSshKey.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.chkSshKey.Location = new System.Drawing.Point(0, 94);
-            this.chkSshKey.Name = "chkSshKey";
-            this.chkSshKey.Size = new System.Drawing.Size(107, 20);
-            this.chkSshKey.TabIndex = 9;
-            this.chkSshKey.Text = "Ключ:";
-            this.chkSshKey.UseVisualStyleBackColor = true;
-            this.chkSshKey.CheckedChanged += new System.EventHandler(this.chkSshKey_CheckedChanged);
-            // 
-            // btnShhKey
-            // 
-            this.btnShhKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShhKey.Enabled = false;
-            this.btnShhKey.Location = new System.Drawing.Point(382, 93);
-            this.btnShhKey.Name = "btnShhKey";
-            this.btnShhKey.Size = new System.Drawing.Size(32, 23);
-            this.btnShhKey.TabIndex = 11;
-            this.btnShhKey.Text = "...";
-            this.btnShhKey.UseVisualStyleBackColor = true;
-            this.btnShhKey.Click += new System.EventHandler(this.btnShhKey_Click);
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
             // 
             // frmConnection
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(444, 356);
             this.Controls.Add(this.chkShowDBPass);
@@ -449,6 +477,7 @@
             this.panSsh.ResumeLayout(false);
             this.panSsh.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSshPort)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -487,6 +516,7 @@
         private System.Windows.Forms.Button btnShhKey;
         private System.Windows.Forms.CheckBox chkSshKey;
         private System.Windows.Forms.TextBox txtSshKey;
+        private System.Windows.Forms.ErrorProvider errorProvider;
 
     }
 }
