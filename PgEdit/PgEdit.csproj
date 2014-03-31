@@ -113,6 +113,12 @@
     <Compile Include="DataWorkspace.Designer.cs">
       <DependentUpon>DataWorkspace.cs</DependentUpon>
     </Compile>
+    <Compile Include="TreeWorkspace.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TreeWorkspace.Designer.cs">
+      <DependentUpon>TreeWorkspace.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -143,6 +149,9 @@
     </Compile>
     <EmbeddedResource Include="DataWorkspace.resx">
       <DependentUpon>DataWorkspace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TreeWorkspace.resx">
+      <DependentUpon>TreeWorkspace.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ConnectionStrings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
