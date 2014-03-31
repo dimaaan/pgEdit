@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 namespace PgEdit
 {
+    // TODO list of used hosts and ssh hosts
     // TODO same server different db problem (maybe merge tabs + add server aliases + when switch existing alias it adds to this server or different server & db dialogs)
     public partial class frmConnection : Form
     {
@@ -25,9 +26,21 @@ namespace PgEdit
         private Database database;
         private SshTunnel sshTunnel;
 
+        private Universe universe;
+
+        /// <summary>
+        /// For Windows Forms Designer only. 
+        /// Use ctor with parameters.
+        /// </summary>
         public frmConnection()
         {
             InitializeComponent();
+        }
+
+        public frmConnection(Universe universe) 
+            : this()
+        {
+            this.universe = universe;
         }
 
         public Server Server
@@ -107,6 +120,21 @@ namespace PgEdit
 
                 server.Databases.Add(database);
             }
+
+
+            // autocomplite for ComboBoxes
+            foreach(var s in universe.Servers) {
+                cmbHost.Items.Add(s.Address);
+            }
+
+            foreach (var s in universe.Servers)
+            {
+                if (s.Ssh != null)
+                {
+                    cmbSshHost.Items.Add(s.Ssh.Server);
+                }
+            }
+
 
             // bind controls to domain objects
             Binding b;

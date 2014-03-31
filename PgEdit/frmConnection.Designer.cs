@@ -73,7 +73,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPassword.Location = new System.Drawing.Point(128, 62);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(213, 20);
+            this.txtPassword.Size = new System.Drawing.Size(305, 20);
             this.txtPassword.TabIndex = 7;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
@@ -84,7 +84,7 @@
             this.errorProvider.SetIconAlignment(this.txtUser, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.txtUser.Location = new System.Drawing.Point(128, 36);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(304, 20);
+            this.txtUser.Size = new System.Drawing.Size(396, 20);
             this.txtUser.TabIndex = 5;
             this.txtUser.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
             this.txtUser.Validated += new System.EventHandler(this.ctrl_Validated);
@@ -113,11 +113,13 @@
             // 
             this.cmbDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbDatabase.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbDatabase.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbDatabase.FormattingEnabled = true;
             this.errorProvider.SetIconAlignment(this.cmbDatabase, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.cmbDatabase.Location = new System.Drawing.Point(128, 88);
             this.cmbDatabase.Name = "cmbDatabase";
-            this.cmbDatabase.Size = new System.Drawing.Size(304, 21);
+            this.cmbDatabase.Size = new System.Drawing.Size(396, 21);
             this.cmbDatabase.TabIndex = 10;
             this.cmbDatabase.DropDown += new System.EventHandler(this.cmbDatabase_DropDown);
             this.cmbDatabase.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
@@ -135,7 +137,7 @@
             // nudPort
             // 
             this.nudPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudPort.Location = new System.Drawing.Point(347, 10);
+            this.nudPort.Location = new System.Drawing.Point(439, 10);
             this.nudPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -149,11 +151,13 @@
             // 
             this.cmbHost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbHost.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbHost.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbHost.FormattingEnabled = true;
             this.errorProvider.SetIconAlignment(this.cmbHost, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.cmbHost.Location = new System.Drawing.Point(128, 9);
             this.cmbHost.Name = "cmbHost";
-            this.cmbHost.Size = new System.Drawing.Size(162, 21);
+            this.cmbHost.Size = new System.Drawing.Size(254, 21);
             this.cmbHost.TabIndex = 1;
             this.cmbHost.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
             this.cmbHost.Validated += new System.EventHandler(this.ctrl_Validated);
@@ -161,7 +165,7 @@
             // lblPort
             // 
             this.lblPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPort.Location = new System.Drawing.Point(296, 10);
+            this.lblPort.Location = new System.Drawing.Point(388, 10);
             this.lblPort.Name = "lblPort";
             this.lblPort.Size = new System.Drawing.Size(45, 20);
             this.lblPort.TabIndex = 2;
@@ -198,14 +202,14 @@
             this.panSsh.Enabled = false;
             this.panSsh.Location = new System.Drawing.Point(15, 138);
             this.panSsh.Name = "panSsh";
-            this.panSsh.Size = new System.Drawing.Size(417, 164);
+            this.panSsh.Size = new System.Drawing.Size(509, 164);
             this.panSsh.TabIndex = 12;
             // 
             // btnShhKey
             // 
             this.btnShhKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnShhKey.Enabled = false;
-            this.btnShhKey.Location = new System.Drawing.Point(382, 93);
+            this.btnShhKey.Location = new System.Drawing.Point(474, 93);
             this.btnShhKey.Name = "btnShhKey";
             this.btnShhKey.Size = new System.Drawing.Size(32, 23);
             this.btnShhKey.TabIndex = 11;
@@ -233,7 +237,7 @@
             this.errorProvider.SetIconAlignment(this.txtSshKey, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.txtSshKey.Location = new System.Drawing.Point(113, 94);
             this.txtSshKey.Name = "txtSshKey";
-            this.txtSshKey.Size = new System.Drawing.Size(263, 20);
+            this.txtSshKey.Size = new System.Drawing.Size(355, 20);
             this.txtSshKey.TabIndex = 10;
             this.txtSshKey.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
             this.txtSshKey.Validated += new System.EventHandler(this.ctrl_Validated);
@@ -242,7 +246,7 @@
             // 
             this.chkShowSshPass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkShowSshPass.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkShowSshPass.Location = new System.Drawing.Point(332, 68);
+            this.chkShowSshPass.Location = new System.Drawing.Point(424, 68);
             this.chkShowSshPass.Name = "chkShowSshPass";
             this.chkShowSshPass.Size = new System.Drawing.Size(82, 20);
             this.chkShowSshPass.TabIndex = 8;
@@ -255,7 +259,7 @@
             // 
             this.ctrlSshConnectionStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ctrlSshConnectionStatus.BackColor = System.Drawing.Color.Black;
-            this.ctrlSshConnectionStatus.Location = new System.Drawing.Point(132, 129);
+            this.ctrlSshConnectionStatus.Location = new System.Drawing.Point(224, 129);
             this.ctrlSshConnectionStatus.Name = "ctrlSshConnectionStatus";
             this.ctrlSshConnectionStatus.Size = new System.Drawing.Size(23, 23);
             this.ctrlSshConnectionStatus.TabIndex = 12;
@@ -265,7 +269,7 @@
             // btnTestSshConnection
             // 
             this.btnTestSshConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTestSshConnection.Location = new System.Drawing.Point(166, 129);
+            this.btnTestSshConnection.Location = new System.Drawing.Point(258, 129);
             this.btnTestSshConnection.Name = "btnTestSshConnection";
             this.btnTestSshConnection.Size = new System.Drawing.Size(251, 23);
             this.btnTestSshConnection.TabIndex = 13;
@@ -289,7 +293,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtShhPassword.Location = new System.Drawing.Point(113, 68);
             this.txtShhPassword.Name = "txtShhPassword";
-            this.txtShhPassword.Size = new System.Drawing.Size(213, 20);
+            this.txtShhPassword.Size = new System.Drawing.Size(305, 20);
             this.txtShhPassword.TabIndex = 7;
             this.txtShhPassword.UseSystemPasswordChar = true;
             // 
@@ -297,7 +301,7 @@
             // 
             this.lblSshPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSshPort.AutoEllipsis = true;
-            this.lblSshPort.Location = new System.Drawing.Point(281, 15);
+            this.lblSshPort.Location = new System.Drawing.Point(373, 15);
             this.lblSshPort.Name = "lblSshPort";
             this.lblSshPort.Size = new System.Drawing.Size(45, 20);
             this.lblSshPort.TabIndex = 2;
@@ -311,7 +315,7 @@
             this.errorProvider.SetIconAlignment(this.txtSshUser, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.txtSshUser.Location = new System.Drawing.Point(113, 42);
             this.txtSshUser.Name = "txtSshUser";
-            this.txtSshUser.Size = new System.Drawing.Size(304, 20);
+            this.txtSshUser.Size = new System.Drawing.Size(396, 20);
             this.txtSshUser.TabIndex = 5;
             this.txtSshUser.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
             this.txtSshUser.Validated += new System.EventHandler(this.ctrl_Validated);
@@ -329,7 +333,7 @@
             // nudSshPort
             // 
             this.nudSshPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudSshPort.Location = new System.Drawing.Point(332, 15);
+            this.nudSshPort.Location = new System.Drawing.Point(424, 15);
             this.nudSshPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -353,11 +357,13 @@
             // 
             this.cmbSshHost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbSshHost.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbSshHost.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbSshHost.FormattingEnabled = true;
             this.errorProvider.SetIconAlignment(this.cmbSshHost, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.cmbSshHost.Location = new System.Drawing.Point(113, 15);
             this.cmbSshHost.Name = "cmbSshHost";
-            this.cmbSshHost.Size = new System.Drawing.Size(162, 21);
+            this.cmbSshHost.Size = new System.Drawing.Size(254, 21);
             this.cmbSshHost.TabIndex = 1;
             this.cmbSshHost.Validating += new System.ComponentModel.CancelEventHandler(this.ctrl_Validating);
             this.cmbSshHost.Validated += new System.EventHandler(this.ctrl_Validated);
@@ -370,7 +376,7 @@
             this.chkUseSsh.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.chkUseSsh.Location = new System.Drawing.Point(15, 115);
             this.chkUseSsh.Name = "chkUseSsh";
-            this.chkUseSsh.Size = new System.Drawing.Size(352, 24);
+            this.chkUseSsh.Size = new System.Drawing.Size(444, 24);
             this.chkUseSsh.TabIndex = 11;
             this.chkUseSsh.Text = "Подключение через SSH туннель";
             this.chkUseSsh.UseVisualStyleBackColor = true;
@@ -402,7 +408,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(276, 321);
+            this.btnOK.Location = new System.Drawing.Point(368, 321);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 15;
@@ -415,7 +421,7 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.CausesValidation = false;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(357, 321);
+            this.btnCancel.Location = new System.Drawing.Point(449, 321);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 16;
@@ -426,7 +432,7 @@
             // 
             this.chkShowDBPass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkShowDBPass.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkShowDBPass.Location = new System.Drawing.Point(347, 62);
+            this.chkShowDBPass.Location = new System.Drawing.Point(439, 62);
             this.chkShowDBPass.Name = "chkShowDBPass";
             this.chkShowDBPass.Size = new System.Drawing.Size(85, 20);
             this.chkShowDBPass.TabIndex = 8;
@@ -447,7 +453,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(444, 356);
+            this.ClientSize = new System.Drawing.Size(536, 356);
             this.Controls.Add(this.chkShowDBPass);
             this.Controls.Add(this.panSsh);
             this.Controls.Add(this.txtPassword);
