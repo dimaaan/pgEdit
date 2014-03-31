@@ -13,7 +13,6 @@ namespace PgEdit.Domain
         public uint Port { get; set; }
         public List<Database> Databases { get; set; }
         public SshTunnel Ssh { get; set; }
-        public SshClient sshClient { get; set; }
 
         public Server()
         {
