@@ -97,6 +97,50 @@ namespace PgEdit.Service
             }
         }
 
+        /// <summary>
+        /// When adding new server, servers with same host, port and SSH settings will be merged to avoid dublicates
+        /// </summary>
+        public static void MergeServer(List<Server> servers, Server server)
+        {
+            bool merged = false;
+
+            foreach (Server currServ in servers)
+            {
+                if (currServ.Address == server.Address && currServ.Port == server.Port)
+                {
+                    if ((currServ.Ssh == null) == (server.Ssh == null))
+                    {
+                        if (currServ.Ssh != null)
+                        {
+                            if(currServ.Ssh.Server == server.Ssh.Server &&
+                                currServ.Ssh.Port == server.Ssh.Port &&
+                                currServ.Ssh.User == server.Ssh.User &&
+                                currServ.Ssh.Password == server.Ssh.Password &&
+                                currServ.Ssh.KeyFilePath == server.Ssh.KeyFilePath)
+                            {
+                                merged = true;
+                            }
+                        }
+                        else
+                        {
+                            merged = true;
+                        }
+                    }
+
+                    if (merged)
+                    {
+                        currServ.Databases.AddRange(server.Databases);
+                        break;
+                    }
+                }
+            }
+
+            if (!merged)
+            {
+                servers.Add(server);
+            }
+        }
+
         private static int FreePort()
         {
             Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);

@@ -13,8 +13,6 @@ using System.Windows.Forms;
 
 namespace PgEdit
 {
-    // TODO list of used hosts and ssh hosts
-    // TODO same server different db problem (maybe merge tabs + add server aliases + when switch existing alias it adds to this server or different server & db dialogs)
     public partial class frmConnection : Form
     {
         // Test connection colors
