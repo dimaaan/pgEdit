@@ -294,7 +294,7 @@ namespace PgEdit
 
         private void tsmiNewConnection_Click(object sender, EventArgs e)
         {
-            frmConnection dlg = new frmConnection();
+            frmConnection dlg = new frmConnection(universe);
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
