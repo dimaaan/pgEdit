@@ -49,9 +49,16 @@ namespace PgEdit
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                ConnectionService.MergeServer(universe.Servers, dlg.Server);
+                Server mergedServer = ConnectionService.MergeServer(universe.Servers, dlg.Server);
 
-                ucTree.FillTreeView();
+                if (mergedServer == null)
+                {
+                    ucTree.AddServer(dlg.Server);
+                }
+                else
+                {
+                    ucTree.AddDatabase(mergedServer, dlg.Server.Databases.First());
+                }
 
                 ConnectionService.Save(universe);
             }
