@@ -83,6 +83,7 @@ namespace PgEdit
         public event Action DatabaseClosed;
         public event Action<DataTable> TableOpened;
         public event Action SelectionChanged;
+        public event Action NewConnection;
 
         public void FillTreeView()
         {
@@ -202,33 +203,57 @@ namespace PgEdit
                     Tag = db,
                     ImageKey = IMAGE_KEY_DATABASE_DISCONNECTED,
                     SelectedImageKey = IMAGE_KEY_DATABASE_DISCONNECTED,
+                    ContextMenuStrip = cmsDatabase
                 };
                 nodeHost.Nodes.Add(nodeDB);
             }
             return nodeHost;
         }
 
-        private void RemoveServer(TreeNode selectedNode)
+        private void RemoveServer(TreeNode serverNode)
         {
-            string msg = "Настройки подключения к серверу и его базам данных будут удалены.{0}Продолжить?";
+            string msg = "Настройки подключения к серверу и его базам данных будут удалены.{0}{0}Продолжить?";
             var res = MessageBox.Show(
                 String.Format(msg, Environment.NewLine),
-                null,
+                "Удаление подключения к серверу",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
 
             if (res == DialogResult.Yes)
             {
-                Server server = (Server)selectedNode.Tag;
+                Server server = (Server)serverNode.Tag;
 
                 SuspendLayout();
-                CloseDatabasesOfServer(selectedNode);
+                CloseDatabasesOfServer(serverNode);
                 universe.Servers.Remove(server);
                 ConnectionService.CloseSshTunnel(server);
                 ConnectionService.Save(universe);
-                selectedNode.Remove();
+                serverNode.Remove();
                 ResumeLayout();
+            }
+        }
+
+        private void RemoveDatabase(TreeNode dbNode)
+        {
+            string msg = "Настройки подключения к БД будут удалены.{0}{0}Продолжить?";
+            var res = MessageBox.Show(
+                String.Format(msg, Environment.NewLine),
+                "Удаление подключения к БД",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+
+            if (res == DialogResult.Yes)
+            {
+                TreeNode serverNode = dbNode.Parent;
+                Server server = (Server)serverNode.Tag;
+                Database db = (Database) dbNode.Tag;
+
+                CloseDatabase(dbNode);
+                server.Databases.Remove(db);
+                ConnectionService.Save(universe);
+                dbNode.Remove();
             }
         }
 
@@ -347,20 +372,41 @@ namespace PgEdit
             }
         }
 
-        private void tvTree_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == Convert.ToChar(Keys.Enter) &&
-                tvTree.SelectedNode != null)
-            {
-                OnSelectTreeNode(tvTree.SelectedNode);
-                e.Handled = true;
-            }
-        }
-
         private void tvTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (SelectionChanged != null)
                 SelectionChanged();
+        }
+
+        private void tvTree_KeyDown(object sender, KeyEventArgs e)
+        {
+            bool handled = false;
+
+            if (e.KeyCode == Keys.Enter && tvTree.SelectedNode != null)
+            {
+                OnSelectTreeNode(tvTree.SelectedNode);
+                handled = true;
+            }
+            else if (e.KeyCode == Keys.Delete && tvTree.SelectedNode != null)
+            {
+                TreeNode node = tvTree.SelectedNode;
+                if (node != null && node.Tag is Server)
+                {
+                    RemoveServer(node);
+                    handled = true;
+                }
+            }
+            else if (e.KeyCode == Keys.Insert)
+            {
+                if (NewConnection != null)
+                    NewConnection();
+            }
+
+            if (handled)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
         }
 
         private void tsmiRemoveServer_Click(object sender, EventArgs e)
@@ -372,6 +418,18 @@ namespace PgEdit
             if (selectedNode != null)
             {
                 RemoveServer(selectedNode);
+            }
+        }
+
+        private void tsmiRemoveDatabase_Click(object sender, EventArgs e)
+        {
+            // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
+            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsDatabase.Left, cmsDatabase.Top)));
+            var selectedNode = hitTest.Node;
+
+            if (selectedNode != null)
+            {
+                RemoveDatabase(selectedNode);
             }
         }
     }
