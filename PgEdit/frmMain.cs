@@ -31,6 +31,21 @@ namespace PgEdit
             InitializeComponent();
         }
 
+        public void FillTreeView(Universe universe)
+        {
+            tvTree.SuspendLayout();
+            tvTree.Nodes.Clear();
+
+            foreach (Server server in universe.Servers)
+            {
+                TreeNode nodeHost = ServerToNode(server);
+                tvTree.Nodes.Add(nodeHost);
+            }
+
+            tvTree.ExpandAll();
+            tvTree.ResumeLayout();
+        }
+
         private void OpenDatabase(TreeNode dbNode) {
             Database db = (Database)dbNode.Tag;
             Server server = (Server)dbNode.Parent.Tag;
@@ -105,20 +120,6 @@ namespace PgEdit
             }
 
             return res;
-        }
-
-        public void FillTreeViewOnStartup(Universe universe)
-        {
-            List<TreeNode> nodes = new List<TreeNode>();
-
-            foreach (Server server in universe.Servers)
-            {
-                TreeNode nodeHost = ServerToNode(server);
-                nodes.Add(nodeHost);
-            }
-
-            tvTree.Nodes.AddRange(nodes.ToArray());
-            tvTree.ExpandAll();
         }
 
         private TreeNode ServerToNode(Server server)
@@ -289,7 +290,7 @@ namespace PgEdit
 
             universe = ConnectionService.Load();
 
-            FillTreeViewOnStartup(universe);
+            FillTreeView(universe);
         }
 
         private void tsmiNewConnection_Click(object sender, EventArgs e)
@@ -298,10 +299,9 @@ namespace PgEdit
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                universe.Servers.Add(dlg.Server);
+                ConnectionService.MergeServer(universe.Servers, dlg.Server);
 
-                TreeNode serverNode = ServerToNode(dlg.Server);
-                tvTree.Nodes.Add(serverNode);
+                FillTreeView(universe);
                 
                 ConnectionService.Save(universe);
             }
