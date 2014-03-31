@@ -10,6 +10,7 @@ namespace PgEdit.Domain
     public class Database
     {
         public const string TABLE_PROPERTY_ROWS_COUNT = "rowsCount";
+        public const string TABLE_PROPERTY_COLUMNS = "columns";
 
         public string Name { get; set; }
         public string User { get; set; }
@@ -22,17 +23,9 @@ namespace PgEdit.Domain
         /// </summary>
         public List<DataSet> Schemas { get; set; }
 
-        /// <summary>
-        /// Table structure.
-        /// First key - schema.
-        /// Second key - table
-        /// </summary>
-        public Dictionary<string, Dictionary<string, List<Column>>> Columns { get; set; }
-
         public Database()
         {
             User = "postgres";
-            Columns = new Dictionary<string, Dictionary<string, List<Column>>>();
         }
     }
 }
