@@ -43,6 +43,20 @@ namespace PgEdit
             }
         }
 
+        private void ShowNewConnectionDialog()
+        {
+            frmConnection dlg = new frmConnection(universe);
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                ConnectionService.MergeServer(universe.Servers, dlg.Server);
+
+                ucTree.FillTreeView();
+
+                ConnectionService.Save(universe);
+            }
+        }
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             Icon = Resources.logo;
@@ -55,16 +69,7 @@ namespace PgEdit
 
         private void tsmiNewConnection_Click(object sender, EventArgs e)
         {
-            frmConnection dlg = new frmConnection(universe);
-
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                ConnectionService.MergeServer(universe.Servers, dlg.Server);
-
-                ucTree.FillTreeView();
-                
-                ConnectionService.Save(universe);
-            }
+            ShowNewConnectionDialog();
         }
 
         private void tsmiConnect_Click(object sender, EventArgs e)
@@ -132,6 +137,11 @@ namespace PgEdit
         private void ucTree_SelectionChanged()
         {
             RefreshMenu();
+        }
+
+        private void ucTree_NewConnection()
+        {
+            ShowNewConnectionDialog();
         }
     }
 }

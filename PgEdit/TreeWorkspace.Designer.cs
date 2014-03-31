@@ -33,7 +33,10 @@
             this.tsmiRemoveServer = new System.Windows.Forms.ToolStripMenuItem();
             this.ilTreeView = new System.Windows.Forms.ImageList(this.components);
             this.tvTree = new System.Windows.Forms.TreeView();
+            this.cmsDatabase = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiRemoveDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsServer.SuspendLayout();
+            this.cmsDatabase.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsServer
@@ -68,7 +71,21 @@
             this.tvTree.TabIndex = 1;
             this.tvTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTree_AfterSelect);
             this.tvTree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvTree_NodeMouseDoubleClick);
-            this.tvTree.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tvTree_KeyPress);
+            this.tvTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvTree_KeyDown);
+            // 
+            // cmsDatabase
+            // 
+            this.cmsDatabase.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiRemoveDatabase});
+            this.cmsDatabase.Name = "cmsDatabase";
+            this.cmsDatabase.Size = new System.Drawing.Size(153, 48);
+            // 
+            // tsmiRemoveDatabase
+            // 
+            this.tsmiRemoveDatabase.Name = "tsmiRemoveDatabase";
+            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(152, 22);
+            this.tsmiRemoveDatabase.Text = "Удалить";
+            this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
             // 
             // TreeWorkspace
             // 
@@ -79,6 +96,7 @@
             this.Size = new System.Drawing.Size(223, 434);
             this.Load += new System.EventHandler(this.TreeWorkspace_Load);
             this.cmsServer.ResumeLayout(false);
+            this.cmsDatabase.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -89,5 +107,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiRemoveServer;
         private System.Windows.Forms.ImageList ilTreeView;
         private System.Windows.Forms.TreeView tvTree;
+        private System.Windows.Forms.ContextMenuStrip cmsDatabase;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRemoveDatabase;
     }
 }
