@@ -123,17 +123,12 @@ namespace PgEdit
 
 
             // autocomplite for ComboBoxes
-            foreach(var s in universe.Servers) {
+            foreach(var s in universe.Servers)
                 cmbHost.Items.Add(s.Address);
-            }
 
             foreach (var s in universe.Servers)
-            {
                 if (s.Ssh != null)
-                {
                     cmbSshHost.Items.Add(s.Ssh.Server);
-                }
-            }
 
 
             // bind controls to domain objects
@@ -211,9 +206,7 @@ namespace PgEdit
             bindings.Add(b);
 
             foreach(Binding binding in bindings) 
-            {
                 binding.Format += binding_Parse;
-            }
         }
 
         private void binding_Parse(object sender, ConvertEventArgs e)
