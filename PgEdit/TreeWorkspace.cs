@@ -92,13 +92,55 @@ namespace PgEdit
 
             foreach (Server server in universe.Servers)
             {
-                TreeNode nodeHost = ServerToNode(server);
-                tvTree.Nodes.Add(nodeHost);
+                AddServer(server);
             }
 
             tvTree.ExpandAll();
             tvTree.ResumeLayout();
         }
+
+        /// <summary>
+        /// Adds server node to Tree View.
+        /// Supposed that server already added to universe
+        /// </summary>
+        public void AddServer(Server server)
+        {
+            TreeNode serverNode = ServerToNode(server);
+
+            foreach (Database db in server.Databases)
+            {
+                serverNode.Nodes.Add(DatabaseToNode(db));
+            }
+
+            tvTree.Nodes.Add(serverNode);
+        }
+
+        /// <summary>
+        /// Adds database node to Tree View.
+        /// Supposed that database already added to universe
+        /// </summary>
+        public void AddDatabase(Server server, Database db)
+        {
+            TreeNode serverNode = findServerNode(server);
+            TreeNode dbNode = DatabaseToNode(db);
+
+            serverNode.Nodes.Add(dbNode);
+        }
+
+        private TreeNode findServerNode(Server server)
+        {
+            foreach(TreeNode n in tvTree.Nodes) {
+                Server currServ = (Server) n.Tag;
+
+                if (currServ == server)
+                {
+                    return n;
+                }
+            }
+
+            throw new Exception("Server node not found while updating tree");
+        }
+        
 
         private void OpenDatabase(TreeNode dbNode)
         {
@@ -186,7 +228,7 @@ namespace PgEdit
 
         private TreeNode ServerToNode(Server server)
         {
-            TreeNode nodeHost = new TreeNode()
+            return new TreeNode()
             {
                 Text = server.Address,
                 Tag = server,
@@ -194,20 +236,18 @@ namespace PgEdit
                 SelectedImageKey = IMAGE_KEY_SERVER,
                 ContextMenuStrip = cmsServer
             };
+        }
 
-            foreach (Database db in server.Databases)
+        private TreeNode DatabaseToNode(Database db)
+        {
+            return new TreeNode()
             {
-                TreeNode nodeDB = new TreeNode()
-                {
-                    Text = db.Name,
-                    Tag = db,
-                    ImageKey = IMAGE_KEY_DATABASE_DISCONNECTED,
-                    SelectedImageKey = IMAGE_KEY_DATABASE_DISCONNECTED,
-                    ContextMenuStrip = cmsDatabase
-                };
-                nodeHost.Nodes.Add(nodeDB);
-            }
-            return nodeHost;
+                Text = db.Name,
+                Tag = db,
+                ImageKey = IMAGE_KEY_DATABASE_DISCONNECTED,
+                SelectedImageKey = IMAGE_KEY_DATABASE_DISCONNECTED,
+                ContextMenuStrip = cmsDatabase
+            };
         }
 
         private void RemoveServer(TreeNode serverNode)

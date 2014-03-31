@@ -99,10 +99,12 @@ namespace PgEdit.Service
 
         /// <summary>
         /// When adding new server, servers with same host, port and SSH settings will be merged to avoid dublicates
+        /// Returns server into witch db was merged or null if no merge
         /// </summary>
-        public static void MergeServer(List<Server> servers, Server server)
+        public static Server MergeServer(List<Server> servers, Server server)
         {
             bool merged = false;
+            Server mergedTo = null;
 
             foreach (Server currServ in servers)
             {
@@ -130,6 +132,7 @@ namespace PgEdit.Service
                     if (merged)
                     {
                         currServ.Databases.AddRange(server.Databases);
+                        mergedTo = currServ;
                         break;
                     }
                 }
@@ -139,6 +142,8 @@ namespace PgEdit.Service
             {
                 servers.Add(server);
             }
+
+            return mergedTo;
         }
 
         private static int FreePort()
