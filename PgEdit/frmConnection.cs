@@ -13,7 +13,6 @@ using System.Windows.Forms;
 
 namespace PgEdit
 {
-    // TODO validation
     // TODO same server different db problem (maybe merge tabs + add server aliases + when switch existing alias it adds to this server or different server & db dialogs)
     public partial class frmConnection : Form
     {
@@ -61,6 +60,39 @@ namespace PgEdit
                 cmbDatabase.DataSource = DatabaseService.fetchDbNames(connection);
                 ctrlConnectionStatus.BackColor = COLOR_SUCCESS;
             }
+        }
+
+        private bool ValidateControl(Control c)
+        {
+            CancelEventArgs cea = new CancelEventArgs();
+
+            ctrl_Validating(c, cea);
+
+            if (!cea.Cancel)
+            {
+                ctrl_Validated(c, EventArgs.Empty);
+            }
+
+            return !cea.Cancel;
+        }
+
+        private bool ValidateSshSettings()
+        {
+            bool a = ValidateControl(cmbSshHost);
+            bool b = ValidateControl(txtSshUser);
+            bool c;
+
+            if (chkSshKey.Checked)
+            {
+                c = ValidateControl(txtSshKey);
+            }
+            else 
+            {
+                ctrl_Validated(txtSshKey, EventArgs.Empty);
+                c = true;
+            }
+
+            return a && b && c;
         }
 
         private void frmConnection_Load(object sender, EventArgs e)
@@ -163,34 +195,44 @@ namespace PgEdit
 
         private void btnTestSshConnection_Click(object sender, EventArgs e)
         {
-            try
+            if (ValidateSshSettings())
             {
-                ConnectionService.CreateSSHTunnel(server);
-                ConnectionService.CloseSshTunnel(server);
-                ctrlSshConnectionStatus.BackColor = COLOR_SUCCESS;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ctrlSshConnectionStatus.BackColor = COLOR_FAIL;
+                try
+                {
+                    ConnectionService.CreateSSHTunnel(server);
+                    ConnectionService.CloseSshTunnel(server);
+                    ctrlSshConnectionStatus.BackColor = COLOR_SUCCESS;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ctrlSshConnectionStatus.BackColor = COLOR_FAIL;
+                }
             }
         }
 
         private void btnTestConnection_Click(object sender, EventArgs e)
         {
-            try
+            if(ValidateChildren(ValidationConstraints.Enabled)) 
             {
-                FillDatabaseList();
-            }
-            catch(Exception ex) {
-                MessageBox.Show(ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ctrlConnectionStatus.BackColor = COLOR_FAIL;
+                try
+                {
+                    FillDatabaseList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, null, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ctrlConnectionStatus.BackColor = COLOR_FAIL;
+                }
             }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            if (ValidateChildren(ValidationConstraints.Enabled))
+            {
+                DialogResult = DialogResult.OK;
+            }
         }
 
         private void cmbDatabase_DropDown(object sender, EventArgs e)
@@ -239,6 +281,24 @@ namespace PgEdit
         {
             txtSshKey.Enabled = btnShhKey.Enabled = chkSshKey.Checked;
             sshTunnel.KeyFilePath = chkSshKey.Checked ? txtSshKey.Text : null;
+        }
+
+        private void ctrl_Validating(object sender, CancelEventArgs e)
+        {
+            Control c = (Control)sender;
+
+            if (String.IsNullOrWhiteSpace(c.Text))
+            {
+                errorProvider.SetError(c, "Заполните это поле");
+                e.Cancel = true;
+            }
+        }
+
+        private void ctrl_Validated(object sender, EventArgs e)
+        {
+            Control c = (Control)sender;
+
+            errorProvider.SetError(c, String.Empty);
         }
     }
 }
