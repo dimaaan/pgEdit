@@ -125,9 +125,9 @@ namespace PgEdit.Service
                 "col.attname AS name, " +
                 "pg_catalog.format_type(col.atttypid,col.atttypmod) AS type, " +
                 "col.attnotnull AS notnull, " +
-                "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'p') THEN TRUE ELSE FALSE END AS primarykey, " +
-                "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'f') THEN TRUE ELSE FALSE END AS foreignkey, " +
-                "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'u') THEN TRUE ELSE FALSE END AS unique, " +
+                "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'p' LIMIT 1) THEN TRUE ELSE FALSE END AS primarykey, " +
+                "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'f' LIMIT 1) THEN TRUE ELSE FALSE END AS foreignkey, " +
+                "CASE WHEN (SELECT TRUE FROM pg_constraint c WHERE c.conrelid = tbl.oid AND array_length(c.conkey, 1) = 1 AND col.attnum = ANY (c.conkey) AND c.contype = 'u' LIMIT 1) THEN TRUE ELSE FALSE END AS unique, " +
                 "CASE WHEN col.atthasdef IS TRUE THEN def_val.adsrc END AS defaultValue, " +
                 "col_description(tbl.oid, col.attnum) AS description " +
                 "FROM pg_namespace schema " +
