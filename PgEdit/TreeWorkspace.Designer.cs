@@ -34,8 +34,8 @@
             this.ilTreeView = new System.Windows.Forms.ImageList(this.components);
             this.tvTree = new System.Windows.Forms.TreeView();
             this.cmsDatabase = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiRemoveDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDisconnectDatabase = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiRemoveDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsServer.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
             this.SuspendLayout();
@@ -81,13 +81,7 @@
             this.tsmiRemoveDatabase});
             this.cmsDatabase.Name = "cmsDatabase";
             this.cmsDatabase.Size = new System.Drawing.Size(153, 70);
-            // 
-            // tsmiRemoveDatabase
-            // 
-            this.tsmiRemoveDatabase.Name = "tsmiRemoveDatabase";
-            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(152, 22);
-            this.tsmiRemoveDatabase.Text = "Удалить";
-            this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
+            this.cmsDatabase.Opened += new System.EventHandler(this.cmsDatabase_Opened);
             // 
             // tsmiDisconnectDatabase
             // 
@@ -95,6 +89,13 @@
             this.tsmiDisconnectDatabase.Size = new System.Drawing.Size(152, 22);
             this.tsmiDisconnectDatabase.Text = "Отключиться";
             this.tsmiDisconnectDatabase.Click += new System.EventHandler(this.tsmiDisconnectDatabase_Click);
+            // 
+            // tsmiRemoveDatabase
+            // 
+            this.tsmiRemoveDatabase.Name = "tsmiRemoveDatabase";
+            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(152, 22);
+            this.tsmiRemoveDatabase.Text = "Удалить";
+            this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
             // 
             // TreeWorkspace
             // 
