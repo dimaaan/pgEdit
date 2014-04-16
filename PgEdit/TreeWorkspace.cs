@@ -160,8 +160,6 @@ namespace PgEdit
             dbNode.SelectedImageKey = IMAGE_KEY_DATABASE_CONNECTED;
             db.IsOpen = true;
 
-            UpdateDisconnectMenuItem();
-
             if (DatabaseOpened != null)
                 DatabaseOpened();
         }
@@ -182,8 +180,6 @@ namespace PgEdit
                 dbNode.Nodes.Clear();
                 dbNode.ImageKey = IMAGE_KEY_DATABASE_DISCONNECTED;
                 dbNode.SelectedImageKey = IMAGE_KEY_DATABASE_DISCONNECTED;
-
-                UpdateDisconnectMenuItem();
 
                 if (DatabaseClosed != null)
                     DatabaseClosed();
@@ -398,12 +394,6 @@ namespace PgEdit
             }
         }
 
-        private void UpdateDisconnectMenuItem()
-        {
-            Database selDb = tvTree.SelectedNode.Tag as Database;
-            tsmiDisconnectDatabase.Enabled = selDb != null ? selDb.IsOpen : false;
-        }
-
         private void TreeWorkspace_Load(object sender, EventArgs e)
         {
             ilTreeView.Images.Add(IMAGE_KEY_SERVER, Resources.computersystemproduct);
@@ -424,8 +414,6 @@ namespace PgEdit
 
         private void tvTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            UpdateDisconnectMenuItem();
-
             if (SelectionChanged != null)
                 SelectionChanged();
         }
@@ -488,6 +476,16 @@ namespace PgEdit
         private void tsmiDisconnectDatabase_Click(object sender, EventArgs e)
         {
             CloseSelectedDatabase();
+        }
+
+        private void cmsDatabase_Opened(object sender, EventArgs e)
+        {
+            // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
+            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsDatabase.Left, cmsDatabase.Top)));
+            var selectedNode = hitTest.Node;
+
+            Database selDb = selectedNode.Tag as Database;
+            tsmiDisconnectDatabase.Enabled = selDb != null ? selDb.IsOpen : false;
         }
     }
 }
