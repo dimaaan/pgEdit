@@ -35,6 +35,7 @@
             this.tvTree = new System.Windows.Forms.TreeView();
             this.cmsDatabase = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiRemoveDatabase = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDisconnectDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsServer.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
             this.SuspendLayout();
@@ -76,9 +77,10 @@
             // cmsDatabase
             // 
             this.cmsDatabase.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDisconnectDatabase,
             this.tsmiRemoveDatabase});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(153, 48);
+            this.cmsDatabase.Size = new System.Drawing.Size(153, 70);
             // 
             // tsmiRemoveDatabase
             // 
@@ -86,6 +88,13 @@
             this.tsmiRemoveDatabase.Size = new System.Drawing.Size(152, 22);
             this.tsmiRemoveDatabase.Text = "Удалить";
             this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
+            // 
+            // tsmiDisconnectDatabase
+            // 
+            this.tsmiDisconnectDatabase.Name = "tsmiDisconnectDatabase";
+            this.tsmiDisconnectDatabase.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDisconnectDatabase.Text = "Отключиться";
+            this.tsmiDisconnectDatabase.Click += new System.EventHandler(this.tsmiDisconnectDatabase_Click);
             // 
             // TreeWorkspace
             // 
@@ -109,5 +118,6 @@
         private System.Windows.Forms.TreeView tvTree;
         private System.Windows.Forms.ContextMenuStrip cmsDatabase;
         private System.Windows.Forms.ToolStripMenuItem tsmiRemoveDatabase;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDisconnectDatabase;
     }
 }
