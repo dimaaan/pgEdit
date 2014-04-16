@@ -30,7 +30,6 @@ namespace PgEdit
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
             this.tsmiDB = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewConnection = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,15 +45,6 @@ namespace PgEdit
             this.ucTree = new PgEdit.TreeWorkspace();
             this.tabTable = new System.Windows.Forms.TabControl();
             this.tpColumns = new System.Windows.Forms.TabPage();
-            this.dgvColumns = new System.Windows.Forms.DataGridView();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrimaryKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colForeignKey = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colNotNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colUnique = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colDefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpData = new System.Windows.Forms.TabPage();
             this.ucTable = new PgEdit.DataWorkspace();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +55,7 @@ namespace PgEdit
             this.dataGridViewCheckBoxColumn4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ucColumns = new PgEdit.TableWorkspace();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
@@ -72,7 +63,6 @@ namespace PgEdit
             this.scMain.SuspendLayout();
             this.tabTable.SuspendLayout();
             this.tpColumns.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvColumns)).BeginInit();
             this.tpData.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -211,7 +201,7 @@ namespace PgEdit
             // 
             // tpColumns
             // 
-            this.tpColumns.Controls.Add(this.dgvColumns);
+            this.tpColumns.Controls.Add(this.ucColumns);
             this.tpColumns.Location = new System.Drawing.Point(4, 22);
             this.tpColumns.Name = "tpColumns";
             this.tpColumns.Padding = new System.Windows.Forms.Padding(3);
@@ -219,101 +209,6 @@ namespace PgEdit
             this.tpColumns.TabIndex = 0;
             this.tpColumns.Text = "Поля";
             this.tpColumns.UseVisualStyleBackColor = true;
-            // 
-            // dgvColumns
-            // 
-            this.dgvColumns.AllowUserToAddRows = false;
-            this.dgvColumns.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvColumns.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvColumns.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvColumns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvColumns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colName,
-            this.colType,
-            this.colPrimaryKey,
-            this.colForeignKey,
-            this.colNotNull,
-            this.colUnique,
-            this.colDefaultValue,
-            this.colDescription});
-            this.dgvColumns.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvColumns.Location = new System.Drawing.Point(3, 3);
-            this.dgvColumns.Name = "dgvColumns";
-            this.dgvColumns.ReadOnly = true;
-            this.dgvColumns.RowHeadersVisible = false;
-            this.dgvColumns.Size = new System.Drawing.Size(566, 505);
-            this.dgvColumns.TabIndex = 0;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.DataPropertyName = "Name";
-            this.colName.Frozen = true;
-            this.colName.HeaderText = "Имя";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 54;
-            // 
-            // colType
-            // 
-            this.colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colType.DataPropertyName = "PgType";
-            this.colType.HeaderText = "Тип";
-            this.colType.Name = "colType";
-            this.colType.ReadOnly = true;
-            this.colType.Width = 51;
-            // 
-            // colPrimaryKey
-            // 
-            this.colPrimaryKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colPrimaryKey.DataPropertyName = "PrimaryKey";
-            this.colPrimaryKey.HeaderText = "Первичный ключ";
-            this.colPrimaryKey.Name = "colPrimaryKey";
-            this.colPrimaryKey.ReadOnly = true;
-            this.colPrimaryKey.Width = 88;
-            // 
-            // colForeignKey
-            // 
-            this.colForeignKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colForeignKey.DataPropertyName = "ForeignKey";
-            this.colForeignKey.HeaderText = "Внешний ключ";
-            this.colForeignKey.Name = "colForeignKey";
-            this.colForeignKey.ReadOnly = true;
-            this.colForeignKey.Width = 77;
-            // 
-            // colNotNull
-            // 
-            this.colNotNull.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colNotNull.DataPropertyName = "NotNull";
-            this.colNotNull.HeaderText = "Не Null";
-            this.colNotNull.Name = "colNotNull";
-            this.colNotNull.ReadOnly = true;
-            this.colNotNull.Width = 43;
-            // 
-            // colUnique
-            // 
-            this.colUnique.DataPropertyName = "Unique";
-            this.colUnique.HeaderText = "Уникальный";
-            this.colUnique.Name = "colUnique";
-            this.colUnique.ReadOnly = true;
-            // 
-            // colDefaultValue
-            // 
-            this.colDefaultValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colDefaultValue.DataPropertyName = "DefaultValue";
-            this.colDefaultValue.HeaderText = "По умолчанию";
-            this.colDefaultValue.Name = "colDefaultValue";
-            this.colDefaultValue.ReadOnly = true;
-            this.colDefaultValue.Width = 96;
-            // 
-            // colDescription
-            // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescription.DataPropertyName = "Description";
-            this.colDescription.HeaderText = "Описание";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
             // 
             // tpData
             // 
@@ -340,8 +235,8 @@ namespace PgEdit
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewTextBoxColumn1.Frozen = true;
             this.dataGridViewTextBoxColumn1.HeaderText = "Имя";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -402,6 +297,14 @@ namespace PgEdit
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
+            // ucColumns
+            // 
+            this.ucColumns.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucColumns.Location = new System.Drawing.Point(3, 3);
+            this.ucColumns.Name = "ucColumns";
+            this.ucColumns.Size = new System.Drawing.Size(566, 505);
+            this.ucColumns.TabIndex = 0;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -423,7 +326,6 @@ namespace PgEdit
             this.scMain.ResumeLayout(false);
             this.tabTable.ResumeLayout(false);
             this.tpColumns.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvColumns)).EndInit();
             this.tpData.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -440,7 +342,6 @@ namespace PgEdit
         private System.Windows.Forms.ToolStripMenuItem tsmiDisconnect;
         private System.Windows.Forms.TabControl tabTable;
         private System.Windows.Forms.TabPage tpColumns;
-        private System.Windows.Forms.DataGridView dgvColumns;
         private System.Windows.Forms.TabPage tpData;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
         private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
@@ -456,15 +357,8 @@ namespace PgEdit
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colPrimaryKey;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colForeignKey;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colNotNull;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colUnique;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDefaultValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.ToolStripMenuItem tsmiNewConnection;
         private TreeWorkspace ucTree;
+        private TableWorkspace ucColumns;
     }
 }
