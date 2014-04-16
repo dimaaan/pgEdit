@@ -130,14 +130,14 @@ namespace PgEdit
         {
             ucTable.DataSource = null;
             ucTable.Tag = null;
-            dgvColumns.DataSource = null;
+            ucColumns.DataSource = null;
             RefreshMenu();
         }
 
         private void ucTree_TableOpened(DataTable table)
         {
             List<Column> columns = (List<Column>) table.ExtendedProperties[Database.TABLE_PROPERTY_COLUMNS];
-            dgvColumns.DataSource = columns;
+            ucColumns.DataSource = columns;
             ucTable.DataSource = table;
         }
 
