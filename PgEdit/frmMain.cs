@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Equin.ApplicationFramework;
+using Npgsql;
 using PgEdit.Domain;
 using PgEdit.Properties;
 using PgEdit.Service;
@@ -137,7 +138,7 @@ namespace PgEdit
         private void ucTree_TableOpened(DataTable table)
         {
             List<Column> columns = (List<Column>) table.ExtendedProperties[Database.TABLE_PROPERTY_COLUMNS];
-            ucColumns.DataSource = columns;
+            ucColumns.DataSource = new BindingListView<Column>(columns);
             ucTable.DataSource = table;
         }
 
