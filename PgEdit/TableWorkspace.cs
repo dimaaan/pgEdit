@@ -12,11 +12,11 @@ namespace PgEdit
 {
     public partial class TableWorkspace : UserControl
     {
-        public object DataSource
+        public IBindingListView DataSource
         {
             get
             {
-                return dgvColumns.DataSource;
+                return (IBindingListView) dgvColumns.DataSource;
             }
             set
             {
