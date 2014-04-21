@@ -13,6 +13,7 @@ Quick PostgreSQL DB editor for developers
 * SSH.NET http://sshnet.codeplex.com/
 * DataGridViewAutoFilterColumnHeaderCell http://msdn.microsoft.com/en-us/library/aa480727.aspx
 * JSON.NET http://json.codeplex.com
+* BindingListView https://github.com/waynebloss/BindingListView
 
 Language: Russian
 
