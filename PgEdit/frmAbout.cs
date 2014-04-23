@@ -40,7 +40,8 @@ namespace PgEdit
                 "* Npgsql{0}https://github.com/npgsql/Npgsql{0}" +
                 "* SSH.NET{0}http://sshnet.codeplex.com{0}" +
                 "* JSON.NET{0}http://json.codeplex.com{0}" +
-                "* DataGridViewAutoFilterColumnHeaderCell{0}http://msdn.microsoft.com/en-us/library/aa480727.aspx " +
+                "* DataGridViewAutoFilterColumnHeaderCell{0}http://msdn.microsoft.com/en-us/library/aa480727.aspx{0}" +
+                "* BindingListView{0}https://github.com/waynebloss/BindingListView " +
                 "{0}{0}" + 
                 "Арт:{0} " +
                 "Логотип - Анна \"annubis\" Кикош", 
