@@ -110,11 +110,6 @@ namespace PgEdit
             Process.Start("ConnectionStrings.json");
         }
 
-        private void tsmiBugReport_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://github.com/dimaaan/pgEdit/issues/new");
-        }
-
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             Shutdown();

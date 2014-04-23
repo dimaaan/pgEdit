@@ -39,12 +39,12 @@ namespace PgEdit
             this.tsmiRegisteredDB = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiBugReport = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.ucTree = new PgEdit.TreeWorkspace();
             this.tabTable = new System.Windows.Forms.TabControl();
             this.tpColumns = new System.Windows.Forms.TabPage();
+            this.ucColumns = new PgEdit.TableWorkspace();
             this.tpData = new System.Windows.Forms.TabPage();
             this.ucTable = new PgEdit.DataWorkspace();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,7 +55,6 @@ namespace PgEdit
             this.dataGridViewCheckBoxColumn4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ucColumns = new PgEdit.TableWorkspace();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
@@ -135,24 +134,16 @@ namespace PgEdit
             // tsmiHelp
             // 
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiBugReport,
             this.tsmiAbout});
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(68, 20);
             this.tsmiHelp.Text = "Помощь";
             // 
-            // tsmiBugReport
-            // 
-            this.tsmiBugReport.Name = "tsmiBugReport";
-            this.tsmiBugReport.Size = new System.Drawing.Size(231, 22);
-            this.tsmiBugReport.Text = "Feature Request/Bug Report...";
-            this.tsmiBugReport.Click += new System.EventHandler(this.tsmiBugReport_Click);
-            // 
             // tsmiAbout
             // 
             this.tsmiAbout.Name = "tsmiAbout";
             this.tsmiAbout.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.tsmiAbout.Size = new System.Drawing.Size(231, 22);
+            this.tsmiAbout.Size = new System.Drawing.Size(177, 22);
             this.tsmiAbout.Text = "О программе...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
@@ -209,6 +200,15 @@ namespace PgEdit
             this.tpColumns.TabIndex = 0;
             this.tpColumns.Text = "Поля";
             this.tpColumns.UseVisualStyleBackColor = true;
+            // 
+            // ucColumns
+            // 
+            this.ucColumns.DataSource = null;
+            this.ucColumns.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucColumns.Location = new System.Drawing.Point(3, 3);
+            this.ucColumns.Name = "ucColumns";
+            this.ucColumns.Size = new System.Drawing.Size(566, 505);
+            this.ucColumns.TabIndex = 0;
             // 
             // tpData
             // 
@@ -297,14 +297,6 @@ namespace PgEdit
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
-            // ucColumns
-            // 
-            this.ucColumns.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucColumns.Location = new System.Drawing.Point(3, 3);
-            this.ucColumns.Name = "ucColumns";
-            this.ucColumns.Size = new System.Drawing.Size(566, 505);
-            this.ucColumns.TabIndex = 0;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -347,7 +339,6 @@ namespace PgEdit
         private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
         private System.Windows.Forms.ToolStripSeparator tsSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsmiRegisteredDB;
-        private System.Windows.Forms.ToolStripMenuItem tsmiBugReport;
         private DataWorkspace ucTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
