@@ -51,14 +51,17 @@ namespace PgEdit
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 Server mergedServer = ConnectionService.MergeServer(universe.Servers, dlg.Server);
+                Database newDb = dlg.Server.Databases.First();
 
                 if (mergedServer == null)
                 {
                     ucTree.AddServer(dlg.Server);
+                    ucTree.SelectDatabase(newDb);
                 }
                 else
                 {
-                    ucTree.AddDatabase(mergedServer, dlg.Server.Databases.First());
+                    ucTree.AddDatabase(mergedServer, newDb);
+                    ucTree.SelectDatabase(newDb);
                 }
 
                 ConnectionService.Save(universe);

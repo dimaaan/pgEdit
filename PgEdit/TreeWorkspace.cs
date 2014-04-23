@@ -101,8 +101,10 @@ namespace PgEdit
 
         /// <summary>
         /// Adds server node to Tree View.
-        /// Supposed that server already added to universe
         /// </summary>
+        /// <param name="server">
+        /// Must be added to universe
+        /// </param>
         public void AddServer(Server server)
         {
             TreeNode serverNode = ServerToNode(server);
@@ -117,14 +119,37 @@ namespace PgEdit
 
         /// <summary>
         /// Adds database node to Tree View.
-        /// Supposed that database already added to universe
         /// </summary>
+        /// <param name="db">
+        /// Must be added to universe
+        /// </param>
         public void AddDatabase(Server server, Database db)
         {
             TreeNode serverNode = findServerNode(server);
             TreeNode dbNode = DatabaseToNode(db);
 
             serverNode.Nodes.Add(dbNode);
+        }
+
+        /// <summary>
+        /// Finds database node and select it.
+        /// </summary>
+        public void SelectDatabase(Database db)
+        {
+            foreach (TreeNode servNode in tvTree.Nodes)
+            {
+                foreach (TreeNode dbNode in servNode.Nodes)
+                {
+                    Database currDb = (Database)dbNode.Tag;
+                    if (currDb == db)
+                    {
+                        tvTree.SelectedNode = dbNode;
+                        return;
+                    }
+                }
+            }
+
+            throw new Exception("Selecting database, that not exists in tree");
         }
 
         private TreeNode findServerNode(Server server)
