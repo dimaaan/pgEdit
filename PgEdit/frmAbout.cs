@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -48,6 +49,16 @@ namespace PgEdit
                 Environment.NewLine,
                 displayVersion);
             txtInfo.Text = info;
+        }
+
+        private void llbnCheckNewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/dimaaan/pgEdit/releases");
+        }
+
+        private void llblBugReport_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/dimaaan/pgEdit/issues/new");
         }
     }
 }
