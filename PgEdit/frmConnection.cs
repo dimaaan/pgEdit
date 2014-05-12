@@ -273,6 +273,9 @@ namespace PgEdit
         {
             server.Ssh = chkUseSsh.Checked ? sshTunnel : null;
             panSsh.Enabled = chkUseSsh.Checked;
+            ctrl_Validated(cmbSshHost, EventArgs.Empty);
+            ctrl_Validated(txtSshUser, EventArgs.Empty);
+            ctrl_Validated(txtSshKey, EventArgs.Empty);
             ResetConnectionStatuses();
         }
 
