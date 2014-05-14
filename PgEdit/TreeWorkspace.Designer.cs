@@ -62,6 +62,7 @@
             // 
             // tvTree
             // 
+            this.tvTree.AllowDrop = true;
             this.tvTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvTree.ImageIndex = 0;
             this.tvTree.ImageList = this.ilTreeView;
@@ -70,8 +71,12 @@
             this.tvTree.SelectedImageIndex = 0;
             this.tvTree.Size = new System.Drawing.Size(223, 434);
             this.tvTree.TabIndex = 1;
+            this.tvTree.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tvTree_ItemDrag);
             this.tvTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTree_AfterSelect);
             this.tvTree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvTree_NodeMouseDoubleClick);
+            this.tvTree.DragDrop += new System.Windows.Forms.DragEventHandler(this.tvTree_DragDrop);
+            this.tvTree.DragEnter += new System.Windows.Forms.DragEventHandler(this.tvTree_DragEnter);
+            this.tvTree.DragOver += new System.Windows.Forms.DragEventHandler(this.tvTree_DragOver);
             this.tvTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvTree_KeyDown);
             // 
             // cmsDatabase
@@ -80,20 +85,20 @@
             this.tsmiDisconnectDatabase,
             this.tsmiRemoveDatabase});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(153, 70);
+            this.cmsDatabase.Size = new System.Drawing.Size(149, 48);
             this.cmsDatabase.Opened += new System.EventHandler(this.cmsDatabase_Opened);
             // 
             // tsmiDisconnectDatabase
             // 
             this.tsmiDisconnectDatabase.Name = "tsmiDisconnectDatabase";
-            this.tsmiDisconnectDatabase.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDisconnectDatabase.Size = new System.Drawing.Size(148, 22);
             this.tsmiDisconnectDatabase.Text = "Отключиться";
             this.tsmiDisconnectDatabase.Click += new System.EventHandler(this.tsmiDisconnectDatabase_Click);
             // 
             // tsmiRemoveDatabase
             // 
             this.tsmiRemoveDatabase.Name = "tsmiRemoveDatabase";
-            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(152, 22);
+            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(148, 22);
             this.tsmiRemoveDatabase.Text = "Удалить";
             this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
             // 
