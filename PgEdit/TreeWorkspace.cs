@@ -419,6 +419,23 @@ namespace PgEdit
             }
         }
 
+        /// <summary>
+        /// Determine whether node1 is a parent or ancestor of a node2.
+        /// </summary>
+        private bool ContainsNode(TreeNode node1, TreeNode node2)
+        {
+            if (node2.Parent == null)
+                return false;
+
+            if (node2.Parent == node1)
+                return true;
+
+            // If the parent node is not null or equal to the first node, 
+            // call the ContainsNode method recursively using the parent of 
+            // the second node.
+            return ContainsNode(node1, node2.Parent);
+        }
+
         private void TreeWorkspace_Load(object sender, EventArgs e)
         {
             ilTreeView.Images.Add(IMAGE_KEY_SERVER, Resources.computersystemproduct);
@@ -512,5 +529,70 @@ namespace PgEdit
             Database selDb = selectedNode.Tag as Database;
             tsmiDisconnectDatabase.Enabled = selDb != null ? selDb.IsOpen : false;
         }
+        
+        private void tvTree_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            TreeNode dragNode = (TreeNode)e.Item;
+            if (dragNode.Tag is Server)
+            {
+                DoDragDrop(e.Item, DragDropEffects.Move);
+            }
+        }
+
+        private void tvTree_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.AllowedEffect;
+        }
+
+        private void tvTree_DragOver(object sender, DragEventArgs e)
+        {
+            Point mouseCoords = tvTree.PointToClient(new Point(e.X, e.Y));
+            TreeNode dragOverNode = tvTree.GetNodeAt(mouseCoords);
+
+            if (dragOverNode != null)
+            {
+                TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+
+                if (draggedNode == dragOverNode || ContainsNode(draggedNode, dragOverNode))
+                {
+                    e.Effect = DragDropEffects.None;
+                }
+                else
+                {
+                    if (dragOverNode.Tag is Server)
+                    {
+                        e.Effect = DragDropEffects.Move;
+                    }
+                    else
+                    {
+                        e.Effect = DragDropEffects.None;
+                    }
+                }
+            }
+        }
+
+        private void tvTree_DragDrop(object sender, DragEventArgs e)
+        {
+            Point mouseCoords = tvTree.PointToClient(new Point(e.X, e.Y));
+            TreeNode droppedNode = tvTree.GetNodeAt(mouseCoords);
+            TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+
+            if (draggedNode.Tag is Server)
+            {
+                Server draggedServer = (Server)draggedNode.Tag;
+                Server droppedServer = (Server)droppedNode.Tag;
+                int droppedServerIndex = universe.Servers.IndexOf(droppedServer);
+
+                tvTree.Nodes.Remove(draggedNode);
+                tvTree.Nodes.Insert(droppedNode.Index + 1, draggedNode);
+
+                universe.Servers.Remove(draggedServer);
+                universe.Servers.Insert(droppedServerIndex, draggedServer);
+
+                ConnectionService.Save(universe);
+            }
+        }
+
+        
     }
 }
