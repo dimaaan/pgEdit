@@ -299,7 +299,7 @@ namespace PgEdit
             }
         }
 
-        private void RemoveDatabase(TreeNode dbNode)
+        public void RemoveDatabase(TreeNode dbNode)
         {
             string msg = "Настройки подключения к БД будут удалены.{0}{0}Продолжить?";
             var res = MessageBox.Show(
