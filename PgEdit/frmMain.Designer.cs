@@ -56,6 +56,8 @@ namespace PgEdit
             this.dataGridViewCheckBoxColumn4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tsmiRemoveServer = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
@@ -83,6 +85,8 @@ namespace PgEdit
             this.tsmiNewConnection,
             this.tsmiConnect,
             this.tsmiDisconnect,
+            this.toolStripSeparator1,
+            this.tsmiRemoveServer,
             this.tsmiRemoveDatabase,
             this.tsSeparator1,
             this.tsmiRegisteredDB,
@@ -94,7 +98,7 @@ namespace PgEdit
             // tsmiNewConnection
             // 
             this.tsmiNewConnection.Name = "tsmiNewConnection";
-            this.tsmiNewConnection.Size = new System.Drawing.Size(231, 22);
+            this.tsmiNewConnection.Size = new System.Drawing.Size(236, 22);
             this.tsmiNewConnection.Text = "Новое подключение...";
             this.tsmiNewConnection.Click += new System.EventHandler(this.tsmiNewConnection_Click);
             // 
@@ -102,7 +106,7 @@ namespace PgEdit
             // 
             this.tsmiConnect.Enabled = false;
             this.tsmiConnect.Name = "tsmiConnect";
-            this.tsmiConnect.Size = new System.Drawing.Size(231, 22);
+            this.tsmiConnect.Size = new System.Drawing.Size(236, 22);
             this.tsmiConnect.Text = "Подключиться к выбранной";
             this.tsmiConnect.Click += new System.EventHandler(this.tsmiConnect_Click);
             // 
@@ -110,33 +114,33 @@ namespace PgEdit
             // 
             this.tsmiDisconnect.Enabled = false;
             this.tsmiDisconnect.Name = "tsmiDisconnect";
-            this.tsmiDisconnect.Size = new System.Drawing.Size(231, 22);
+            this.tsmiDisconnect.Size = new System.Drawing.Size(236, 22);
             this.tsmiDisconnect.Text = "Отключиться от выбранной";
             this.tsmiDisconnect.Click += new System.EventHandler(this.tsmiDisconnect_Click);
             // 
             // tsmiRemoveDatabase
             // 
             this.tsmiRemoveDatabase.Name = "tsmiRemoveDatabase";
-            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(231, 22);
+            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(236, 22);
             this.tsmiRemoveDatabase.Text = "Удалить выбранную БД...";
             this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
             // 
             // tsSeparator1
             // 
             this.tsSeparator1.Name = "tsSeparator1";
-            this.tsSeparator1.Size = new System.Drawing.Size(228, 6);
+            this.tsSeparator1.Size = new System.Drawing.Size(233, 6);
             // 
             // tsmiRegisteredDB
             // 
             this.tsmiRegisteredDB.Name = "tsmiRegisteredDB";
-            this.tsmiRegisteredDB.Size = new System.Drawing.Size(231, 22);
+            this.tsmiRegisteredDB.Size = new System.Drawing.Size(236, 22);
             this.tsmiRegisteredDB.Text = "Зарегистрированные...";
             this.tsmiRegisteredDB.Click += new System.EventHandler(this.tsmiRegisteredDB_Click);
             // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(231, 22);
+            this.tsmiExit.Size = new System.Drawing.Size(236, 22);
             this.tsmiExit.Text = "Выход";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
@@ -306,6 +310,18 @@ namespace PgEdit
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
+            // tsmiRemoveServer
+            // 
+            this.tsmiRemoveServer.Name = "tsmiRemoveServer";
+            this.tsmiRemoveServer.Size = new System.Drawing.Size(236, 22);
+            this.tsmiRemoveServer.Text = "Удалить выбранный сервер...";
+            this.tsmiRemoveServer.Click += new System.EventHandler(this.tsmiRemoveServer_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(233, 6);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -361,5 +377,7 @@ namespace PgEdit
         private TreeWorkspace ucTree;
         private TableWorkspace ucColumns;
         private System.Windows.Forms.ToolStripMenuItem tsmiRemoveDatabase;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRemoveServer;
     }
 }

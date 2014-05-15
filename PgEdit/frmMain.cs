@@ -28,10 +28,12 @@ namespace PgEdit
         private void RefreshMenu()
         {
             Database selDb = ucTree.SelectedDatabase;
+            Server selServ = ucTree.SelectedServer;
 
             tsmiConnect.Enabled = selDb != null && !selDb.IsOpen;
             tsmiDisconnect.Enabled = selDb != null && selDb.IsOpen;
             tsmiRemoveDatabase.Enabled = selDb != null;
+            tsmiRemoveServer.Enabled = selServ != null;
         }
 
         private void Shutdown()
@@ -114,6 +116,11 @@ namespace PgEdit
         private void tsmiRemoveDatabase_Click(object sender, EventArgs e)
         {
             ucTree.RemoveDatabase(ucTree.SelectedNode);
+        }
+
+        private void tsmiRemoveServer_Click(object sender, EventArgs e)
+        {
+            ucTree.RemoveServer(ucTree.SelectedNode);
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
