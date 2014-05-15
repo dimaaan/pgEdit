@@ -47,11 +47,10 @@ namespace PgEdit
             get
             {
                 Database res = null;
-                TreeNode dbNode = GetSelectedDBNode(tvTree.SelectedNode);
 
-                if (dbNode != null)
+                if (tvTree.SelectedNode != null && tvTree.SelectedNode.Tag is Database)
                 {
-                    res = (Database)dbNode.Tag;
+                    res = (Database)tvTree.SelectedNode.Tag;
                 }
 
                 return res;
@@ -62,13 +61,13 @@ namespace PgEdit
         {
             get
             {
-                Server server = null;
+                Server res = null;
 
                 if(tvTree.SelectedNode != null && tvTree.SelectedNode.Tag is Server) {
-                    server = (Server) tvTree.SelectedNode.Tag;
+                    res = (Server)tvTree.SelectedNode.Tag;
                 }
 
-                return server;
+                return res;
             }
         }
 
