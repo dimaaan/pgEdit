@@ -35,6 +35,7 @@ namespace PgEdit
             this.tsmiNewConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDisconnect = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiRemoveDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRegisteredDB = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,6 +83,7 @@ namespace PgEdit
             this.tsmiNewConnection,
             this.tsmiConnect,
             this.tsmiDisconnect,
+            this.tsmiRemoveDatabase,
             this.tsSeparator1,
             this.tsmiRegisteredDB,
             this.tsmiExit});
@@ -111,6 +113,13 @@ namespace PgEdit
             this.tsmiDisconnect.Size = new System.Drawing.Size(231, 22);
             this.tsmiDisconnect.Text = "Отключиться от выбранной";
             this.tsmiDisconnect.Click += new System.EventHandler(this.tsmiDisconnect_Click);
+            // 
+            // tsmiRemoveDatabase
+            // 
+            this.tsmiRemoveDatabase.Name = "tsmiRemoveDatabase";
+            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(231, 22);
+            this.tsmiRemoveDatabase.Text = "Удалить выбранную БД...";
+            this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
             // 
             // tsSeparator1
             // 
@@ -351,5 +360,6 @@ namespace PgEdit
         private System.Windows.Forms.ToolStripMenuItem tsmiNewConnection;
         private TreeWorkspace ucTree;
         private TableWorkspace ucColumns;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRemoveDatabase;
     }
 }

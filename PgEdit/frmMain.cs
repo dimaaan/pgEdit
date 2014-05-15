@@ -31,6 +31,7 @@ namespace PgEdit
 
             tsmiConnect.Enabled = selDb != null && !selDb.IsOpen;
             tsmiDisconnect.Enabled = selDb != null && selDb.IsOpen;
+            tsmiRemoveDatabase.Enabled = selDb != null;
         }
 
         private void Shutdown()
@@ -108,6 +109,11 @@ namespace PgEdit
         private void tsmiRegisteredDB_Click(object sender, EventArgs e)
         {
             Process.Start("ConnectionStrings.json");
+        }
+
+        private void tsmiRemoveDatabase_Click(object sender, EventArgs e)
+        {
+            ucTree.RemoveDatabase(ucTree.SelectedNode);
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
