@@ -99,7 +99,7 @@
             // 
             this.tsmiRemoveDatabase.Name = "tsmiRemoveDatabase";
             this.tsmiRemoveDatabase.Size = new System.Drawing.Size(148, 22);
-            this.tsmiRemoveDatabase.Text = "Удалить";
+            this.tsmiRemoveDatabase.Text = "Удалить...";
             this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
             // 
             // TreeWorkspace
