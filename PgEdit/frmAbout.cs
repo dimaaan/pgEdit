@@ -49,6 +49,8 @@ namespace PgEdit
                 Environment.NewLine,
                 displayVersion);
             txtInfo.Text = info;
+            // strange, but all text is selected now. so reset selection
+            txtInfo.SelectionStart = txtInfo.SelectionLength = 0;
         }
 
         private void llbnCheckNewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
