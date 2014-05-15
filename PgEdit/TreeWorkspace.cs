@@ -58,6 +58,20 @@ namespace PgEdit
             }
         }
 
+        public Server SelectedServer
+        {
+            get
+            {
+                Server server = null;
+
+                if(tvTree.SelectedNode != null && tvTree.SelectedNode.Tag is Server) {
+                    server = (Server) tvTree.SelectedNode.Tag;
+                }
+
+                return server;
+            }
+        }
+
         public TreeNode SelectedNode
         {
             get
@@ -275,7 +289,7 @@ namespace PgEdit
             };
         }
 
-        private void RemoveServer(TreeNode serverNode)
+        public void RemoveServer(TreeNode serverNode)
         {
             string msg = "Настройки подключения к серверу и его базам данных будут удалены.{0}{0}Продолжить?";
             var res = MessageBox.Show(
