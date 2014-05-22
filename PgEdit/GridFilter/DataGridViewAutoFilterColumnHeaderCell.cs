@@ -1232,9 +1232,9 @@ namespace PgEdit.GridFilter
             String newFilter = FilterWithoutCurrentColumn(data.Filter);
             if (String.IsNullOrEmpty(newFilter))
             {
-                newFilter += newColumnFilter;
+                newFilter = newColumnFilter;
             }
-            else
+            else if (!String.IsNullOrEmpty(newColumnFilter))
             {
                 newFilter += " AND " + newColumnFilter;
             }
