@@ -45,8 +45,8 @@ namespace PgEdit
                 }
                 else
                 {
-                    bsData.DataSource = null;
                     bsData.Filter = null;
+                    bsData.DataSource = null;
                     tsslRowsCount.Text = null;
                     tsbRefresh.Enabled = tsmiRefresh.Enabled = false;
                 }
