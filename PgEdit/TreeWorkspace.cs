@@ -533,6 +533,12 @@ namespace PgEdit
             CloseSelectedDatabase();
         }
 
+        private void tsmiNewConnection_Click(object sender, EventArgs e)
+        {
+            if (NewConnection != null)
+                NewConnection();
+        }
+
         private void cmsDatabase_Opened(object sender, EventArgs e)
         {
             // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened

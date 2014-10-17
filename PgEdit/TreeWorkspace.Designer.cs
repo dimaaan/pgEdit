@@ -36,8 +36,11 @@
             this.cmsDatabase = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDisconnectDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRemoveDatabase = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiNewConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsServer.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
+            this.cmsTreeView.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsServer
@@ -63,6 +66,7 @@
             // tvTree
             // 
             this.tvTree.AllowDrop = true;
+            this.tvTree.ContextMenuStrip = this.cmsTreeView;
             this.tvTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvTree.ImageIndex = 0;
             this.tvTree.ImageList = this.ilTreeView;
@@ -102,6 +106,20 @@
             this.tsmiRemoveDatabase.Text = "Удалить...";
             this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
             // 
+            // cmsTreeView
+            // 
+            this.cmsTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewConnection});
+            this.cmsTreeView.Name = "cmsTreeView";
+            this.cmsTreeView.Size = new System.Drawing.Size(198, 48);
+            // 
+            // tsmiNewConnection
+            // 
+            this.tsmiNewConnection.Name = "tsmiNewConnection";
+            this.tsmiNewConnection.Size = new System.Drawing.Size(197, 22);
+            this.tsmiNewConnection.Text = "Новое подключение...";
+            this.tsmiNewConnection.Click += new System.EventHandler(this.tsmiNewConnection_Click);
+            // 
             // TreeWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -112,6 +130,7 @@
             this.Load += new System.EventHandler(this.TreeWorkspace_Load);
             this.cmsServer.ResumeLayout(false);
             this.cmsDatabase.ResumeLayout(false);
+            this.cmsTreeView.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -125,5 +144,7 @@
         private System.Windows.Forms.ContextMenuStrip cmsDatabase;
         private System.Windows.Forms.ToolStripMenuItem tsmiRemoveDatabase;
         private System.Windows.Forms.ToolStripMenuItem tsmiDisconnectDatabase;
+        private System.Windows.Forms.ContextMenuStrip cmsTreeView;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNewConnection;
     }
 }
