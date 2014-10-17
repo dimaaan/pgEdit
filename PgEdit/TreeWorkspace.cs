@@ -288,17 +288,29 @@ namespace PgEdit
             };
         }
 
-        public void RemoveServer(TreeNode serverNode)
+        /// <param name="force">if true - don't ask user, remove it quietly</param>
+        public void RemoveServer(TreeNode serverNode, bool force = false)
         {
-            string msg = "Настройки подключения к серверу и его базам данных будут удалены.{0}{0}Продолжить?";
-            var res = MessageBox.Show(
-                String.Format(msg, Environment.NewLine),
-                "Удаление подключения к серверу",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question,
-                MessageBoxDefaultButton.Button2);
+            bool remove;
 
-            if (res == DialogResult.Yes)
+            if (force)
+            {
+                remove = true;
+            }
+            else 
+            {
+                string msg = "Настройки подключения к серверу и его базам данных будут удалены.{0}{0}Продолжить?";
+                var res = MessageBox.Show(
+                    String.Format(msg, Environment.NewLine),
+                    "Удаление подключения к серверу",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+                remove = res == DialogResult.Yes;
+            }
+            
+
+            if (remove)
             {
                 Server server = (Server)serverNode.Tag;
 
@@ -330,7 +342,15 @@ namespace PgEdit
 
                 CloseDatabase(dbNode);
                 server.Databases.Remove(db);
-                ConnectionService.Save(universe);
+                if (server.Databases.Count == 0)
+                {
+                    RemoveServer(serverNode, true);
+                }
+                else
+                {
+                    // if database removed with server, settings will be save inside method RemoveServer, otherwise save it
+                    ConnectionService.Save(universe);
+                }
                 dbNode.Remove();
             }
         }
@@ -485,18 +505,17 @@ namespace PgEdit
             else if (e.KeyCode == Keys.Delete && tvTree.SelectedNode != null)
             {
                 TreeNode node = tvTree.SelectedNode;
-                if (node != null && node.Tag is Server)
+                if (node.Tag is Server)
                 {
                     RemoveServer(node);
                     handled = true;
                 }
+                else if (node.Tag is Database)
+                {
+                    RemoveDatabase(node);
+                    handled = true;
+                }
             }
-            else if (e.KeyCode == Keys.Insert)
-            {
-                if (NewConnection != null)
-                    NewConnection();
-            }
-
             if (handled)
             {
                 e.Handled = true;

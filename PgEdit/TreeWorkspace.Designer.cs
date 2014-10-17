@@ -33,14 +33,14 @@
             this.tsmiRemoveServer = new System.Windows.Forms.ToolStripMenuItem();
             this.ilTreeView = new System.Windows.Forms.ImageList(this.components);
             this.tvTree = new System.Windows.Forms.TreeView();
+            this.cmsTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiNewConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDatabase = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDisconnectDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRemoveDatabase = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiNewConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsServer.SuspendLayout();
-            this.cmsDatabase.SuspendLayout();
             this.cmsTreeView.SuspendLayout();
+            this.cmsDatabase.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsServer
@@ -48,12 +48,13 @@
             this.cmsServer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiRemoveServer});
             this.cmsServer.Name = "cmsStructure";
-            this.cmsServer.Size = new System.Drawing.Size(128, 26);
+            this.cmsServer.Size = new System.Drawing.Size(152, 26);
             // 
             // tsmiRemoveServer
             // 
             this.tsmiRemoveServer.Name = "tsmiRemoveServer";
-            this.tsmiRemoveServer.Size = new System.Drawing.Size(127, 22);
+            this.tsmiRemoveServer.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.tsmiRemoveServer.Size = new System.Drawing.Size(152, 22);
             this.tsmiRemoveServer.Text = "Удалить...";
             this.tsmiRemoveServer.Click += new System.EventHandler(this.tsmiRemoveServer_Click);
             // 
@@ -83,13 +84,28 @@
             this.tvTree.DragOver += new System.Windows.Forms.DragEventHandler(this.tvTree_DragOver);
             this.tvTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvTree_KeyDown);
             // 
+            // cmsTreeView
+            // 
+            this.cmsTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewConnection});
+            this.cmsTreeView.Name = "cmsTreeView";
+            this.cmsTreeView.Size = new System.Drawing.Size(220, 26);
+            // 
+            // tsmiNewConnection
+            // 
+            this.tsmiNewConnection.Name = "tsmiNewConnection";
+            this.tsmiNewConnection.ShortcutKeys = System.Windows.Forms.Keys.Insert;
+            this.tsmiNewConnection.Size = new System.Drawing.Size(219, 22);
+            this.tsmiNewConnection.Text = "Новое подключение...";
+            this.tsmiNewConnection.Click += new System.EventHandler(this.tsmiNewConnection_Click);
+            // 
             // cmsDatabase
             // 
             this.cmsDatabase.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiDisconnectDatabase,
             this.tsmiRemoveDatabase});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(149, 48);
+            this.cmsDatabase.Size = new System.Drawing.Size(153, 70);
             this.cmsDatabase.Opened += new System.EventHandler(this.cmsDatabase_Opened);
             // 
             // tsmiDisconnectDatabase
@@ -102,23 +118,10 @@
             // tsmiRemoveDatabase
             // 
             this.tsmiRemoveDatabase.Name = "tsmiRemoveDatabase";
-            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(148, 22);
+            this.tsmiRemoveDatabase.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(152, 22);
             this.tsmiRemoveDatabase.Text = "Удалить...";
             this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
-            // 
-            // cmsTreeView
-            // 
-            this.cmsTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewConnection});
-            this.cmsTreeView.Name = "cmsTreeView";
-            this.cmsTreeView.Size = new System.Drawing.Size(198, 48);
-            // 
-            // tsmiNewConnection
-            // 
-            this.tsmiNewConnection.Name = "tsmiNewConnection";
-            this.tsmiNewConnection.Size = new System.Drawing.Size(197, 22);
-            this.tsmiNewConnection.Text = "Новое подключение...";
-            this.tsmiNewConnection.Click += new System.EventHandler(this.tsmiNewConnection_Click);
             // 
             // TreeWorkspace
             // 
@@ -129,8 +132,8 @@
             this.Size = new System.Drawing.Size(223, 434);
             this.Load += new System.EventHandler(this.TreeWorkspace_Load);
             this.cmsServer.ResumeLayout(false);
-            this.cmsDatabase.ResumeLayout(false);
             this.cmsTreeView.ResumeLayout(false);
+            this.cmsDatabase.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
