@@ -44,6 +44,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tsData = new System.Windows.Forms.ToolStrip();
             this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
+            this.tsslSort = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.cmsData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsData)).BeginInit();
@@ -100,6 +101,7 @@
             this.ssData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslRowsCount,
             this.tsslRowsFiltered,
+            this.tsslSort,
             this.tsslOffsetLimit});
             this.ssData.Location = new System.Drawing.Point(0, 458);
             this.ssData.Name = "ssData";
@@ -111,19 +113,19 @@
             // tsslRowsCount
             // 
             this.tsslRowsCount.Name = "tsslRowsCount";
-            this.tsslRowsCount.Size = new System.Drawing.Size(208, 17);
+            this.tsslRowsCount.Size = new System.Drawing.Size(156, 17);
             this.tsslRowsCount.Spring = true;
             // 
             // tsslRowsFiltered
             // 
             this.tsslRowsFiltered.Name = "tsslRowsFiltered";
-            this.tsslRowsFiltered.Size = new System.Drawing.Size(208, 17);
+            this.tsslRowsFiltered.Size = new System.Drawing.Size(156, 17);
             this.tsslRowsFiltered.Spring = true;
             // 
             // tsslOffsetLimit
             // 
             this.tsslOffsetLimit.Name = "tsslOffsetLimit";
-            this.tsslOffsetLimit.Size = new System.Drawing.Size(208, 17);
+            this.tsslOffsetLimit.Size = new System.Drawing.Size(156, 17);
             this.tsslOffsetLimit.Spring = true;
             // 
             // lblFilterExpr
@@ -181,6 +183,12 @@
             this.tsbRefresh.Text = "Обновить";
             this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
             // 
+            // tsslSort
+            // 
+            this.tsslSort.Name = "tsslSort";
+            this.tsslSort.Size = new System.Drawing.Size(156, 17);
+            this.tsslSort.Spring = true;
+            // 
             // DataWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,5 +228,6 @@
         private System.Windows.Forms.ToolStripButton tsbRefresh;
         private System.Windows.Forms.ContextMenuStrip cmsData;
         private System.Windows.Forms.ToolStripMenuItem tsmiRefresh;
+        private System.Windows.Forms.ToolStripStatusLabel tsslSort;
     }
 }
