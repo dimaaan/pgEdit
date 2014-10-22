@@ -4,9 +4,12 @@ pgEdit
 Quick PostgreSQL DB editor for developers
 
 # Functionality
+Main window splitted in two parts so-called workspaces.
+Left workspace is database structure and right one is schema and data
 * server -> database -> schemas -> tables tree
 * viewing table fields
-* viewing table data, sorting, filtering, reordering columns, copy cell data
+* viewing table data, sorting by one or multi columns, easy filtering, reordering columns, copy cell data
+* many hot keys and context menu available
 
 #Used
 * Npgsql https://github.com/npgsql/Npgsql
