@@ -75,6 +75,8 @@ namespace PgEdit.GridFilter
 
         public event EventHandler FilteredChanged;
 
+        public event EventHandler SortChanged;
+
         /// <summary>
         /// Initializes a new instance of the DataGridViewColumnHeaderCell 
         /// class and sets its property values to the property values of the 
@@ -572,14 +574,10 @@ namespace PgEdit.GridFilter
                 return;
             }
 
-            // Determine the sort direction and sort by the owning column. 
-            ListSortDirection direction = ListSortDirection.Ascending;
-            if (this.DataGridView.SortedColumn == OwningColumn && 
-                this.DataGridView.SortOrder == SortOrder.Ascending)
+            if (SortChanged != null)
             {
-                direction = ListSortDirection.Descending;
+                SortChanged(this, EventArgs.Empty);
             }
-            this.DataGridView.Sort(OwningColumn, direction);
         }
 
         #region drop-down list: Show/HideDropDownListBox, SetDropDownListBoxBounds, DropDownListBoxMaxHeightInternal
