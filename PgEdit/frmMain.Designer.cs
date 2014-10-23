@@ -35,6 +35,8 @@ namespace PgEdit
             this.tsmiNewConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDisconnect = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiRemoveServer = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRemoveDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiRegisteredDB = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,8 +58,6 @@ namespace PgEdit
             this.dataGridViewCheckBoxColumn4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tsmiRemoveServer = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.msMainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
@@ -118,6 +118,18 @@ namespace PgEdit
             this.tsmiDisconnect.Text = "Отключиться от выбранной";
             this.tsmiDisconnect.Click += new System.EventHandler(this.tsmiDisconnect_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(233, 6);
+            // 
+            // tsmiRemoveServer
+            // 
+            this.tsmiRemoveServer.Name = "tsmiRemoveServer";
+            this.tsmiRemoveServer.Size = new System.Drawing.Size(236, 22);
+            this.tsmiRemoveServer.Text = "Удалить выбранный сервер...";
+            this.tsmiRemoveServer.Click += new System.EventHandler(this.tsmiRemoveServer_Click);
+            // 
             // tsmiRemoveDatabase
             // 
             this.tsmiRemoveDatabase.Name = "tsmiRemoveDatabase";
@@ -175,7 +187,7 @@ namespace PgEdit
             // 
             this.scMain.Panel2.Controls.Add(this.tabTable);
             this.scMain.Size = new System.Drawing.Size(784, 537);
-            this.scMain.SplitterDistance = 200;
+            this.scMain.SplitterDistance = 240;
             this.scMain.TabIndex = 3;
             // 
             // ucTree
@@ -183,7 +195,7 @@ namespace PgEdit
             this.ucTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucTree.Location = new System.Drawing.Point(0, 0);
             this.ucTree.Name = "ucTree";
-            this.ucTree.Size = new System.Drawing.Size(200, 537);
+            this.ucTree.Size = new System.Drawing.Size(240, 537);
             this.ucTree.TabIndex = 1;
             this.ucTree.Universe = null;
             this.ucTree.DatabaseOpened += new System.Action(this.ucTree_DatabaseOpened);
@@ -200,7 +212,7 @@ namespace PgEdit
             this.tabTable.Location = new System.Drawing.Point(0, 0);
             this.tabTable.Name = "tabTable";
             this.tabTable.SelectedIndex = 0;
-            this.tabTable.Size = new System.Drawing.Size(580, 537);
+            this.tabTable.Size = new System.Drawing.Size(540, 537);
             this.tabTable.TabIndex = 2;
             // 
             // tpColumns
@@ -209,7 +221,7 @@ namespace PgEdit
             this.tpColumns.Location = new System.Drawing.Point(4, 22);
             this.tpColumns.Name = "tpColumns";
             this.tpColumns.Padding = new System.Windows.Forms.Padding(3);
-            this.tpColumns.Size = new System.Drawing.Size(572, 511);
+            this.tpColumns.Size = new System.Drawing.Size(532, 511);
             this.tpColumns.TabIndex = 0;
             this.tpColumns.Text = "Поля";
             this.tpColumns.UseVisualStyleBackColor = true;
@@ -220,7 +232,7 @@ namespace PgEdit
             this.ucColumns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucColumns.Location = new System.Drawing.Point(3, 3);
             this.ucColumns.Name = "ucColumns";
-            this.ucColumns.Size = new System.Drawing.Size(566, 505);
+            this.ucColumns.Size = new System.Drawing.Size(526, 505);
             this.ucColumns.TabIndex = 0;
             // 
             // tpData
@@ -309,18 +321,6 @@ namespace PgEdit
             this.dataGridViewTextBoxColumn4.HeaderText = "Описание";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // tsmiRemoveServer
-            // 
-            this.tsmiRemoveServer.Name = "tsmiRemoveServer";
-            this.tsmiRemoveServer.Size = new System.Drawing.Size(236, 22);
-            this.tsmiRemoveServer.Text = "Удалить выбранный сервер...";
-            this.tsmiRemoveServer.Click += new System.EventHandler(this.tsmiRemoveServer_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(233, 6);
             // 
             // frmMain
             // 
