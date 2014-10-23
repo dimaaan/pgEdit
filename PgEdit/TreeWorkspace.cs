@@ -469,6 +469,15 @@ namespace PgEdit
             return ContainsNode(node1, node2.Parent);
         }
 
+        private void ShowSqlEditor(TreeNode dbNode)
+        {
+            Database db = (Database)dbNode.Tag;
+            Server server = (Server)dbNode.Parent.Tag;
+
+            frmSqlEditor frm = new frmSqlEditor(server, db);
+            frm.Show();
+        }
+
         private void TreeWorkspace_Load(object sender, EventArgs e)
         {
             ilTreeView.Images.Add(IMAGE_KEY_SERVER, Resources.computersystemproduct);
@@ -558,6 +567,11 @@ namespace PgEdit
                 NewConnection();
         }
 
+        private void tsmiSqlEditor_Click(object sender, EventArgs e)
+        {
+            ShowSqlEditor(GetSelectedDBNode(tvTree.SelectedNode));
+        }
+
         private void cmsDatabase_Opened(object sender, EventArgs e)
         {
             // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
@@ -565,7 +579,7 @@ namespace PgEdit
             var selectedNode = hitTest.Node;
 
             Database selDb = selectedNode.Tag as Database;
-            tsmiDisconnectDatabase.Enabled = selDb != null ? selDb.IsOpen : false;
+            tsmiDisconnectDatabase.Enabled = tsmiSqlEditor.Enabled = selDb != null ? selDb.IsOpen : false;
         }
         
         private void tvTree_ItemDrag(object sender, ItemDragEventArgs e)

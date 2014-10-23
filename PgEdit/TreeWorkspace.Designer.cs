@@ -38,6 +38,7 @@
             this.cmsDatabase = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDisconnectDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRemoveDatabase = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSqlEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsServer.SuspendLayout();
             this.cmsTreeView.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
@@ -54,7 +55,7 @@
             // 
             this.tsmiRemoveServer.Name = "tsmiRemoveServer";
             this.tsmiRemoveServer.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.tsmiRemoveServer.Size = new System.Drawing.Size(152, 22);
+            this.tsmiRemoveServer.Size = new System.Drawing.Size(151, 22);
             this.tsmiRemoveServer.Text = "Удалить...";
             this.tsmiRemoveServer.Click += new System.EventHandler(this.tsmiRemoveServer_Click);
             // 
@@ -102,16 +103,17 @@
             // cmsDatabase
             // 
             this.cmsDatabase.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSqlEditor,
             this.tsmiDisconnectDatabase,
             this.tsmiRemoveDatabase});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(153, 70);
+            this.cmsDatabase.Size = new System.Drawing.Size(158, 92);
             this.cmsDatabase.Opened += new System.EventHandler(this.cmsDatabase_Opened);
             // 
             // tsmiDisconnectDatabase
             // 
             this.tsmiDisconnectDatabase.Name = "tsmiDisconnectDatabase";
-            this.tsmiDisconnectDatabase.Size = new System.Drawing.Size(148, 22);
+            this.tsmiDisconnectDatabase.Size = new System.Drawing.Size(157, 22);
             this.tsmiDisconnectDatabase.Text = "Отключиться";
             this.tsmiDisconnectDatabase.Click += new System.EventHandler(this.tsmiDisconnectDatabase_Click);
             // 
@@ -119,9 +121,16 @@
             // 
             this.tsmiRemoveDatabase.Name = "tsmiRemoveDatabase";
             this.tsmiRemoveDatabase.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(152, 22);
+            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(157, 22);
             this.tsmiRemoveDatabase.Text = "Удалить...";
             this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
+            // 
+            // tsmiSqlEditor
+            // 
+            this.tsmiSqlEditor.Name = "tsmiSqlEditor";
+            this.tsmiSqlEditor.Size = new System.Drawing.Size(157, 22);
+            this.tsmiSqlEditor.Text = "Редактор SQL...";
+            this.tsmiSqlEditor.Click += new System.EventHandler(this.tsmiSqlEditor_Click);
             // 
             // TreeWorkspace
             // 
@@ -149,5 +158,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiDisconnectDatabase;
         private System.Windows.Forms.ContextMenuStrip cmsTreeView;
         private System.Windows.Forms.ToolStripMenuItem tsmiNewConnection;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSqlEditor;
     }
 }
