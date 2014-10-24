@@ -49,8 +49,11 @@ namespace PgEdit
                 try
                 {
                     adapter.Fill(queryResult);
-                    dgvSqlResult.DataSource = queryResult.Tables[0];
-                    tcResults.SelectedTab = tpSqlResult;
+                    if (queryResult.Tables.Count > 0)
+                    {
+                        dgvSqlResult.DataSource = queryResult.Tables[0];
+                        tcResults.SelectedTab = tpSqlResult;
+                    }
                 }
                 catch (NpgsqlException e)
                 {
