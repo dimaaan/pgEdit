@@ -15,8 +15,8 @@ namespace PgEdit
 {
     public partial class frmSqlEditor : Form
     {
-        private Server server;
-        private Database database;
+        public readonly Server server;
+        public readonly Database database;
 
         /// <summary>
         /// For Windows Forms Designer only. 

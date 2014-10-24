@@ -30,6 +30,8 @@ namespace PgEdit
 
         private TreeNode openedTableNode;
 
+        private List<frmSqlEditor> openedSqlEditors = new List<frmSqlEditor>();
+
         public Universe Universe
         {
             get
@@ -221,6 +223,10 @@ namespace PgEdit
 
             if (db.IsOpen)
             {
+                var sqlEditorsToClose = from sqle in openedSqlEditors where sqle.database == db select sqle;
+                foreach (var frm in sqlEditorsToClose.ToList())
+                    frm.Close();
+
                 db.Schemas = null;
                 db.IsOpen = false;
                 dbNode.Nodes.Clear();
@@ -483,7 +489,9 @@ namespace PgEdit
             Server server = (Server)dbNode.Parent.Tag;
 
             frmSqlEditor frm = new frmSqlEditor(server, db);
+            frm.FormClosed += frmSqlEditor_FormClosed;
             frm.Show();
+            openedSqlEditors.Add(frm);
         }
 
         private void TreeWorkspace_Load(object sender, EventArgs e)
@@ -651,6 +659,12 @@ namespace PgEdit
 
                 ConnectionService.Save(universe);
             }
+        }
+
+        void frmSqlEditor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmSqlEditor frm = (frmSqlEditor) sender;
+            openedSqlEditors.Remove(frm);
         }
 
         
