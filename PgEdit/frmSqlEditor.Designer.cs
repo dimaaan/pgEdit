@@ -108,7 +108,7 @@
             // 
             this.dgvSqlResult.AllowUserToAddRows = false;
             this.dgvSqlResult.AllowUserToDeleteRows = false;
-            this.dgvSqlResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSqlResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvSqlResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvSqlResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSqlResult.Dock = System.Windows.Forms.DockStyle.Fill;
