@@ -187,7 +187,15 @@ namespace PgEdit
 
             using (NpgsqlConnection connection = ConnectionService.GetConnection(server, db))
             {
-                connection.Open();
+                try
+                {
+                    connection.Open();
+                }
+                catch (NpgsqlException e)
+                {
+                    MessageBox.Show(e.Message, String.Format("Error {0}", e.ErrorCode), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 db.Schemas = DatabaseService.fetchAllSchemasWithTables(connection);
             }
 
