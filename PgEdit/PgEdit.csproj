@@ -174,9 +174,6 @@
     <EmbeddedResource Include="TreeWorkspace.resx">
       <DependentUpon>TreeWorkspace.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ConnectionStrings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
