@@ -8,6 +8,14 @@ namespace PgEdit.Domain
 {
     public class Universe
     {
+        public Universe()
+        {
+            Servers = new List<Server>();
+        }
+
+        /// <summary>
+        /// Can't be null
+        /// </summary>
         public List<Server> Servers { get; set; }
     }
 }

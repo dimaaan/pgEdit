@@ -78,7 +78,14 @@ namespace PgEdit
             universe = ConnectionService.Load();
 
             ucTree.Universe = universe;
-            ucTree.FillTreeView();
+            if (universe.Servers.Count > 0)
+            {
+                ucTree.FillTreeView();
+            }
+            else
+            {
+                ShowNewConnectionDialog();
+            }
         }
 
         private void tsmiNewConnection_Click(object sender, EventArgs e)
