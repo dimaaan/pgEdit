@@ -36,9 +36,10 @@
             this.cmsTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiNewConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDatabase = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiSqlEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDisconnectDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRemoveDatabase = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSqlEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiConnectDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsServer.SuspendLayout();
             this.cmsTreeView.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
@@ -104,11 +105,19 @@
             // 
             this.cmsDatabase.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiSqlEditor,
+            this.tsmiConnectDatabase,
             this.tsmiDisconnectDatabase,
             this.tsmiRemoveDatabase});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(158, 92);
+            this.cmsDatabase.Size = new System.Drawing.Size(158, 114);
             this.cmsDatabase.Opened += new System.EventHandler(this.cmsDatabase_Opened);
+            // 
+            // tsmiSqlEditor
+            // 
+            this.tsmiSqlEditor.Name = "tsmiSqlEditor";
+            this.tsmiSqlEditor.Size = new System.Drawing.Size(157, 22);
+            this.tsmiSqlEditor.Text = "Редактор SQL...";
+            this.tsmiSqlEditor.Click += new System.EventHandler(this.tsmiSqlEditor_Click);
             // 
             // tsmiDisconnectDatabase
             // 
@@ -125,12 +134,12 @@
             this.tsmiRemoveDatabase.Text = "Удалить...";
             this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
             // 
-            // tsmiSqlEditor
+            // tsmiConnectDatabase
             // 
-            this.tsmiSqlEditor.Name = "tsmiSqlEditor";
-            this.tsmiSqlEditor.Size = new System.Drawing.Size(157, 22);
-            this.tsmiSqlEditor.Text = "Редактор SQL...";
-            this.tsmiSqlEditor.Click += new System.EventHandler(this.tsmiSqlEditor_Click);
+            this.tsmiConnectDatabase.Name = "tsmiConnectDatabase";
+            this.tsmiConnectDatabase.Size = new System.Drawing.Size(157, 22);
+            this.tsmiConnectDatabase.Text = "Подключиться";
+            this.tsmiConnectDatabase.Click += new System.EventHandler(this.tsmiConnectDatabase_Click);
             // 
             // TreeWorkspace
             // 
@@ -159,5 +168,6 @@
         private System.Windows.Forms.ContextMenuStrip cmsTreeView;
         private System.Windows.Forms.ToolStripMenuItem tsmiNewConnection;
         private System.Windows.Forms.ToolStripMenuItem tsmiSqlEditor;
+        private System.Windows.Forms.ToolStripMenuItem tsmiConnectDatabase;
     }
 }
