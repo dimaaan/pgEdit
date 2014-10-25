@@ -26,6 +26,8 @@ namespace PgEdit
 
         private Universe universe;
 
+        private bool viewMode;
+
         /// <summary>
         /// For Windows Forms Designer only. 
         /// Use ctor with parameters.
@@ -35,10 +37,25 @@ namespace PgEdit
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Creates dialog for new connection
+        /// </summary>
         public frmConnection(Universe universe) 
             : this()
         {
             this.universe = universe;
+        }
+
+        /// <summary>
+        /// Creates dialog for viewing existing connection
+        /// </summary>
+        public frmConnection(Universe universe, Server server, Database database) 
+            : this(universe)
+        {
+            this.server = server;
+            this.database = database;
+            this.sshTunnel = server.Ssh;
+            viewMode = true;
         }
 
         public Server Server
@@ -110,15 +127,38 @@ namespace PgEdit
         {
             ResetConnectionStatuses();
 
-            if (server == null)
+            if (viewMode)
             {
-                sshTunnel = new SshTunnel();
+                if (sshTunnel == null)
+                {
+                    sshTunnel = new SshTunnel();
+                }
+
+                cmbHost.Enabled =
+                    nudPort.Enabled =
+                    txtUser.Enabled =
+                    txtPassword.Enabled =
+                    chkShowDBPass.Enabled =
+                    cmbDatabase.Enabled =
+                    chkUseSsh.Enabled =
+                    cmbSshHost.Enabled =
+                    nudSshPort.Enabled =
+                    txtSshUser.Enabled =
+                    txtSshPassword.Enabled =
+                    chkShowSshPass.Enabled =
+                    chkSshKey.Enabled =
+                    txtSshKey.Enabled =
+                    btnShhKey.Enabled = false;
+                chkUseSsh.Checked = server.Ssh != null;
+            }
+            else
+            {
                 database = new Database();
                 server = new Server();
+                sshTunnel = new SshTunnel();
 
                 server.Databases.Add(database);
             }
-
 
             // autocomplite for ComboBoxes
             foreach(var s in universe.Servers)

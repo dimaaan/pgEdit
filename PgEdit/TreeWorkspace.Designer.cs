@@ -37,9 +37,10 @@
             this.tsmiNewConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDatabase = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiSqlEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiConnectDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDisconnectDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRemoveDatabase = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiConnectDatabase = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiViewConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsServer.SuspendLayout();
             this.cmsTreeView.SuspendLayout();
             this.cmsDatabase.SuspendLayout();
@@ -107,22 +108,30 @@
             this.tsmiSqlEditor,
             this.tsmiConnectDatabase,
             this.tsmiDisconnectDatabase,
+            this.tsmiViewConnection,
             this.tsmiRemoveDatabase});
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(158, 114);
+            this.cmsDatabase.Size = new System.Drawing.Size(214, 136);
             this.cmsDatabase.Opened += new System.EventHandler(this.cmsDatabase_Opened);
             // 
             // tsmiSqlEditor
             // 
             this.tsmiSqlEditor.Name = "tsmiSqlEditor";
-            this.tsmiSqlEditor.Size = new System.Drawing.Size(157, 22);
+            this.tsmiSqlEditor.Size = new System.Drawing.Size(213, 22);
             this.tsmiSqlEditor.Text = "Редактор SQL...";
             this.tsmiSqlEditor.Click += new System.EventHandler(this.tsmiSqlEditor_Click);
+            // 
+            // tsmiConnectDatabase
+            // 
+            this.tsmiConnectDatabase.Name = "tsmiConnectDatabase";
+            this.tsmiConnectDatabase.Size = new System.Drawing.Size(213, 22);
+            this.tsmiConnectDatabase.Text = "Подключиться";
+            this.tsmiConnectDatabase.Click += new System.EventHandler(this.tsmiConnectDatabase_Click);
             // 
             // tsmiDisconnectDatabase
             // 
             this.tsmiDisconnectDatabase.Name = "tsmiDisconnectDatabase";
-            this.tsmiDisconnectDatabase.Size = new System.Drawing.Size(157, 22);
+            this.tsmiDisconnectDatabase.Size = new System.Drawing.Size(213, 22);
             this.tsmiDisconnectDatabase.Text = "Отключиться";
             this.tsmiDisconnectDatabase.Click += new System.EventHandler(this.tsmiDisconnectDatabase_Click);
             // 
@@ -130,16 +139,16 @@
             // 
             this.tsmiRemoveDatabase.Name = "tsmiRemoveDatabase";
             this.tsmiRemoveDatabase.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(157, 22);
+            this.tsmiRemoveDatabase.Size = new System.Drawing.Size(213, 22);
             this.tsmiRemoveDatabase.Text = "Удалить...";
             this.tsmiRemoveDatabase.Click += new System.EventHandler(this.tsmiRemoveDatabase_Click);
             // 
-            // tsmiConnectDatabase
+            // tsmiViewConnection
             // 
-            this.tsmiConnectDatabase.Name = "tsmiConnectDatabase";
-            this.tsmiConnectDatabase.Size = new System.Drawing.Size(157, 22);
-            this.tsmiConnectDatabase.Text = "Подключиться";
-            this.tsmiConnectDatabase.Click += new System.EventHandler(this.tsmiConnectDatabase_Click);
+            this.tsmiViewConnection.Name = "tsmiViewConnection";
+            this.tsmiViewConnection.Size = new System.Drawing.Size(213, 22);
+            this.tsmiViewConnection.Text = "Свойства подключения...";
+            this.tsmiViewConnection.Click += new System.EventHandler(this.tsmiViewConnection_Click);
             // 
             // TreeWorkspace
             // 
@@ -169,5 +178,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiNewConnection;
         private System.Windows.Forms.ToolStripMenuItem tsmiSqlEditor;
         private System.Windows.Forms.ToolStripMenuItem tsmiConnectDatabase;
+        private System.Windows.Forms.ToolStripMenuItem tsmiViewConnection;
     }
 }

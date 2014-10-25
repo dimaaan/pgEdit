@@ -203,6 +203,7 @@ namespace PgEdit
             this.ucTree.TableOpened += new System.Action<System.Data.DataTable>(this.ucTree_TableOpened);
             this.ucTree.SelectionChanged += new System.Action(this.ucTree_SelectionChanged);
             this.ucTree.NewConnection += new System.Action(this.ucTree_NewConnection);
+            this.ucTree.ViewConnection += new System.Action<PgEdit.Domain.Server, PgEdit.Domain.Database>(this.ucTree_ViewConnection);
             // 
             // tabTable
             // 
@@ -241,7 +242,7 @@ namespace PgEdit
             this.tpData.Location = new System.Drawing.Point(4, 22);
             this.tpData.Name = "tpData";
             this.tpData.Padding = new System.Windows.Forms.Padding(3);
-            this.tpData.Size = new System.Drawing.Size(572, 511);
+            this.tpData.Size = new System.Drawing.Size(532, 511);
             this.tpData.TabIndex = 1;
             this.tpData.Text = "Данные";
             this.tpData.UseVisualStyleBackColor = true;
@@ -252,7 +253,7 @@ namespace PgEdit
             this.ucTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucTable.Location = new System.Drawing.Point(3, 3);
             this.ucTable.Name = "ucTable";
-            this.ucTable.Size = new System.Drawing.Size(566, 505);
+            this.ucTable.Size = new System.Drawing.Size(526, 505);
             this.ucTable.TabIndex = 0;
             this.ucTable.DataSourceNeedRefresh += new System.Action(this.ucTable_DataSourceNeedRefresh);
             // 

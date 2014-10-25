@@ -71,6 +71,11 @@ namespace PgEdit
             }
         }
 
+        private void ShowViewConnectionDialog(Server server, Database db)
+        {
+            new frmConnection(universe, server, db).ShowDialog();
+        }
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             Icon = Resources.logo;
@@ -168,6 +173,11 @@ namespace PgEdit
         private void ucTree_NewConnection()
         {
             ShowNewConnectionDialog();
+        }
+
+        private void ucTree_ViewConnection(Server server, Database db)
+        {
+            ShowViewConnectionDialog(server, db);
         }
     }
 }

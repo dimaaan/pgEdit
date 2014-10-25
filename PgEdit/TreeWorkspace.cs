@@ -99,6 +99,7 @@ namespace PgEdit
         public event Action<DataTable> TableOpened;
         public event Action SelectionChanged;
         public event Action NewConnection;
+        public event Action<Server, Database> ViewConnection;
 
         public void FillTreeView()
         {
@@ -611,6 +612,24 @@ namespace PgEdit
             if (selectedNode != null)
             {
                 ShowSqlEditor(selectedNode);
+            }
+        }
+
+        private void tsmiViewConnection_Click(object sender, EventArgs e)
+        {
+            // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
+            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsDatabase.Left, cmsDatabase.Top)));
+            var selectedNode = hitTest.Node;
+
+            if (selectedNode != null)
+            {
+                Database db = (Database)selectedNode.Tag;
+                Server server = (Server)selectedNode.Parent.Tag;
+
+                if (ViewConnection != null)
+                {
+                    ViewConnection(server, db);
+                }
             }
         }
 
