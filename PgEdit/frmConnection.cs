@@ -189,7 +189,7 @@ namespace PgEdit
                 false, DataSourceUpdateMode.OnValidation);
             bindings.Add(b);
 
-            b = txtShhPassword.DataBindings.Add(
+            b = txtSshPassword.DataBindings.Add(
                 PropertyName((TextBox c) => c.Text),
                 sshTunnel,
                 PropertyName((SshTunnel c) => c.Password),
@@ -286,7 +286,7 @@ namespace PgEdit
 
         private void chkShowSshPass_CheckedChanged(object sender, EventArgs e)
         {
-            txtShhPassword.UseSystemPasswordChar = !chkShowSshPass.Checked;
+            txtSshPassword.UseSystemPasswordChar = !chkShowSshPass.Checked;
         }
 
         private void btnShhKey_Click(object sender, EventArgs e)

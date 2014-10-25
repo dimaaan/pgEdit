@@ -47,7 +47,7 @@
             this.ctrlSshConnectionStatus = new System.Windows.Forms.Control();
             this.btnTestSshConnection = new System.Windows.Forms.Button();
             this.lblSshHost = new System.Windows.Forms.Label();
-            this.txtShhPassword = new System.Windows.Forms.TextBox();
+            this.txtSshPassword = new System.Windows.Forms.TextBox();
             this.lblSshPort = new System.Windows.Forms.Label();
             this.txtSshUser = new System.Windows.Forms.TextBox();
             this.lblSshUser = new System.Windows.Forms.Label();
@@ -192,7 +192,7 @@
             this.panSsh.Controls.Add(this.ctrlSshConnectionStatus);
             this.panSsh.Controls.Add(this.btnTestSshConnection);
             this.panSsh.Controls.Add(this.lblSshHost);
-            this.panSsh.Controls.Add(this.txtShhPassword);
+            this.panSsh.Controls.Add(this.txtSshPassword);
             this.panSsh.Controls.Add(this.lblSshPort);
             this.panSsh.Controls.Add(this.txtSshUser);
             this.panSsh.Controls.Add(this.lblSshUser);
@@ -287,15 +287,15 @@
             this.lblSshHost.Text = "Хост:";
             this.lblSshHost.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtShhPassword
+            // txtSshPassword
             // 
-            this.txtShhPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtSshPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtShhPassword.Location = new System.Drawing.Point(113, 68);
-            this.txtShhPassword.Name = "txtShhPassword";
-            this.txtShhPassword.Size = new System.Drawing.Size(305, 20);
-            this.txtShhPassword.TabIndex = 7;
-            this.txtShhPassword.UseSystemPasswordChar = true;
+            this.txtSshPassword.Location = new System.Drawing.Point(113, 68);
+            this.txtSshPassword.Name = "txtSshPassword";
+            this.txtSshPassword.Size = new System.Drawing.Size(305, 20);
+            this.txtSshPassword.TabIndex = 7;
+            this.txtSshPassword.UseSystemPasswordChar = true;
             // 
             // lblSshPort
             // 
@@ -503,7 +503,7 @@
         private System.Windows.Forms.CheckBox chkUseSsh;
         private System.Windows.Forms.Panel panSsh;
         private System.Windows.Forms.Label lblSshHost;
-        private System.Windows.Forms.TextBox txtShhPassword;
+        private System.Windows.Forms.TextBox txtSshPassword;
         private System.Windows.Forms.Label lblSshPort;
         private System.Windows.Forms.TextBox txtSshUser;
         private System.Windows.Forms.Label lblSshUser;
