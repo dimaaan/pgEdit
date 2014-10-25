@@ -276,7 +276,11 @@ namespace PgEdit
             {
                 try
                 {
-                    FillDatabaseList();
+                    using (var connection = ConnectionService.GetConnection(server, database))
+                    {
+                        connection.Open();
+                        ctrlConnectionStatus.BackColor = COLOR_SUCCESS;
+                    }
                 }
                 catch (Exception ex)
                 {
