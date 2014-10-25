@@ -80,8 +80,11 @@ namespace PgEdit.Service
             if (File.Exists(CONNECTION_STRINGS_PATH))
             {
                 string json = File.ReadAllText(CONNECTION_STRINGS_PATH);
-                ConnectionSettings settings = JsonConvert.DeserializeObject<ConnectionSettings>(json);
-                universe.Servers = ConvertSettingsToDomain(settings);
+                if (!String.IsNullOrWhiteSpace(json))
+                {
+                    ConnectionSettings settings = JsonConvert.DeserializeObject<ConnectionSettings>(json);
+                    universe.Servers = ConvertSettingsToDomain(settings);
+                }
             }
 
             return universe;
