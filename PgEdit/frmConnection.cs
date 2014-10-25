@@ -13,6 +13,23 @@ using System.Windows.Forms;
 
 namespace PgEdit
 {
+    /// <summary>
+    /// Creates or views database connections
+    /// </summary>
+    /// <remarks>
+    /// Bird eye view:
+    /// This form used in 2 scenarios: creating new connection settings and viewing existing connection settings (see constructors for more info).
+    /// 
+    /// In 'create new connection' mode frmConnection_Load method creates new server, database and sshTunnel domain objects and binds it to controls.
+    /// Changing contols by user changes domain object's properties.
+    /// When user click OK validation function check settings and if its OK then dialog closes with 'DialogResult.OK'.
+    /// Then newly created domain objects can be obtained via public propery 'Server'.
+    /// 
+    /// In 'view connection' mode corresponded domain object passed to form via constructor and binds to controls just as it in 'create new connection' mode.
+    /// All editing controls disables exept check connection buttons.
+    /// So use can't change anything.
+    /// It this scenario 'DialogResult.OK' and frmConnection.Server property should be ignored
+    /// </remarks>
     public partial class frmConnection : Form
     {
         // Test connection colors
