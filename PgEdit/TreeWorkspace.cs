@@ -708,12 +708,19 @@ namespace PgEdit
             }
         }
 
+        private void tvTree_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                tvTree.SelectedNode = tvTree.GetNodeAt(e.X, e.Y);
+            }
+        }
+
         void frmSqlEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
             frmSqlEditor frm = (frmSqlEditor) sender;
             openedSqlEditors.Remove(frm);
         }
-      
   
     }
 }
