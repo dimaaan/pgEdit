@@ -22,4 +22,4 @@ Left workspace is database structure and right one is schema and data
 Language: Russian
 
 
-![screenshot](https://f.cloud.github.com/assets/4518589/2440110/5fefe92a-ae04-11e3-9ccf-e72b1bbf4f1d.png)
+![screenshot](https://cloud.githubusercontent.com/assets/4518589/4782356/e33278fa-5ced-11e4-8420-1834c6bd1251.png)
