@@ -549,102 +549,6 @@ namespace PgEdit
             }
         }
 
-        private void tsmiRemoveServer_Click(object sender, EventArgs e)
-        {
-            // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
-            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsServer.Left, cmsServer.Top)));
-            var selectedNode = hitTest.Node;
-
-            if (selectedNode != null)
-            {
-                RemoveServer(selectedNode);
-            }
-        }
-
-        private void tsmiRemoveDatabase_Click(object sender, EventArgs e)
-        {
-            // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
-            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsDatabase.Left, cmsDatabase.Top)));
-            var selectedNode = hitTest.Node;
-
-            if (selectedNode != null)
-            {
-                RemoveDatabase(selectedNode);
-            }
-        }
-
-        private void tsmiConnectDatabase_Click(object sender, EventArgs e)
-        {
-            // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
-            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsDatabase.Left, cmsDatabase.Top)));
-            var selectedNode = hitTest.Node;
-
-            if (selectedNode != null)
-            {
-                OpenDatabase(selectedNode);
-            }
-        }
-
-        private void tsmiDisconnectDatabase_Click(object sender, EventArgs e)
-        {
-            // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
-            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsDatabase.Left, cmsDatabase.Top)));
-            var selectedNode = hitTest.Node;
-
-            if (selectedNode != null)
-            {
-                CloseDatabase(selectedNode);
-            }
-        }
-
-        private void tsmiNewConnection_Click(object sender, EventArgs e)
-        {
-            if (NewConnection != null)
-                NewConnection();
-        }
-
-        private void tsmiSqlEditor_Click(object sender, EventArgs e)
-        {
-            // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
-            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsDatabase.Left, cmsDatabase.Top)));
-            var selectedNode = hitTest.Node;
-
-            if (selectedNode != null)
-            {
-                ShowSqlEditor(selectedNode);
-            }
-        }
-
-        private void tsmiViewConnection_Click(object sender, EventArgs e)
-        {
-            // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
-            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsDatabase.Left, cmsDatabase.Top)));
-            var selectedNode = hitTest.Node;
-
-            if (selectedNode != null)
-            {
-                Database db = (Database)selectedNode.Tag;
-                Server server = (Server)selectedNode.Parent.Tag;
-
-                if (ViewConnection != null)
-                {
-                    ViewConnection(server, db);
-                }
-            }
-        }
-
-        private void cmsDatabase_Opened(object sender, EventArgs e)
-        {
-            // due to strane behavior we can't use TreeView.SelectedNode here to find out TreeNode for witch context menu is opened
-            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsDatabase.Left, cmsDatabase.Top)));
-            var selectedNode = hitTest.Node;
-
-            Database selDb = selectedNode.Tag as Database;
-            bool opened = selDb != null ? selDb.IsOpen : false;
-            tsmiDisconnectDatabase.Enabled = tsmiSqlEditor.Enabled = opened;
-            tsmiConnectDatabase.Enabled = !opened;
-        }
-        
         private void tvTree_ItemDrag(object sender, ItemDragEventArgs e)
         {
             TreeNode dragNode = (TreeNode)e.Item;
@@ -714,6 +618,60 @@ namespace PgEdit
             {
                 tvTree.SelectedNode = tvTree.GetNodeAt(e.X, e.Y);
             }
+        }
+
+        private void tsmiRemoveServer_Click(object sender, EventArgs e)
+        {
+            RemoveServer(tvTree.SelectedNode);
+        }
+
+        private void tsmiRemoveDatabase_Click(object sender, EventArgs e)
+        {
+            RemoveDatabase(tvTree.SelectedNode);
+        }
+
+        private void tsmiConnectDatabase_Click(object sender, EventArgs e)
+        {
+            OpenDatabase(tvTree.SelectedNode);
+        }
+
+        private void tsmiDisconnectDatabase_Click(object sender, EventArgs e)
+        {
+            CloseDatabase(tvTree.SelectedNode);
+        }
+
+        private void tsmiNewConnection_Click(object sender, EventArgs e)
+        {
+            if (NewConnection != null)
+                NewConnection();
+        }
+
+        private void tsmiSqlEditor_Click(object sender, EventArgs e)
+        {
+            ShowSqlEditor(tvTree.SelectedNode);
+        }
+
+        private void tsmiViewConnection_Click(object sender, EventArgs e)
+        {
+            TreeNode selectedNode = tvTree.SelectedNode;
+            Database db = (Database)selectedNode.Tag;
+            Server server = (Server)selectedNode.Parent.Tag;
+
+            if (ViewConnection != null)
+            {
+                ViewConnection(server, db);
+            }
+        }
+
+        private void cmsDatabase_Opened(object sender, EventArgs e)
+        {
+            var hitTest = tvTree.HitTest(tvTree.PointToClient(new Point(cmsDatabase.Left, cmsDatabase.Top)));
+            var selectedNode = hitTest.Node;
+
+            Database selDb = selectedNode.Tag as Database;
+            bool opened = selDb != null ? selDb.IsOpen : false;
+            tsmiDisconnectDatabase.Enabled = tsmiSqlEditor.Enabled = opened;
+            tsmiConnectDatabase.Enabled = !opened;
         }
 
         void frmSqlEditor_FormClosed(object sender, FormClosedEventArgs e)
