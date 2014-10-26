@@ -9,6 +9,7 @@ Left workspace is database structure and right one is schema and data
 * server -> database -> schemas -> tables tree
 * viewing table fields
 * viewing table data, sorting by one or multi columns, easy filtering, reordering columns, copy cell data
+* SQL editor (no syntax hilight and autocomplete yet, but planned)
 * many hot keys and context menu available
 
 #Used
