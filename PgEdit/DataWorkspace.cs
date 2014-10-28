@@ -40,9 +40,9 @@ namespace PgEdit
                     {
                         bsData.Filter = null;
                         bsData.Sort = null;
+                        tsslSort.Text = null;
                     }
                     bsData.DataSource = value;
-
                     object rowsCount = value.ExtendedProperties[Database.TABLE_PROPERTY_ROWS_COUNT];
                     tsslRowsCount.Text = string.Format("Записей извлечено: {0} из {1}", bsData.Count, rowsCount);
                     tsbRefresh.Enabled = tsmiRefresh.Enabled = true;
@@ -54,6 +54,7 @@ namespace PgEdit
                     bsData.Sort = null;
                     bsData.DataSource = null;
                     tsslRowsCount.Text = null;
+                    tsslSort.Text = null;
                     tsbRefresh.Enabled = tsmiRefresh.Enabled = false;
                     sortHeaderGlyphs = null;
                 }
