@@ -53,6 +53,7 @@ namespace PgEdit
                     {
                         dgvSqlResult.DataSource = queryResult.Tables[0];
                         tcResults.SelectedTab = tpSqlResult;
+                        txtSqlError.Text = String.Empty;
                     }
                 }
                 catch (NpgsqlException e)
