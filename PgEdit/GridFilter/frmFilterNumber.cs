@@ -127,6 +127,10 @@ namespace PgEdit.GridFilter
             {
                 // Backspace key is OK
             }
+            else if (e.KeyChar == 22) 
+            {
+                // SYN char or Synchronous Idle or Paste are OK
+            }
             else
             {
                 e.Handled = true;
