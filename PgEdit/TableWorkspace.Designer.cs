@@ -64,6 +64,7 @@
             this.dgvColumns.ReadOnly = true;
             this.dgvColumns.RowHeadersVisible = false;
             this.dgvColumns.Size = new System.Drawing.Size(640, 480);
+            this.dgvColumns.StandardTab = true;
             this.dgvColumns.TabIndex = 1;
             // 
             // colName

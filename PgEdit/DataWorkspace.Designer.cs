@@ -37,6 +37,7 @@
             this.ssData = new System.Windows.Forms.StatusStrip();
             this.tsslRowsCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRowsFiltered = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslSort = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslOffsetLimit = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblFilterExpr = new System.Windows.Forms.Label();
             this.panFilters = new System.Windows.Forms.Panel();
@@ -44,7 +45,6 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tsData = new System.Windows.Forms.ToolStrip();
             this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
-            this.tsslSort = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.cmsData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsData)).BeginInit();
@@ -72,6 +72,7 @@
             this.dgvData.ReadOnly = true;
             this.dgvData.RowHeadersVisible = false;
             this.dgvData.Size = new System.Drawing.Size(640, 400);
+            this.dgvData.StandardTab = true;
             this.dgvData.TabIndex = 1;
             this.dgvData.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvData_ColumnAdded);
             this.dgvData.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvData_DataError);
@@ -121,6 +122,12 @@
             this.tsslRowsFiltered.Name = "tsslRowsFiltered";
             this.tsslRowsFiltered.Size = new System.Drawing.Size(156, 17);
             this.tsslRowsFiltered.Spring = true;
+            // 
+            // tsslSort
+            // 
+            this.tsslSort.Name = "tsslSort";
+            this.tsslSort.Size = new System.Drawing.Size(156, 17);
+            this.tsslSort.Spring = true;
             // 
             // tsslOffsetLimit
             // 
@@ -180,14 +187,8 @@
             this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRefresh.Name = "tsbRefresh";
             this.tsbRefresh.Size = new System.Drawing.Size(23, 22);
-            this.tsbRefresh.Text = "Обновить";
+            this.tsbRefresh.Text = "Обновить F5";
             this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
-            // 
-            // tsslSort
-            // 
-            this.tsslSort.Name = "tsslSort";
-            this.tsslSort.Size = new System.Drawing.Size(156, 17);
-            this.tsslSort.Spring = true;
             // 
             // DataWorkspace
             // 
