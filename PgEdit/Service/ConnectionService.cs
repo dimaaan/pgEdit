@@ -197,7 +197,7 @@ namespace PgEdit.Service
 
         public static NpgsqlConnection GetConnection(Server server, Database db)
         {
-            string connStr = "Server={0};Port={1};User Id={2};Password={3};Database={4};";
+            string connStr = "Server={0};Port={1};User Id={2};Password=\"{3}\";Database={4};";
 
             if (server.Ssh != null)
             {
